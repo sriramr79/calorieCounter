@@ -10,4 +10,6 @@ public class CalorieCounterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+    
+    //testing new commit
 }
