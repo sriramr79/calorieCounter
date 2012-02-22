@@ -20,9 +20,16 @@ public class CalorieCounterActivity extends Activity {
         updateDisplayedFood(level.getCurrentFood());
     }
     
+    
     public void onSubmitEvent(View view) {
     	EditText userInput = (EditText)findViewById(R.id.calorieInput);
-    	int calorieGuess = Integer.parseInt(userInput.getText().toString());
+    	// Surround in try-catch to avoid crash on unparseable input
+    	int calorieGuess = -1;
+    	try {
+    		calorieGuess = Integer.parseInt(userInput.getText().toString());
+    	} catch (NumberFormatException e) {
+    		// Do nothing
+    	}
     	level.enterCurrentGuess(calorieGuess);
     	if(level.hasNextFood()) {
     		level.moveToNextFood();

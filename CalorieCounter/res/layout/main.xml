@@ -17,13 +17,12 @@
         android:contentDescription="@string/mcfries"
         android:scaleType="center"
         android:src="@drawable/mcfries" />
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/foodName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mcfries"/>
-
+        android:text="@string/mcfries" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -32,17 +31,17 @@
         <EditText
             android:id="@+id/calorieInput"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.17"
-            android:hint=""
-            android:inputType="number" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number" >
+        </EditText>
 
         <Button
             android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:onClick="onSubmitEvent"
-            android:text="@string/submitButton" />
+            android:text="@string/submitButton" />3
 
         <Button
             android:id="@+id/quit"
