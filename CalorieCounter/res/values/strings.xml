@@ -3,9 +3,26 @@
 
     <string name="hello">CalorieCounter Beta v0.1: 2.21.12</string>
     <string name="app_name">CalorieCounter</string>
-    <string name="mcfries">Large order of McDonalds\' Fries</string>
-    <string name="bkfries">Small order of Burger King Fries</string>
+    
+    <string name="correctMessage">That\'s right,\u0020</string>
+    <string name="correctIs">\u0020is\u0020</string>
+    <string name="calories">\u0020calories.\u0020</string>
+    
+    <string name="closeMessage">That\'s close, but\u0020</string>
+    <string name="closeLow">\u0020has slightly more calories than that.\u0020</string>
+    <string name="closeHigh">\u0020has slightly fewer calories than that.\u0020</string>
+    
+    <string name="wrongMessage">Sorry, but\u0020</string>
+    <string name="wrongLow">\u0020has more calories than that.\u0020</string>
+    <string name="wrongHigh">\u0020has less calories than that.\u0020</string>
+    
+    <string name="food">Food:\u0020</string>
+    <string name="mcfries">a large order of McDonalds\' Fries</string>
+    <string name="bkfries">a small order of Burger King Fries</string>
+    
     <string name="submitButton">Submit</string>
     <string name="quitButton">Quit</string>
+    <string name="nextButton">Next</string>
+    <string name="retryButton">Retry</string>
 
 </resources>

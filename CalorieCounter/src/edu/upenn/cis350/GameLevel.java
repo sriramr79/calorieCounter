@@ -35,11 +35,11 @@ public class GameLevel {
 		// http://nutrition.mcdonalds.com/getnutrition/nutritionfacts.pdf
 		FoodItem fries1 = new FoodItem(res.getDrawable(R.drawable.mcfries),
 										res.getString(R.string.mcfries),
-										500);
+										500, 600, 50);
 		// http://www.bk.com/en/us/menu-nutrition/index.html
 		FoodItem fries2 = new FoodItem(res.getDrawable(R.drawable.bkfries),
 										res.getString(R.string.bkfries),
-										340);
+										300, 400, 50);
 		foodList.add(fries1);
 		foodList.add(fries2);
 		this.calorieGuesses = new int[foodList.size()];
