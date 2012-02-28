@@ -24,7 +24,7 @@ public class CalorieCounterActivity extends Activity {
         updateDisplayedFood(level.getCurrentFood());
     }
     
-    
+    //testing
     public void onSubmitEvent(View view) {
     	EditText userInput = (EditText)findViewById(R.id.calorieInput);
     	// Surround in try-catch to avoid crash on unparseable input
