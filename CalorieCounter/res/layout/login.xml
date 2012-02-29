@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
         android:layout_centerInParent="true"
+        android:onClick="submitLogin"
         android:text="Submit" />
 
 </RelativeLayout>
