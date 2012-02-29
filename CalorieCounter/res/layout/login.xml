@@ -56,8 +56,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
-        android:layout_centerInParent="true"
         android:onClick="submitLogin"
         android:text="Submit" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordField"
+        android:layout_toRightOf="@+id/loginSubmit"
+        android:onClick="onTapQuit"
+        android:text="Quit" />
 
 </RelativeLayout>

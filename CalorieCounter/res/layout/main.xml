@@ -47,11 +47,11 @@
             android:text="@string/submitButton" />
 
         <Button
-            android:id="@+id/quit"
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:onClick="onQuitEvent"
-            android:text="@string/quitButton" />
+            android:onClick="onLogoutEvent"
+            android:text="@string/logoutButton" />
     </LinearLayout>
 
 </LinearLayout>

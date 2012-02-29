@@ -8,10 +8,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
-
+	
 	private final String testUN = "cal";
 	private final String testPW = "count";
-	
+		
 	private EditText username, password;
 	
     /** Called when the activity is first created. */
@@ -22,19 +22,40 @@ public class LoginActivity extends Activity {
         
         username = (EditText) findViewById(R.id.loginField);
         password = (EditText) findViewById(R.id.passwordField);
-        
     }
-    
-    public void submitLogin (View view) {
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Constants.LOGOUT_SUCCESSFUL) {
+			resetLoginFields();
+		}
+	}
+
+
+
+	public void submitLogin (View view) {
     	String un = username.getText().toString();
     	String pw = password.getText().toString();
     	
     	if (un.equalsIgnoreCase(testUN) && pw.equals(testPW)) {    	
     		Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
     		Intent i = new Intent(this, CalorieCounterActivity.class);
-    		startActivity(i);
-    	} else
-    		Toast.makeText(this, "Login failed!", Toast.LENGTH_SHORT).show();    		
-    }  
+    		startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
+    	} else {
+    		resetLoginFields();
+    		Toast.makeText(this, "Login failed!", Toast.LENGTH_SHORT).show();
+    	}
+    }
 
+
+	private void resetLoginFields() {
+		username.setText("");
+		password.setText("");
+		username.requestFocus();
+	}  
+	
+	public void onTapQuit (View view) {
+		finish();
+	}
 }

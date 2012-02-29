@@ -172,7 +172,8 @@ public class CalorieCounterActivity extends Activity {
     
     }
     
-    public void onQuitEvent(View view) {
+    public void onLogoutEvent(View view) {
+    	setResult(Constants.LOGOUT_SUCCESSFUL);
     	finish();
     }
 }
