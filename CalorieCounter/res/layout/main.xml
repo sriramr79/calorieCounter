@@ -22,7 +22,8 @@
         android:id="@+id/foodName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mcfries" />
+        android:text="@string/mcfries" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -33,6 +34,8 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:hint="Enter Guess"
+            android:imeOptions="actionDone"
             android:inputType="number" >
         </EditText>
 
@@ -41,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:onClick="onSubmitEvent"
-            android:text="@string/submitButton" />3
+            android:text="@string/submitButton" />
 
         <Button
             android:id="@+id/quit"
@@ -50,5 +53,5 @@
             android:onClick="onQuitEvent"
             android:text="@string/quitButton" />
     </LinearLayout>
-    
+
 </LinearLayout>
