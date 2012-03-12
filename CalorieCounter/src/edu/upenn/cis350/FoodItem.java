@@ -5,9 +5,9 @@ import android.graphics.drawable.Drawable;
 /**
  * Class to represent a food item.
  * @author Paul M. Gurniak
- * @version 1.0
+ * @version 1.1
  */
-public class FoodItem {
+public class FoodItem implements Comparable<FoodItem> {
 	
 	/**
 	 * Enumeration type to represent the accuracy of a response 
@@ -54,8 +54,8 @@ public class FoodItem {
 	}
 	
 	/**
-	 * Returns the integer calorie count of this food item
-	 * @deprecated
+	 * Returns the integer calorie count of this food item.
+	 * As of v1.1, no longer deprecated: use this for games that need an exact number.
 	 */
 	public int getCalorieCount() {
 		return (this.calorieLow + this.calorieHigh)/2;
@@ -85,6 +85,22 @@ public class FoodItem {
 	
 	public String toString() {
 		return this.name;
+	}
+	
+	public boolean equals(Object o) {
+		if(o instanceof FoodItem) {
+			return ((FoodItem) o).getName() == this.getName();
+		}
+		return false;
+	}
+	
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
+	@Override
+	public int compareTo(FoodItem other) {
+		return this.getCalorieCount() - other.getCalorieCount();
 	}
 	
 }

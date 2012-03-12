@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
     	
     	if (un.equalsIgnoreCase(testUN) && pw.equals(testPW)) {    	
     		Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-    		Intent i = new Intent(this, CalorieCounterActivity.class);
+    		Intent i = new Intent(this, RankingGameActivity.class);
     		startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
     	} else {
     		resetLoginFields();

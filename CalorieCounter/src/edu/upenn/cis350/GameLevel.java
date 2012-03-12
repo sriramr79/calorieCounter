@@ -6,7 +6,7 @@ import android.content.res.Resources;
 /**
  * Class to represent a game level, which consists of a sequence of food items
  * @author Paul M. Gurniak
- * @version 1.0
+ * @version 1.1
  *
  */
 public class GameLevel {
@@ -26,22 +26,15 @@ public class GameLevel {
 	}
 	
 	/**
-	 * Default constructor, constructs hard-coded game level.
-	 * This is just plain crap, used only for the Week 1 demo
-	 * @deprecated
+	 * Constructs Game level consisting of every food in the system, in random order
+	 * As of v1.1 no longer deprecated.
 	 */
 	public GameLevel(Resources res) {
 		this.foodList = new ArrayList<FoodItem>();
-		// http://nutrition.mcdonalds.com/getnutrition/nutritionfacts.pdf
-		FoodItem fries1 = new FoodItem(res.getDrawable(R.drawable.mcfries),
-										res.getString(R.string.mcfries),
-										500, 600, 50);
-		// http://www.bk.com/en/us/menu-nutrition/index.html
-		FoodItem fries2 = new FoodItem(res.getDrawable(R.drawable.bkfries),
-										res.getString(R.string.bkfries),
-										300, 400, 50);
-		foodList.add(fries1);
-		foodList.add(fries2);
+		FoodGenerator gen = new FoodGenerator(res);
+		while(gen.hasNextFood()) {
+			foodList.add(gen.nextFood());
+		}
 		this.calorieGuesses = new int[foodList.size()];
 		this.currentFood = 0;
 	}
