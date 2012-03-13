@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
@@ -31,6 +32,8 @@ public class RankingGameView extends View {
 	private int dispHeight;
 	private int dispWidth;
 	
+	private int numAttempts;
+	
 	private ScreenSquare order0Square;
 	private ScreenSquare order1Square;
 	private ScreenSquare order2Square;
@@ -47,6 +50,7 @@ public class RankingGameView extends View {
 	private ScreenSquare start2Square;
 	
 	private ScreenSquare submitSquare;
+	private ScreenSquare quitSquare;
 	
 	private ScreenSquare touchedSquare;
 	
@@ -54,24 +58,29 @@ public class RankingGameView extends View {
 	private static final int START2_DIALOG = 2;
 	private static final int CORRECT_DIALOG = 3;
 	private static final int WRONG_DIALOG = 4;
+	private static final int QUIT_DIALOG = 5;
 	
 	private Context mContext;
 	
 	public RankingGameView(Context c) {
 		super(c);
 		setUpFoodItems();
-		setUpStaticDisplay();
+		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
 	}
 	public RankingGameView(Context c, AttributeSet a) {
 		super(c, a);
 		setUpFoodItems();
-		setUpStaticDisplay();
+		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
 	}
 	
+	/**
+	 * Performs a basic setup, acquiring and sorting the three food items
+	 * given as a challenge to the user.
+	 */
 	private void setUpFoodItems() {
 		FoodGenerator foods = new FoodGenerator(this.getResources());
 		correctOrder = new ArrayList<FoodItem>();
@@ -86,9 +95,13 @@ public class RankingGameView extends View {
 		displayOrder.add(nextFood);
 		correctOrder.add(nextFood);
 		Collections.sort(correctOrder);
+		numAttempts = 0;
 	}
 	
-	private void setUpStaticDisplay() {
+	/**
+	 * Sets up the initial state of all static and dynamic display items
+	 */
+	private void setUpDisplayItems() {
 		WindowManager wm = (WindowManager)this.getContext().getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
 		this.dispHeight = display.getHeight();
@@ -111,6 +124,7 @@ public class RankingGameView extends View {
 		food2Square = new ScreenSquare(19*dispWidth/26, 15*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		
 		submitSquare = new ScreenSquare(16*dispWidth/26, 20*dispHeight/26, 9*dispWidth/26, 3*dispWidth/26, Color.RED, this.getContext().getResources().getString(R.string.rankSubmitButton), Color.WHITE);
+		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.RED, this.getContext().getResources().getString(R.string.rankXButton), Color.MAGENTA);
 		
 		checkOccupancy();
 		
@@ -119,7 +133,6 @@ public class RankingGameView extends View {
 		displayOrder.get(2).getImage().setBounds(food2Loc);
 	}
 	
-	// This method is called when the View is displayed
 	protected void onDraw(Canvas canvas) {
 		Paint paint = new Paint();
 		displayOrder.get(0).getImage().draw(canvas);
@@ -130,6 +143,7 @@ public class RankingGameView extends View {
 		canvas.drawText(displayOrder.get(0).getName(), 2*dispWidth/26, 27*dispHeight/104, paint);
 		canvas.drawText(displayOrder.get(1).getName(), 2*dispWidth/26, 51*dispHeight/104, paint);
 		canvas.drawText(displayOrder.get(2).getName(), 2*dispWidth/26, 75*dispHeight/104, paint);
+		quitSquare.draw(canvas, paint);
 		submitSquare.setColor(food0Occupied && food1Occupied && food2Occupied ? Color.GREEN : Color.RED);
 		submitSquare.draw(canvas, paint);
 		start0Square.draw(canvas, paint);
@@ -154,11 +168,16 @@ public class RankingGameView extends View {
 			int touchY = (int)event.getY();
 			
 			if(submitSquare.containsPoint(touchX, touchY) && food0Occupied && food1Occupied && food2Occupied) {
+				numAttempts++;
 				if(checkEnteredOrder()) {
 					showDialog(CORRECT_DIALOG);
 				} else {
 					showDialog(WRONG_DIALOG);
 				}
+			}
+			
+			if(quitSquare.containsPoint(touchX, touchY)) {
+				showDialog(QUIT_DIALOG);
 			}
 
 			checkOccupancy();
@@ -208,10 +227,19 @@ public class RankingGameView extends View {
 		return false;
 	}
 	
+	/**
+	 * Creates a Dialog of the specified ID and shows it
+	 * @param id ID number of the dialog to create
+	 */
 	private void showDialog(int id) {
 		createDialog(id).show();
 	}
 
+	/**
+	 * Creates an instance of the desired Dialog
+	 * @param id ID number of the dialog to create
+	 * @return a Dialog instance ready to be displayed
+	 */
     private Dialog createDialog(int id) {
     	if(id == START_DIALOG) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -238,11 +266,17 @@ public class RankingGameView extends View {
     	}
     	else if(id == CORRECT_DIALOG) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-    		builder.setMessage(getResources().getString(R.string.rankCorrectMessage));
+    		String returnMessage = getResources().getString(R.string.rankCorrectMessage);
+    		if(numAttempts != 1) {
+    			returnMessage += getResources().getString(R.string.rankCorrectMessage2) + Integer.toString(numAttempts);
+    			returnMessage += getResources().getString(R.string.rankCorrectTries);
+    		}
+    		builder.setMessage(returnMessage);
     		builder.setPositiveButton(R.string.rankExitButton,
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
-    				dialog.cancel();
+    				dialog.dismiss();
+    				((Activity)mContext).finish();
     			}
     		});
     		return builder.create();
@@ -254,6 +288,24 @@ public class RankingGameView extends View {
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.cancel();
+    			}
+    		});
+    		return builder.create();
+    	}
+    	else if(id == QUIT_DIALOG) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+    		builder.setMessage(getResources().getString(R.string.rankQuitMessage));
+    		builder.setNegativeButton(R.string.rankNoButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		builder.setPositiveButton(R.string.rankYesButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.dismiss();
+    				((Activity)mContext).finish();
     			}
     		});
     		return builder.create();
@@ -310,170 +362,5 @@ public class RankingGameView extends View {
 	}
 	
 	
-	/**
-	 * Inner class used to represent the position/state of each of the squares on the screen
-	 */
-	private class ScreenSquare {
-		
-		private int xpos;
-		private int ypos;
-		private int width;
-		private int height;
-		private int color;
-		private int startx;
-		private int starty;
-		private int textColor;
-		
-		private String text;
-		
-		public ScreenSquare(int xpos, int ypos, int width, int height, int color, String text) {
-			this.xpos = xpos;
-			this.ypos = ypos;
-			this.startx = xpos;
-			this.starty = ypos;
-			this.width = width;
-			this.height = height;
-			this.color = color;
-			this.text = text;
-			this.textColor = Color.BLACK;
-		}
-		
-		public ScreenSquare(int xpos, int ypos, int width, int height, int color, String text, int textColor) {
-			this.xpos = xpos;
-			this.ypos = ypos;
-			this.startx = xpos;
-			this.starty = ypos;
-			this.width = width;
-			this.height = height;
-			this.color = color;
-			this.text = text;
-			this.textColor = textColor;
-		}
-		
-		/**
-		 * Creates a new ScreenSquare at the location of the specified ScreenSquare with the specified color and text
-		 * @param other ScreenSquare at the desired location
-		 * @param color Color of the new ScreenSquare
-		 * @param text Text label for the new ScreenSquare
-		 */
-		public ScreenSquare(ScreenSquare other, int color, String text) {
-			this.xpos = other.xpos;
-			this.ypos = other.ypos;
-			this.startx = this.xpos;
-			this.starty = this.ypos;
-			this.height = other.height;
-			this.width = other.width;
-			this.color = color;
-			this.text = text;
-		}
-		
-		/**
-		 * Resets the position of the square to the starting position
-		 */
-		public void resetPosition() {
-			this.xpos = this.startx;
-			this.ypos = this.starty;
-		}
-		
-		/**
-		 * Sets the current position as the starting position for this square
-		 */
-		public void setStartPosition() {
-			this.startx = this.xpos;
-			this.starty = this.ypos;
-		}
-		
-		/**
-		 * Moves the square to center at the given point
-		 * @param x desired x-coordinate
-		 * @param y desired y-coordinate
-		 */
-		public void centerAt(int x, int y) {
-			this.xpos = x - this.width/2;
-			this.ypos = y - this.height/2;
-		}
-		
-		/**
-		 * Moves the square's top left corner to the given point
-		 * @param x desired x-coordinate
-		 * @param y desired y-coordinate
-		 */
-		public void moveTo(int x, int y) {
-			this.xpos = x;
-			this.ypos = y;
-		}
-		
-		/**
-		 * Sets this square's color to the specified color
-		 * @param color Color to be set to
-		 */
-		public void setColor(int color) {
-			this.color = color;
-		}
-		
-		/**
-		 * Moves this square's top left corner to match that of the specified ScreenSquare
-		 * @param other ScreenSquare whose position is to be matched
-		 */
-		public void moveTo(ScreenSquare other) {
-			this.xpos = other.xpos;
-			this.ypos = other.ypos;
-		}
-		
-		/**
-		 * Helper to draw this square in its current color (whichever that is).
-		 * Transparently stores and resets the Paint object to its original color
-		 * @param canvas Canvas object to draw to
-		 * @param paint Paint object to use for the drawing
-		 */
-		public void draw(Canvas canvas, Paint paint) {
-			int oldColor = paint.getColor();
-			paint.setColor(this.color);
-			canvas.drawRect(this.xpos, this.ypos, this.xpos + this.width, this.ypos + this.height, paint);
-			
-			Paint.Align oldAlign = paint.getTextAlign();
-			float oldSize = paint.getTextSize();
-			paint.setTextAlign(Paint.Align.CENTER);
-			paint.setColor(textColor);
-			paint.setTextSize(0.8f*this.height);
-			canvas.drawText(this.text, this.xpos + this.width/2, this.ypos + 4*this.height/5, paint);
-			
-			paint.setTextAlign(oldAlign);
-			paint.setTextSize(oldSize);
-			paint.setColor(oldColor);
-			
-		}
 
-		/**
-		 * Method to determine if this square contains the specified point within its boundaries
-		 * 
-		 * @param x X coordinate of the point
-		 * @param y Y coordinate of the point
-		 * @return true if the point is contained within the boundaries (inclusive), false otherwise.
-		 */
-		public boolean containsPoint(int x, int y) {
-			if(x - this.xpos >= 0 && y - this.ypos >= 0 && x - this.xpos < this.width && y - this.ypos < this.height) {
-				return true;
-			}
-			return false;
-		}
-		
-		/**
-		 * Method to help determine if this square is overlapping another one.
-		 * 
-		 * Warning: for simplicity, this assumes that both squares are the same size.
-		 * 
-		 * @param other Other instance of ScreenSquare to compare to
-		 * @return Whether the ScreenSquares are overlapping
-		 */
-		public boolean overlapping(ScreenSquare other) {
-			if(other == null) return false;
-			return this.containsPoint(other.xpos, other.ypos) ||
-					this.containsPoint(other.xpos, other.ypos + other.height) ||
-					this.containsPoint(other.xpos + other.width, other.ypos) ||
-					this.containsPoint(other.xpos + other.width, other.ypos + other.height);
-		}
-		
-	}
-	
 }

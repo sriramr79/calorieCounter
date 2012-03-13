@@ -25,11 +25,17 @@
     <string name="rank2Button">2</string>
     <string name="rank3Button">3</string>
     <string name="rankOtherButton">-</string>
+    <string name="rankXButton">X</string>
     <string name="rankSubmitButton">Submit</string>
     <string name="rankWelcomeMessage">Welcome to the Ranking Game!  In this game, you will rank three foods in order of increasing calorie content.</string>
     <string name="rankWelcomeMessage2">To rank foods, simply drag-and-drop the numbered colored squares at the bottom left to the gray slots on the right.</string>
     <string name="rankCorrectMessage">That\'s correct!</string>
+    <string name="rankCorrectMessage2">\u0020You got it in\u0020</string>
+    <string name="rankCorrectTries">\u0020tries.</string>
     <string name="rankWrongMessage">Sorry, that\'s not quite right.</string>
+    <string name="rankQuitMessage">Are you sure you want to quit?</string>
+    <string name="rankYesButton">Yes</string>
+    <string name="rankNoButton">No</string>
     <string name="rankStartButton">Start</string>
     <string name="rankNextButton">Next</string>
     <string name="rankExitButton">Exit</string>
