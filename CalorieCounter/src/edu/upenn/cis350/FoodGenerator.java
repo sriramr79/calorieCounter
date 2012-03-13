@@ -28,9 +28,12 @@ public class FoodGenerator {
 		FoodItem fries2 = new FoodItem(res.getDrawable(R.drawable.bkfries),
 				res.getString(R.string.bkfries),
 				300, 400, 50);
-		
+		FoodItem apple = new FoodItem(res.getDrawable(R.drawable.redapple),
+				res.getString(R.string.redapple),
+				80, 120, 40);
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
+		unseenItems.add(apple);
 	}
 	
 	/**

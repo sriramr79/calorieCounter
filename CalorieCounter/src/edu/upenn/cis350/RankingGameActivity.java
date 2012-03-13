@@ -17,5 +17,9 @@ public class RankingGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
     }
-
+    
+    public void quitActivity() {
+    	finish();
+    }
+	
 }
