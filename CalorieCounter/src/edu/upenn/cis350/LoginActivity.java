@@ -1,6 +1,7 @@
 package edu.upenn.cis350;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,16 @@ public class LoginActivity extends Activity {
         
         username = (EditText) findViewById(R.id.loginField);
         password = (EditText) findViewById(R.id.passwordField);
+        IOBasic.finalWrite(getApplicationContext());
+        IOBasic.initRead(getApplicationContext());
+        
+        Context context = getApplicationContext();
+        CharSequence text = Integer.toString(IOBasic.points("abaldwin"));
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+       
     }
 
 
