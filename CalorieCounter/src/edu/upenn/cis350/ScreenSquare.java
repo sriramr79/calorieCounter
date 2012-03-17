@@ -133,6 +133,24 @@ public class ScreenSquare {
 	}
 	
 	/**
+	 * Gets the x-coordinate of the center of this square.  Used to generate a point that is guaranteed
+	 * to be contained within the square
+	 * @return The x-coordinate of the center of the square
+	 */
+	public int getCenterX() {
+		return this.xpos + this.width/2;
+	}
+	
+	/**
+	 * Gets the y-coordinate of the center of this square.  Used to generate a point that is guaranteed
+	 * to be contained within the square
+	 * @return The y-coordinate of the center of the square
+	 */
+	public int getCenterY() {
+		return this.ypos + this.height/2;
+	}
+	
+	/**
 	 * Moves the square's top left corner to the given point
 	 * @param x desired x-coordinate
 	 * @param y desired y-coordinate
@@ -214,7 +232,11 @@ public class ScreenSquare {
 		return this.containsPoint(other.xpos, other.ypos) ||
 				this.containsPoint(other.xpos, other.ypos + other.height) ||
 				this.containsPoint(other.xpos + other.width, other.ypos) ||
-				this.containsPoint(other.xpos + other.width, other.ypos + other.height);
+				this.containsPoint(other.xpos + other.width, other.ypos + other.height) ||
+				other.containsPoint(this.xpos, this.ypos) ||
+				other.containsPoint(this.xpos, this.ypos + this.height) ||
+				other.containsPoint(this.xpos + this.width, this.ypos) ||
+				other.containsPoint(this.xpos + this.width, this.ypos + this.height);
 	}
 	
 }

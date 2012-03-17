@@ -26,33 +26,33 @@ import android.view.WindowManager;
  */
 public class RankingGameView extends View {
 
-	private ArrayList<FoodItem> correctOrder;
-	private ArrayList<FoodItem> displayOrder;
+	public ArrayList<FoodItem> correctOrder;
+	public ArrayList<FoodItem> displayOrder;
 	
 	private int dispHeight;
 	private int dispWidth;
 	
-	private int numAttempts;
+	public int numAttempts;
 	
-	private ScreenSquare order0Square;
-	private ScreenSquare order1Square;
-	private ScreenSquare order2Square;
+	public ScreenSquare order0Square;
+	public ScreenSquare order1Square;
+	public ScreenSquare order2Square;
 	
-	private ScreenSquare food0Square;
-	private ScreenSquare food1Square;
-	private ScreenSquare food2Square;
-	private boolean food0Occupied;
-	private boolean food1Occupied;
-	private boolean food2Occupied;
+	public ScreenSquare food0Square;
+	public ScreenSquare food1Square;
+	public ScreenSquare food2Square;
+	public boolean food0Occupied;
+	public boolean food1Occupied;
+	public boolean food2Occupied;
 	
-	private ScreenSquare start0Square;
-	private ScreenSquare start1Square;
-	private ScreenSquare start2Square;
+	public ScreenSquare start0Square;
+	public ScreenSquare start1Square;
+	public ScreenSquare start2Square;
 	
-	private ScreenSquare submitSquare;
-	private ScreenSquare quitSquare;
+	public ScreenSquare submitSquare;
+	public ScreenSquare quitSquare;
 	
-	private ScreenSquare touchedSquare;
+	public ScreenSquare touchedSquare;
 	
 	private Context mContext;
 	
@@ -157,6 +157,23 @@ public class RankingGameView extends View {
 		
 	}
 	
+	/**
+	 * Method that generates the desired motion event and sends it to onTouchEvent.  This method
+	 * serves no purpose outside of a tester, as it will not be invoked by the system.
+	 * 
+	 * This method is apparently necessary because the testing application runs in a different
+	 * thread than this View class, and therefore cannot call onTouchEvent directly.
+	 * 
+	 * @param X X-coordinate of the event
+	 * @param Y Y-coordinate of the event
+	 * @param action Action of the event
+	 * @return the result of calling onTouchEvent with this action
+	 */
+	public boolean fakeTouchEvent(int action, int X, int Y) {
+		MotionEvent e = MotionEvent.obtain(0, 0, action, X, Y, 0 );
+		return onTouchEvent(e);
+	}
+	
 	public boolean onTouchEvent(MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			int touchX = (int)event.getX();
@@ -225,7 +242,7 @@ public class RankingGameView extends View {
 	/**
 	 * Updates all occupancy variables depending on the position of the movable squares
 	 */
-	private void checkOccupancy() {
+	public void checkOccupancy() {
 		food0Occupied = false;
 		food1Occupied = false;
 		food2Occupied = false;
@@ -258,7 +275,7 @@ public class RankingGameView extends View {
 	 * Checks to see whether the order that the foods were ranked is correct
 	 * @return True if the user has set the ranking squares in the correct order, false otherwise.
 	 */
-	private boolean checkEnteredOrder() {
+	public boolean checkEnteredOrder() {
 		for(int i = 0; i < 3; i++) {
 			int position = displayOrder.indexOf(correctOrder.get(i));
 			ScreenSquare checkPosition = position == 0 ? food0Square : position == 1 ? food1Square : food2Square;
@@ -280,7 +297,7 @@ public class RankingGameView extends View {
 	 * Creates a Dialog of the specified ID and shows it
 	 * @param id ID number of the dialog to create
 	 */
-	private void showDialog(int id) {
+	public void showDialog(int id) {
 		createDialog(id).show();
 	}
 
@@ -289,7 +306,7 @@ public class RankingGameView extends View {
 	 * @param id ID number of the dialog to create
 	 * @return a Dialog instance ready to be displayed
 	 */
-    private Dialog createDialog(int id) {
+	public Dialog createDialog(int id) {
     	if(id == START_DIALOG) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
     		builder.setMessage(getResources().getString(R.string.rankWelcomeMessage));
