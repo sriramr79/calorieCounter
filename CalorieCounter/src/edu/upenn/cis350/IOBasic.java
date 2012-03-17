@@ -3,21 +3,27 @@
  */
 package edu.upenn.cis350;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
 
 
 import android.content.Context;
-import android.util.Log;
 
 /**
  * @author Zhang
  *
  */
 public class IOBasic{
-
+	//HashMap that maps a USN to an array of Strings that contains all the other info for the person
+	//arrayFormat = [password, full name, points]
+	static HashMap<String,String[]> dataStruct;
+	static String directory="";
+	//
 	
 	
 	/*
@@ -26,11 +32,12 @@ public class IOBasic{
 	 */
 	static public void finalWrite(Context context)
 	{
-		String FILENAME = "hello_file";
-		String string = "hello world!";
+		String FILENAME = "userInfo.txt";
+		String string = "zhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
 		try{
 			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
 			fos.write(string.getBytes());
+			directory = context.getFilesDir().toString();
 			fos.close();
 		}
 		catch (IOException e)
@@ -43,10 +50,32 @@ public class IOBasic{
 	 * This function should be called when launching the app: it reads the file in its entirety and
 	 * constructs a datastructure out of it
 	 */
-	static public void initRead()
+	static public void initRead(Context context)
 	{
+		dataStruct = new HashMap<String,String[]>();
+		BufferedReader buff;
+		String FILENAME = "userInfo.txt";
+		String currentLine = null;
+		StringTokenizer tk;
+		String[] additionalData=null;
+		String usn=null;
+		int length;
 		try{
-			
+			buff = new BufferedReader(new FileReader(directory+"/"+FILENAME));
+			while((currentLine=buff.readLine())!=null)
+			{
+				tk = new StringTokenizer(currentLine,",");
+				additionalData = new String[tk.countTokens()-1];
+				length = additionalData.length;
+				usn = tk.nextToken();
+				for (int i =0;i<length;i++)
+				{
+					additionalData[i]=tk.nextToken();
+				}
+				dataStruct.put(usn, additionalData);
+				
+			}
+			buff.close();
 		}
 		catch (Exception e)
 		{
@@ -55,27 +84,12 @@ public class IOBasic{
 	}
 
 	/*
-	 * Helper method that returns the info based on full name
-	 */
-	static private String[] getInfoName (String name)
-	{
-		return null;
-	}
-	
-	/*
-	 * Helper method that returns the info based on username
-	 */
-	static private String[] getInfoUSN (String USN)
-	{
-		return null;
-	}
-
-	/*
 	 * Returns the password for a person's username
 	 */
 	static public String password (String USN)
 	{
-		return null;
+		String[] data=dataStruct.get(USN);
+		return data[0];
 	}
 	
 	/*
@@ -83,7 +97,8 @@ public class IOBasic{
 	 */
 	static public int points (String USN)
 	{
-		return 0;
+		String[] data=dataStruct.get(USN);
+		return Integer.parseInt(data[2]);
 	}
 	
 	/*
@@ -91,6 +106,7 @@ public class IOBasic{
 	 */
 	static public String fullName (String USN)
 	{
-		return null;
+		String[] data=dataStruct.get(USN);
+		return data[1];
 	}
 }
