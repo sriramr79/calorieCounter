@@ -54,12 +54,6 @@ public class RankingGameView extends View {
 	
 	private ScreenSquare touchedSquare;
 	
-	private static final int START_DIALOG = 1;
-	private static final int START2_DIALOG = 2;
-	private static final int CORRECT_DIALOG = 3;
-	private static final int WRONG_DIALOG = 4;
-	private static final int QUIT_DIALOG = 5;
-	
 	private Context mContext;
 	
 	public RankingGameView(Context c) {
@@ -107,6 +101,7 @@ public class RankingGameView extends View {
 		this.dispHeight = display.getHeight();
 		this.dispWidth = display.getWidth();
 		
+		// Use these rectangles to automatically resize source image to our screen
 		Rect food0Loc = new Rect(2*dispWidth/26, dispHeight/26, (2*dispWidth + 8*dispHeight)/26, 6*dispHeight/26);
 		Rect food1Loc = new Rect(2*dispWidth/26, 7*dispHeight/26, (2*dispWidth + 8*dispHeight)/26, 12*dispHeight/26);
 		Rect food2Loc = new Rect(2*dispWidth/26, 13*dispHeight/26, (2*dispWidth + 8*dispHeight)/26, 18*dispHeight/26);
@@ -228,6 +223,60 @@ public class RankingGameView extends View {
 	}
 	
 	/**
+	 * Updates all occupancy variables depending on the position of the movable squares
+	 */
+	private void checkOccupancy() {
+		food0Occupied = false;
+		food1Occupied = false;
+		food2Occupied = false;
+		markOverlapping(order0Square);
+		markOverlapping(order1Square);
+		markOverlapping(order2Square);
+	}
+	
+	/**
+	 * Sets the occupancy variable for the position of the square that was just released
+	 * @param square The square that was just released
+	 */
+	private void markOverlapping(ScreenSquare square) {
+		if(square.overlapping(food0Square)) food0Occupied = true;
+		if(square.overlapping(food1Square)) food1Occupied = true;
+		if(square.overlapping(food2Square)) food2Occupied = true;
+	}
+	
+	/**
+	 * Clears the occupancy variable for the position of the square that was just picked up
+	 * @param square The square that was just touched
+	 */
+	private void unmarkOverlapping(ScreenSquare square) {
+		if(square.overlapping(food0Square)) food0Occupied = false;
+		if(square.overlapping(food1Square)) food1Occupied = false;
+		if(square.overlapping(food2Square)) food2Occupied = false;
+	}
+
+	/**
+	 * Checks to see whether the order that the foods were ranked is correct
+	 * @return True if the user has set the ranking squares in the correct order, false otherwise.
+	 */
+	private boolean checkEnteredOrder() {
+		for(int i = 0; i < 3; i++) {
+			int position = displayOrder.indexOf(correctOrder.get(i));
+			ScreenSquare checkPosition = position == 0 ? food0Square : position == 1 ? food1Square : food2Square;
+			ScreenSquare expectedRank = i == 0 ? order0Square : i == 1 ? order1Square : order2Square;
+			if(!expectedRank.overlapping(checkPosition)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static final int START_DIALOG = 1;
+	private static final int START2_DIALOG = 2;
+	private static final int CORRECT_DIALOG = 3;
+	private static final int WRONG_DIALOG = 4;
+	private static final int QUIT_DIALOG = 5;
+	
+	/**
 	 * Creates a Dialog of the specified ID and shows it
 	 * @param id ID number of the dialog to create
 	 */
@@ -268,8 +317,9 @@ public class RankingGameView extends View {
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
     		String returnMessage = getResources().getString(R.string.rankCorrectMessage);
     		if(numAttempts != 1) {
-    			returnMessage += getResources().getString(R.string.rankCorrectMessage2) + Integer.toString(numAttempts);
-    			returnMessage += getResources().getString(R.string.rankCorrectTries);
+    			returnMessage = returnMessage + getResources().getString(R.string.rankCorrectMessage2)
+    										+ Integer.toString(numAttempts)
+    										+ getResources().getString(R.string.rankCorrectTries);
     		}
     		builder.setMessage(returnMessage);
     		builder.setPositiveButton(R.string.rankExitButton,
@@ -312,55 +362,6 @@ public class RankingGameView extends View {
     	}
     	return null;
     }
-	
-	/**
-	 * Updates all occupancy variables depending on the position of the movable squares
-	 */
-	private void checkOccupancy() {
-		food0Occupied = false;
-		food1Occupied = false;
-		food2Occupied = false;
-		markOverlapping(order0Square);
-		markOverlapping(order1Square);
-		markOverlapping(order2Square);
-	}
-	
-	/**
-	 * Sets the occupancy variable for the position of the square that was just released
-	 * @param square The square that was just released
-	 */
-	private void markOverlapping(ScreenSquare square) {
-		if(square.overlapping(food0Square)) food0Occupied = true;
-		if(square.overlapping(food1Square)) food1Occupied = true;
-		if(square.overlapping(food2Square)) food2Occupied = true;
-	}
-	
-	/**
-	 * Clears the occupancy variable for the position of the square that was just picked up
-	 * @param square The square that was just touched
-	 */
-	private void unmarkOverlapping(ScreenSquare square) {
-		if(square.overlapping(food0Square)) food0Occupied = false;
-		if(square.overlapping(food1Square)) food1Occupied = false;
-		if(square.overlapping(food2Square)) food2Occupied = false;
-	}
-
-	/**
-	 * Checks to see whether the order that the foods were ranked is correct
-	 * @return
-	 */
-	private boolean checkEnteredOrder() {
-		for(int i = 0; i < 3; i++) {
-			int position = displayOrder.indexOf(correctOrder.get(i));
-			ScreenSquare checkPosition = position == 0 ? food0Square : position == 1 ? food1Square : food2Square;
-			ScreenSquare expectedRank = i == 0 ? order0Square : i == 1 ? order1Square : order2Square;
-			if(!checkPosition.overlapping(expectedRank)) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	
 
 }

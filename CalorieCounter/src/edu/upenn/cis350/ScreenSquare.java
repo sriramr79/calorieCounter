@@ -7,6 +7,8 @@ import android.graphics.Paint;
 /**
  * Class used to represent a Square that is drawn on the screen, including text, color, movement, and collisions.
  * 
+ * See individual method documentation for more information
+ * 
  * @author Paul M. Gurniak
  * @version 1.0
  *
@@ -66,7 +68,7 @@ public class ScreenSquare {
 	}
 	
 	/**
-	 * Same as the default constructor above, but allows the setting of a separate text color
+	 * Same as the default constructor, but allows the setting of a separate text color.
 	 * @param xpos Starting x position
 	 * @param ypos Staring y position
 	 * @param width Width of the square
