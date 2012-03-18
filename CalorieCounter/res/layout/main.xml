@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/appHeader" />
+        android:text="@string/appVersion" />
 
     <ImageView
         android:id="@+id/foodImage"

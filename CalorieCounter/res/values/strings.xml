@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- General App Strings -->
     <string name="app_name">Calorie Counter</string>
-    <string name="appHeader">CalorieCounter Beta v0.2: 2.29.12</string>
+    <string name="appVersion">CalorieCounter Beta v0.3: 3.20.2012</string>
+
+    <!-- Game messages -->
     <string name="correctMessage">That\'s right,\u0020</string>
     <string name="correctIs">\u0020is\u0020</string>
     <string name="calories">\u0020calories.\u0020</string>
@@ -13,14 +16,24 @@
     <string name="wrongLow">\u0020has more calories than that.\u0020</string>
     <string name="wrongHigh">\u0020has less calories than that.\u0020</string>
     <string name="food">Food:\u0020</string>
+
+    <!-- Button Text -->
     <string name="submitButton">Submit</string>
+    <string name="quitButton">Quit</string>
     <string name="logoutButton">Logout</string>
     <string name="nextButton">Next</string>
     <string name="retryButton">Retry</string>
-    
+
+    <!-- Login Activity -->
+    <string name="welcome">Welcome to the Calorie Counter!</string>
+    <string name="unTitle">Username:\u0020</string>
+    <string name="pwTitle">Password:\u0020</string>
+    <string name="unHint">Enter username</string>
+    <string name="pwHint">Enter password</string>
+
+    <!-- Ranking Game -->
     <string name="rankButtonUnset">-</string>
     <string name="rankButtonSubmit">Submit</string>
-    
     <string name="rank1Button">1</string>
     <string name="rank2Button">2</string>
     <string name="rank3Button">3</string>
@@ -40,7 +53,8 @@
     <string name="rankNextButton">Next</string>
     <string name="rankExitButton">Exit</string>
     <string name="rankRetryButton">Retry</string>
-    
+
+    <!-- Price is Right -->
     <string name="mcfries">a large order of McDonalds\' Fries</string>
     <string name="bkfries">a small order of Burger King Fries</string>
     <string name="redapple">a medium-sized red apple</string>

@@ -21,8 +21,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         
-        username = (EditText) findViewById(R.id.loginField);
-        password = (EditText) findViewById(R.id.passwordField);
+        username = (EditText) findViewById(R.id.unField);
+        password = (EditText) findViewById(R.id.pwField);
         IOBasic.finalWrite(getApplicationContext());
         IOBasic.initRead(getApplicationContext());
         
