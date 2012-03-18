@@ -24,19 +24,37 @@ public class FoodGenerator {
 		seenItems = new LinkedList<FoodItem>();
 		FoodItem fries1 = new FoodItem(res.getDrawable(R.drawable.mcfries),
 				res.getString(R.string.mcfries),
-				500, 600, 50);
+				475, 525, 25);
 		FoodItem fries2 = new FoodItem(res.getDrawable(R.drawable.bkfries),
 				res.getString(R.string.bkfries),
-				300, 400, 50);
+				325, 375, 25);
 		FoodItem apple = new FoodItem(res.getDrawable(R.drawable.redapple),
 				res.getString(R.string.redapple),
 				50, 90, 10);
 		FoodItem banana = new FoodItem(res.getDrawable(R.drawable.banana),
 				res.getString(R.string.banana),
 				80, 110, 15);
+		FoodItem milkglass = new FoodItem(res.getDrawable(R.drawable.milkglass),
+				res.getString(R.string.milkglass),
+				80, 120, 20);
+		FoodItem waterglass = new FoodItem(res.getDrawable(R.drawable.waterglass),
+				res.getString(R.string.waterglass),
+				0, 0, 0);
+		FoodItem cokecan = new FoodItem(res.getDrawable(R.drawable.cokecan),
+				res.getString(R.string.cokecan),
+				110, 130, 10);
+		FoodItem tacobellburrito = new FoodItem(res.getDrawable(R.drawable.tacobellburrito),
+				res.getString(R.string.tacobellburrito),
+				525, 575, 25);
+		
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
 		unseenItems.add(apple);
+		unseenItems.add(banana);
+		unseenItems.add(milkglass);
+		unseenItems.add(waterglass);
+		unseenItems.add(cokecan);
+		unseenItems.add(tacobellburrito);
 	}
 	
 	/**

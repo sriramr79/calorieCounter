@@ -22,6 +22,7 @@ public class CalorieCounterActivity extends Activity {
         setContentView(R.layout.main);
         level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
+        showDialog(INSTRUCTION_DIALOG);
     }
     
     public void onSubmitEvent(View view) {
@@ -91,6 +92,7 @@ public class CalorieCounterActivity extends Activity {
     private static final int CLOSEHIGH_DIALOG = 3;
     private static final int WRONGHIGH_DIALOG = 4;
     private static final int INVALID_DIALOG = 5;
+    private static final int INSTRUCTION_DIALOG = 6;
     
     protected Dialog onCreateDialog(int id) {
     	
@@ -150,6 +152,19 @@ public class CalorieCounterActivity extends Activity {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.cancel();
     	    		updateDisplayedFood(level.getCurrentFood());
+    			}
+    		});
+    		
+    		return builder.create();
+    	}
+    	
+    	else if(id == INSTRUCTION_DIALOG) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(res.getString(R.string.instructionMessage));
+    		builder.setPositiveButton(R.string.startButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
     			}
     		});
     		

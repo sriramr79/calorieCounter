@@ -34,7 +34,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Enter Guess"
+            android:hint="@string/calorieInputHint"
             android:imeOptions="actionDone"
             android:inputType="number" >
         </EditText>
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:onClick="onLogoutEvent"
-            android:text="@string/logoutButton" />
+            android:text="@string/quitButton" />
     </LinearLayout>
 
 </LinearLayout>
