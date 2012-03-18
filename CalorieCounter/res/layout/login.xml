@@ -59,7 +59,7 @@
         android:layout_below="@+id/unField"
         android:hint="@string/pwHint"
         android:inputType="textPassword" />
-
+
     <Button
         android:id="@+id/loginSubmit"
         android:layout_width="wrap_content"
@@ -87,5 +87,14 @@
         android:layout_toRightOf="@+id/centerPoint"
         android:onClick="onTapQuit"
         android:text="@string/quitButton" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginSubmit"
+        android:layout_centerHorizontal="true"
+        android:onClick="onTapRegister"
+        android:text="@string/registerButton" />
 
 </RelativeLayout>

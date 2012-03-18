@@ -46,6 +46,7 @@ public class SignUpActivity extends Activity {
 	}
     
     public void Back (View view) {
+    	setResult(Constants.REGISTERED);
 		finish();
 	}
 
