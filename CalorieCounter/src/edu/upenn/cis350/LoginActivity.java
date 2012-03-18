@@ -20,10 +20,10 @@ public class LoginActivity extends Activity {
 		username = (EditText) findViewById(R.id.unField);
 		password = (EditText) findViewById(R.id.pwField);
 
+		IOBasic.finalWrite(getApplicationContext());
 		IOBasic.initRead(getApplicationContext());
 
 		/*
-		 * IOBasic.finalWrite(getApplicationContext());
 		 * 
 		 * Context context = getApplicationContext(); CharSequence text =
 		 * Integer.toString(IOBasic.getPoints("abaldwin")); int duration =
@@ -40,11 +40,17 @@ public class LoginActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Constants.LOGOUT_SUCCESSFUL) {
 			showToast("You have logged out!");
-			resetLoginFields();
 		} else if (resultCode == Constants.REGISTERED) {
 			showToast("Thank you for registering!");
-			resetLoginFields();
 		}
+	}
+	
+	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		resetLoginFields();
 	}
 
 	private void showToast(String message) {
