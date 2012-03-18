@@ -30,7 +30,7 @@ public class FoodGenerator {
 				300, 400, 50);
 		FoodItem apple = new FoodItem(res.getDrawable(R.drawable.redapple),
 				res.getString(R.string.redapple),
-				80, 120, 40);
+				50, 90, 10);
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
 		unseenItems.add(apple);
