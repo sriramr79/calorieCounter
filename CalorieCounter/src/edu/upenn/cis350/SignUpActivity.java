@@ -42,7 +42,8 @@ public class SignUpActivity extends Activity {
         toast.show();
     	
     	
-		Back(view);
+    	setResult(Constants.REGISTERED);
+		finish();
 	}
     
     public void Back (View view) {
