@@ -88,6 +88,7 @@ public class IOBasic{
 	 */
 	static public String password (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return null;
 		String[] data=dataStruct.get(USN);
 		return data[0];
 	}
@@ -97,6 +98,7 @@ public class IOBasic{
 	 */
 	static public int getPoints (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return -1;
 		String[] data=dataStruct.get(USN);
 		return Integer.parseInt(data[2]);
 	}
@@ -119,6 +121,7 @@ public class IOBasic{
 	 */
 	static public String fullName (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return null;
 		String[] data=dataStruct.get(USN);
 		return data[1];
 	}
