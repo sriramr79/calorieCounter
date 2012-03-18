@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class CalorieCounterActivity extends Activity {
 	
-	GameLevel level;
+	public GameLevel level;
 	
     /** Called when the activity is first created. */
     @Override
@@ -24,7 +24,6 @@ public class CalorieCounterActivity extends Activity {
         updateDisplayedFood(level.getCurrentFood());
     }
     
-    //testing
     public void onSubmitEvent(View view) {
     	EditText userInput = (EditText)findViewById(R.id.calorieInput);
     	// Surround in try-catch to avoid crash on unparseable input
@@ -64,7 +63,7 @@ public class CalorieCounterActivity extends Activity {
     		showDialog(INVALID_DIALOG);
     		break;
     	default:
-    		throw new RuntimeException("Unexpected FoodItem.AnswerType returned!");
+    		throw new RuntimeException("Non-existant FoodItem.AnswerType returned?  You should not be returning any int from FoodItem.checkGuess()!  Use the Enum.");
     	}
     	
    

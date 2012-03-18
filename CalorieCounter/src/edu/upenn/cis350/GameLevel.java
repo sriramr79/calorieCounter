@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import android.content.res.Resources;
 
 /**
- * Class to represent a game level, which consists of a sequence of food items
+ * Class to represent a game level, which consists of a sequence of food items 
+ * 
+ * This class should not be used in any new code: instead, use FoodGenerator.  The
+ * functionality of this class, while helpful for CalorieCounterActivity, contains
+ * a lot of functionality specific to that, whereas FoodGenerator is much more general.
+ * 
  * @author Paul M. Gurniak
  * @version 1.1
- *
  */
 public class GameLevel {
 

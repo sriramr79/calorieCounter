@@ -119,7 +119,7 @@ public class RankingGameView extends View {
 		food2Square = new ScreenSquare(19*dispWidth/26, 15*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		
 		submitSquare = new ScreenSquare(16*dispWidth/26, 20*dispHeight/26, 9*dispWidth/26, 3*dispWidth/26, Color.RED, this.getContext().getResources().getString(R.string.rankSubmitButton), Color.WHITE);
-		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.RED, this.getContext().getResources().getString(R.string.rankXButton), Color.MAGENTA);
+		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.BLACK, this.getContext().getResources().getString(R.string.rankXButton), Color.RED);
 		
 		checkOccupancy();
 		

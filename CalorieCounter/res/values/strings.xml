@@ -55,8 +55,13 @@
     <string name="rankRetryButton">Retry</string>
 
     <!-- Price is Right -->
-    <string name="mcfries">a large order of McDonalds\' Fries</string>
-    <string name="bkfries">a small order of Burger King Fries</string>
+    <string name="mcfries">a large order of McDonalds\' fries</string>
+    <string name="bkfries">a small order of Burger King fries</string>
     <string name="redapple">a medium-sized red apple</string>
-
+    <string name="banana">a ripe yellow banana</string>
+    <string name="milkglass">an 8-ounce glass of skim milk</string>
+    <string name="tacobellburrito">a Taco Bell Beffy 5-Layer Burrito</string>
+	<string name="cokecan">a 12-ounce can of Coca-Cola</string>
+	<string name="waterglass">an 8-ounce glass of water</string>
+    
 </resources>
