@@ -1,16 +1,13 @@
 package edu.upenn.cis350.test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 import edu.upenn.cis350.CalorieCounterActivity;
 import edu.upenn.cis350.FoodItem;
 import edu.upenn.cis350.FoodGenerator;
 import edu.upenn.cis350.GameLevel;
-import edu.upenn.cis350.R;
 
 /**
  * This class contains unit tests for the following classes:
