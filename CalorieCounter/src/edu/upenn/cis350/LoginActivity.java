@@ -23,15 +23,18 @@ public class LoginActivity extends Activity {
         
         username = (EditText) findViewById(R.id.unField);
         password = (EditText) findViewById(R.id.pwField);
-        IOBasic.finalWrite(getApplicationContext());
+       /* IOBasic.finalWrite(getApplicationContext());
         IOBasic.initRead(getApplicationContext());
         
         Context context = getApplicationContext();
-        CharSequence text = Integer.toString(IOBasic.points("abaldwin"));
+        CharSequence text = Integer.toString(IOBasic.getPoints("abaldwin"));
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+        
+        Intent i = new Intent(this, SignUpActivity.class);
+		startActivity(i);*/
        
     }
 

@@ -95,10 +95,23 @@ public class IOBasic{
 	/*
 	 * get points of a person based off of the username
 	 */
-	static public int points (String USN)
+	static public int getPoints (String USN)
 	{
 		String[] data=dataStruct.get(USN);
 		return Integer.parseInt(data[2]);
+	}
+	
+	/*
+	 * set the Points of user USN to points
+	 * 
+	 * returns true if it succeeded, false otherwise (no user with specific usn USN)
+	 */
+	static public boolean setPoints(String USN, int points)
+	{
+		if (!dataStruct.containsKey(USN)) return false;
+		
+		dataStruct.get(USN)[2]=Integer.toString(points);
+		return true;
 	}
 	
 	/*
@@ -109,4 +122,16 @@ public class IOBasic{
 		String[] data=dataStruct.get(USN);
 		return data[1];
 	}
+	
+	/*
+	 * returns False if the usn is already taken, otherwise return true
+	 */
+	static public boolean addUser(String usn, String pass, String fullName)
+	{
+		if (dataStruct.containsKey(usn)==true) return false;
+		String[] data = {pass,fullName,"0"};
+		dataStruct.put(usn, data);
+		return true;
+	}
+	
 }
