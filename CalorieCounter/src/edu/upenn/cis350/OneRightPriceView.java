@@ -72,6 +72,16 @@ public class OneRightPriceView extends View {
 		score = IOBasic.getPoints(username);
 		
 	}
+	public OneRightPriceView(Context c) {
+		super(c);
+		setUpFoodItems();
+		setUpDisplayItems();
+		this.mContext = c;
+		showDialog(START_DIALOG);
+		username = ((OneRightPriceActivity)c).getUsername();
+		score = IOBasic.getPoints(username);
+		
+	}
 	
 	/**
 	 * Performs a basic setup, aquiring two different foods

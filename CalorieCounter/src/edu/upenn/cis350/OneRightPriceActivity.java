@@ -16,9 +16,10 @@ public class OneRightPriceActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.onerightprice);
         
         this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
+        setContentView(R.layout.onerightprice);
+
         //should never occur
         if (username == null) {
         	finish();
