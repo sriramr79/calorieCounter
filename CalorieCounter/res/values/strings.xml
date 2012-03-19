@@ -18,6 +18,8 @@
     <string name="instructionMessage">Enter an estimate for the number of calories in the pictured food.</string>
     <string name="calorieInputHint">Enter guess</string>
     <string name="food">Food:\u0020</string>
+    <string name="scoreReportMessage1">You won\u0020</string>
+    <string name="scoreReportMessage2">\u0020points for this guess.</string>
 
     <!-- Button Text -->
     <string name="submitButton">Submit</string>
@@ -57,7 +59,7 @@
     <string name="rankWelcomeMessage">Welcome to the Ranking Game!  In this game, you will rank three foods in order of increasing calorie content.</string>
     <string name="rankWelcomeMessage2">To rank foods, simply drag-and-drop the numbered colored squares at the bottom left to the gray slots on the right.</string>
     <string name="rankCorrectMessage">That\'s correct!</string>
-    <string name="rankCorrectMessage2">\u0020You got it in\u0020</string>
+    <string name="rankCorrectMessage2">\u0020You won\u0020</string>
     <string name="rankCorrectTries">\u0020tries.</string>
     <string name="rankWrongMessage">Sorry, that\'s not quite right.</string>
     <string name="rankQuitMessage">Are you sure you want to quit?</string>
@@ -67,6 +69,8 @@
     <string name="rankNextButton">Next</string>
     <string name="rankExitButton">Exit</string>
     <string name="rankRetryButton">Retry</string>
+    <string name="rankPoints">\u0020points for this game.</string>
+    
 
     <!-- One Right Price -->
     <string name="oneWelcomeMessage">Welcome to the  One Right Price!  In this game, you will be presented with two foods and one calorie value. You must match the calorie value with the correct food.</string>

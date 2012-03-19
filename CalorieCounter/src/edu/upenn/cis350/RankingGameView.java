@@ -55,6 +55,7 @@ public class RankingGameView extends View {
 	public ScreenSquare touchedSquare;
 	
 	private Context mContext;
+	private String username;
 	
 	public RankingGameView(Context c) {
 		super(c);
@@ -62,6 +63,7 @@ public class RankingGameView extends View {
 		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
+		username = ((RankingGameActivity)c).getUsername();
 	}
 	public RankingGameView(Context c, AttributeSet a) {
 		super(c, a);
@@ -69,6 +71,7 @@ public class RankingGameView extends View {
 		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
+		username = ((RankingGameActivity)c).getUsername();
 	}
 	
 	/**
@@ -190,6 +193,12 @@ public class RankingGameView extends View {
 				numAttempts++;
 				if(checkEnteredOrder()) {
 					showDialog(CORRECT_DIALOG);
+					if(username != null) {
+						int points = IOBasic.getPoints(username);
+						points += numAttempts == 2 ? 1 : numAttempts == 1 ? 2 : 0;
+						IOBasic.setPoints(username, points);
+					}
+					
 				} else {
 					showDialog(WRONG_DIALOG);
 				}
@@ -342,8 +351,12 @@ public class RankingGameView extends View {
     		String returnMessage = getResources().getString(R.string.rankCorrectMessage);
     		if(numAttempts != 1) {
     			returnMessage = returnMessage + getResources().getString(R.string.rankCorrectMessage2)
-    										+ Integer.toString(numAttempts)
-    										+ getResources().getString(R.string.rankCorrectTries);
+    										+ (numAttempts == 2 ? Integer.toString(1) : Integer.toString(0))
+    										+ getResources().getString(R.string.rankPoints);
+    		} else {
+    			returnMessage = returnMessage + getResources().getString(R.string.rankCorrectMessage2)
+    										+ Integer.toString(2)
+    										+ getResources().getString(R.string.rankPoints);
     		}
     		builder.setMessage(returnMessage);
     		builder.setPositiveButton(R.string.rankExitButton,
