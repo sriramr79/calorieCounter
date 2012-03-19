@@ -15,6 +15,7 @@ public class CalorieCounterActivity extends Activity {
 	
 	public GameLevel level;
 	private String username;
+	private int numTries;
 	private int score;
 	
     /** Called when the activity is first created. */
@@ -24,14 +25,13 @@ public class CalorieCounterActivity extends Activity {
         setContentView(R.layout.calcount);
         
         username = getIntent().getStringExtra(Constants.UNEXTRA);
-        score = IOBasic.getPoints(username);
-        
         //should never occur
         if (username == null) {
         	finish();
         }
+		score = IOBasic.getPoints(username);
         
-        level = new GameLevel(getResources());
+		level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
         showDialog(INSTRUCTION_DIALOG);
     }
@@ -47,11 +47,13 @@ public class CalorieCounterActivity extends Activity {
     	}
     	level.enterCurrentGuess(calorieGuess);
     	
+    	numTries++;
+    	
     	// Evaluate user's answer and show an appropriate response dialog
     	FoodItem.AnswerType evaluation = level.getCurrentFood().checkGuess(calorieGuess);
     	switch(evaluation) {
     	case CORRECT:
-    		score++;
+    		score += numTries == 1 ? 2 : numTries == 2 ? 1 : 0;
     		removeDialog(CORRECT_DIALOG);
             showDialog(CORRECT_DIALOG);
             break;
@@ -95,6 +97,7 @@ public class CalorieCounterActivity extends Activity {
     	foodImage.setImageDrawable(currentFood.getImage());
     	EditText calorieGuess = (EditText)findViewById(R.id.calorieInput);
     	calorieGuess.setText("");
+    	numTries = 0;
     }
     
     
@@ -105,6 +108,7 @@ public class CalorieCounterActivity extends Activity {
     private static final int WRONGHIGH_DIALOG = 4;
     private static final int INVALID_DIALOG = 5;
     private static final int INSTRUCTION_DIALOG = 6;
+    private static final int SCORE_DIALOG = 7;
     
     protected Dialog onCreateDialog(int id) {
     	
@@ -116,6 +120,23 @@ public class CalorieCounterActivity extends Activity {
     		// Example format: "That's right, an order of McDonald's fries is 550 calories."
     		String message = res.getString(R.string.correctMessage) + level.getCurrentFood()
     				+ res.getString(R.string.correctIs) + level.getCurrentFood().getCalorieCount() + res.getString(R.string.calories);
+    		builder.setMessage(message);
+    		builder.setPositiveButton(R.string.nextButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.dismiss();
+    				showDialog(SCORE_DIALOG);
+    			}
+    		});
+    		
+    		return builder.create();
+    	}
+    	
+    	else if(id == SCORE_DIALOG) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		String message = res.getString(R.string.scoreReportMessage1)
+    						+ (numTries == 1 ? Integer.toString(2) : numTries == 2 ? Integer.toString(1) : Integer.toString(0))
+    						+ res.getString(R.string.scoreReportMessage2);
     		builder.setMessage(message);
     		builder.setPositiveButton(R.string.nextButton,
     				new DialogInterface.OnClickListener() {
