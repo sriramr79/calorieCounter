@@ -36,7 +36,7 @@ public class OneRightPriceView extends View {
 	private int dispWidth;
 	
 	public int numAttempts;
-	
+	public int tries;
 	public ScreenSquare calorieNumberSquare;
 	
 	public ScreenSquare food0Square;
@@ -59,7 +59,8 @@ public class OneRightPriceView extends View {
 	public int calorieNumber;
 	
 	private Context mContext;
-	
+	private String username;
+	private int score;
 
 	public OneRightPriceView(Context c, AttributeSet a) {
 		super(c, a);
@@ -67,6 +68,9 @@ public class OneRightPriceView extends View {
 		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
+		username = ((RankingGameActivity)c).getUsername();
+		score = IOBasic.getPoints(username);
+		
 	}
 	
 	/**
@@ -259,13 +263,24 @@ public class OneRightPriceView extends View {
 	 */
 	public boolean checkCorrect() {
 		if(food0Occupied && food0.getCalorieCount() == calorieNumber){
+			if(tries == 0){
+				score++;
+				IOBasic.setPoints(username, score);
+			}
 			return true;
 		}
 		else if(food1Occupied && food1.getCalorieCount() == calorieNumber){
+			if(tries == 0){
+				score++;
+				IOBasic.setPoints(username, score);
+			}
 			return true;
 		}
-		else
+		else{
+			tries = 1;
 			return false;
+		}
+		
 	}
 	
 	private static final int START_DIALOG = 1;
