@@ -68,7 +68,7 @@ public class OneRightPriceView extends View {
 		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
-		username = ((RankingGameActivity)c).getUsername();
+		username = ((OneRightPriceActivity)c).getUsername();
 		score = IOBasic.getPoints(username);
 		
 	}
@@ -248,19 +248,13 @@ public class OneRightPriceView extends View {
 		if(square.overlapping(food1Square)) food1Occupied = true;
 	}
 	
-	/**
-	 * Clears the occupancy variable for the position of the square that was just picked up
-	 * @param square The square that was just touched
-	 */
+
 	private void unmarkOverlapping(ScreenSquare square) {
 		if(square.overlapping(food0Square)) food0Occupied = false;
 		if(square.overlapping(food1Square)) food1Occupied = false;
 	}
 
-	/**
-	 * Checks to see whether the order that the foods were ranked is correct
-	 * @return True if the user has set the ranking squares in the correct order, false otherwise.
-	 */
+
 	public boolean checkCorrect() {
 		if(food0Occupied && food0.getCalorieCount() == calorieNumber){
 			if(tries == 0){
