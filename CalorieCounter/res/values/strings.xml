@@ -25,12 +25,21 @@
     <string name="nextButton">Next</string>
     <string name="retryButton">Retry</string>
 
+    <!-- Games -->
+    <string name="game1">Calorie is Right!</string>
+    <string name="game2">1-2-3</string>
+
     <!-- Login Activity -->
     <string name="welcome">Welcome to the Calorie Counter!</string>
     <string name="unTitle">Username:\u0020</string>
     <string name="pwTitle">Password:\u0020</string>
     <string name="unHint">Enter username</string>
     <string name="pwHint">Enter password</string>
+
+    <!-- Home Activity -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="logoutMessage">Are you sure you want to logout?  Your progress will be saved.</string>
 
     <!-- Ranking Game -->
     <string name="rankButtonUnset">-</string>

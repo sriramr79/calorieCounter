@@ -67,7 +67,9 @@ public class LoginActivity extends Activity {
 
 		else if (pw.equals(actPW)) {
 			showToast("Login Successful!");
-			startActivityForResult(new Intent(this, RankingGameActivity.class), Constants.LOGIN_SUCCESSFUL);
+			Intent i = new Intent(this, HomeActivity.class);
+			i.putExtra(Constants.UNEXTRA, un);
+			startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
 		} else {
 			resetLoginFields();
 		}
