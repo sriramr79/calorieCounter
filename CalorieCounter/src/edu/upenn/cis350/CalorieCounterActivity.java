@@ -33,6 +33,7 @@ public class CalorieCounterActivity extends Activity {
         
 		level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
+    	numTries = 0;
         showDialog(INSTRUCTION_DIALOG);
     }
     
@@ -53,7 +54,7 @@ public class CalorieCounterActivity extends Activity {
     	FoodItem.AnswerType evaluation = level.getCurrentFood().checkGuess(calorieGuess);
     	switch(evaluation) {
     	case CORRECT:
-    		score += numTries == 1 ? 2 : numTries == 2 ? 1 : 0;
+    		score += 2;//numTries == 1 ? 2 : numTries == 2 ? 1 : 0;
     		removeDialog(CORRECT_DIALOG);
             showDialog(CORRECT_DIALOG);
             break;
@@ -97,7 +98,6 @@ public class CalorieCounterActivity extends Activity {
     	foodImage.setImageDrawable(currentFood.getImage());
     	EditText calorieGuess = (EditText)findViewById(R.id.calorieInput);
     	calorieGuess.setText("");
-    	numTries = 0;
     }
     
     
@@ -148,6 +148,7 @@ public class CalorieCounterActivity extends Activity {
     	        	else {
     	        		level.resetLevel(true);
     	        	}
+    	        	numTries = 0;
     	    		updateDisplayedFood(level.getCurrentFood());
     			}
     		});
