@@ -106,16 +106,15 @@ public class OneRightPriceView extends View {
 		Rect food0Loc = new Rect(2*dispWidth/26, dispHeight/26, (2*dispWidth + 8*dispHeight)/26, 6*dispHeight/26);
 		Rect food1Loc = new Rect(2*dispWidth/26, 7*dispHeight/26, (2*dispWidth + 8*dispHeight)/26, 12*dispHeight/26);
 		
-		calorieNumberSquare = new ScreenSquare(1*dispWidth/26, 20*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GREEN, this.getContext().getResources().getString(R.string.rank1Button));
-		
+		calorieNumberSquare = new ScreenSquare(1*dispWidth/26, 20*dispHeight/26, 6*dispWidth/26, 3*dispWidth/26, Color.GREEN, Integer.toString(calorieNumber));
 		start0Square = new ScreenSquare(calorieNumberSquare, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		start1Square = new ScreenSquare(calorieNumberSquare, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		
-		food0Square = new ScreenSquare(19*dispWidth/26, 3*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
-		food1Square = new ScreenSquare(19*dispWidth/26, 9*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
+		food0Square = new ScreenSquare(19*dispWidth/26, 3*dispHeight/26, 6*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
+		food1Square = new ScreenSquare(19*dispWidth/26, 9*dispHeight/26, 6*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		
 		submitSquare = new ScreenSquare(16*dispWidth/26, 20*dispHeight/26, 9*dispWidth/26, 3*dispWidth/26, Color.RED, this.getContext().getResources().getString(R.string.rankSubmitButton), Color.WHITE);
-		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.RED, this.getContext().getResources().getString(R.string.rankXButton), Color.MAGENTA);
+		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.RED, this.getContext().getResources().getString(R.string.rankXButton), Color.BLACK);
 		
 		checkOccupancy();
 		
@@ -132,7 +131,7 @@ public class OneRightPriceView extends View {
 		canvas.drawText(displayOrder.get(0).getName(), 2*dispWidth/26, 27*dispHeight/104, paint);
 		canvas.drawText(displayOrder.get(1).getName(), 2*dispWidth/26, 51*dispHeight/104, paint);
 		quitSquare.draw(canvas, paint);
-		submitSquare.setColor(food0Occupied && food1Occupied ? Color.GREEN : Color.RED);
+		submitSquare.setColor(food0Occupied || food1Occupied ? Color.GREEN : Color.RED);
 		submitSquare.draw(canvas, paint);
 		start0Square.draw(canvas, paint);
 		start1Square.draw(canvas, paint);
@@ -168,7 +167,7 @@ public class OneRightPriceView extends View {
 			int touchX = (int)event.getX();
 			int touchY = (int)event.getY();
 			
-			if(submitSquare.containsPoint(touchX, touchY) && food0Occupied || food1Occupied) {
+			if(submitSquare.containsPoint(touchX, touchY) && (food0Occupied || food1Occupied)) {
 				numAttempts++;
 				if(checkCorrect()) {
 					showDialog(CORRECT_DIALOG);
@@ -182,6 +181,8 @@ public class OneRightPriceView extends View {
 			}
 
 			checkOccupancy();
+			
+			touchedSquare = calorieNumberSquare.containsPoint(touchX, touchY) ? calorieNumberSquare : null;
 			// If no square is touched, ignore event
 			if(touchedSquare == null) {
 				return false;
@@ -214,7 +215,7 @@ public class OneRightPriceView extends View {
 				else {
 					touchedSquare.moveTo(overlapping);
 					checkOccupancy();
-					touchedSquare.setStartPosition();
+					//touchedSquare.setStartPosition();
 				}
 				touchedSquare = null;
 				invalidate();
