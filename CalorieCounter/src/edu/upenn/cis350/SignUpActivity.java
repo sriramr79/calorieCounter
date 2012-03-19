@@ -46,7 +46,7 @@ public class SignUpActivity extends Activity {
 		finish();
 	}
     
-    public void Back (View view) {
+    public void goBack (View view) {
 		finish();
 	}
 
