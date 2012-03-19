@@ -15,7 +15,7 @@
         android:paddingBottom="15dp"
         android:text="Register for Calorie Counter"
         android:textSize="30dp" />
-
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
+
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
@@ -43,12 +43,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                 android:hint="Enter full name"
+                android:hint="Enter full name"
                 android:inputType="textPersonName" >
 
                 <requestFocus />
             </EditText>
-
         </LinearLayout>
 
         <LinearLayout
@@ -63,14 +62,14 @@
                 android:layout_weight="1"
                 android:text="Username: "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <EditText
                 android:id="@+id/signUpUN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.46"
-                android:hint="Enter username" />
-
+                android:hint="Enter username"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,21 +89,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                 android:hint="Enter password"
+                android:hint="Enter password"
                 android:inputType="textPassword" />
-
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
+
             <RelativeLayout
                 android:id="@+id/relativeLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="34dp" >
-
+
                 <Button
                     android:id="@+id/signUpButton"
                     android:layout_width="wrap_content"
@@ -122,14 +120,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:onClick="goBack"
                     android:layout_toRightOf="@+id/signUpButton"
+                    android:onClick="goBack"
                     android:text="Back" />
-
             </RelativeLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

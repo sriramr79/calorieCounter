@@ -20,6 +20,7 @@
     <!-- Button Text -->
     <string name="submitButton">Submit</string>
     <string name="quitButton">Quit</string>
+    <string name="registerButton">Sign Up!</string>
     <string name="logoutButton">Logout</string>
     <string name="nextButton">Next</string>
     <string name="retryButton">Retry</string>
@@ -61,7 +62,7 @@
     <string name="banana">a ripe yellow banana</string>
     <string name="milkglass">an 8-ounce glass of skim milk</string>
     <string name="tacobellburrito">a Taco Bell Beffy 5-Layer Burrito</string>
-	<string name="cokecan">a 12-ounce can of Coca-Cola</string>
-	<string name="waterglass">an 8-ounce glass of water</string>
-    
+    <string name="cokecan">a 12-ounce can of Coca-Cola</string>
+    <string name="waterglass">an 8-ounce glass of water</string>
+
 </resources>
