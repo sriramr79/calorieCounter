@@ -1,28 +1,22 @@
 package edu.upenn.cis350.test;
 
-import java.util.HashSet;
-
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import edu.upenn.cis350.CalorieCounterActivity;
-import edu.upenn.cis350.FoodItem;
-import edu.upenn.cis350.FoodGenerator;
-import edu.upenn.cis350.GameLevel;
 import edu.upenn.cis350.IOBasic;
-import edu.upenn.cis350.LoginActivity;
+import edu.upenn.cis350.HomeActivity;
 
 
-public class LoginActivityTest extends
-		ActivityInstrumentationTestCase2<LoginActivity> {
+public class HomeActivityTest extends
+		ActivityInstrumentationTestCase2<HomeActivity> {
 
 	// Provide local variables for the Activity and the associated View
-	private LoginActivity mActivity;
+	private HomeActivity mActivity;
 	
 	// If you want to send motion events to your activity/view, you need to use this to do it
 	private Instrumentation mInst;
 	
-	public LoginActivityTest() {
-		super(LoginActivity.class);
+	public HomeActivityTest() {
+		super(HomeActivity.class);
 		setActivityInitialTouchMode(false);
 	}
 	
@@ -43,23 +37,27 @@ public class LoginActivityTest extends
 	}
 	
 
-	public void testDatabaseLoading() {
-		assertEquals("Sriram Radhakrishnan", IOBasic.fullName("sriramr"));
-	}
-	
-	public void testValidLogin() {
+	public void testNameLoaded() {
 		
 	}
 	
-	public void testInvalidLogin() {
+	public void testScoreLoaded() {
 		
 	}
 	
-	public void testQuit() {
+	public void testGame1() {
 		
 	}
 	
-	public void testSignUp() {
+	public void testGame2() {
+		
+	}
+	
+	public void testGame3() {
+		
+	}
+	
+	public void testLogout() {
 		
 	}
 	
