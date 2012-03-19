@@ -34,7 +34,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/calorieInputHint"
+            android:hint="Enter Guess"
             android:imeOptions="actionDone"
             android:inputType="number" >
         </EditText>
@@ -47,10 +47,10 @@
             android:text="@string/submitButton" />
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/quitCalCount"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:onClick="onLogoutEvent"
+            android:onClick="onQuitEvent"
             android:text="@string/quitButton" />
     </LinearLayout>
 

@@ -19,7 +19,7 @@ public class CalorieCounterActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.calcount);
         level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
         showDialog(INSTRUCTION_DIALOG);
@@ -186,8 +186,8 @@ public class CalorieCounterActivity extends Activity {
     
     }
     
-    public void onLogoutEvent(View view) {
-    	setResult(Constants.LOGOUT_SUCCESSFUL);
+    public void onQuitEvent(View view) {
+//    	setResult(Constants.LOGOUT_SUCCESSFUL);
     	finish();
     }
 }

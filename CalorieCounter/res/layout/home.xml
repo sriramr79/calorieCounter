@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/homeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:scrollHorizontally="false"
+        android:text="hello"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/homeScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:scrollHorizontally="false"
+        android:text="hello"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/game1Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTapGame1"
+        android:text="@string/game1" />
+
+    <Button
+        android:id="@+id/game2Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTapGame2"
+        android:text="@string/game2" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:onClick="onTapLogout"
+        android:text="@string/logoutButton" />
+
+</LinearLayout>
