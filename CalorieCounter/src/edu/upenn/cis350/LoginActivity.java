@@ -7,6 +7,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * This is the launch activity for the CalorieCounter app.
+ * It handles user login, and also contains an option for
+ * a user to sign-up for an account.
+ * This class also loads the data from the database to a local
+ * file on the device.
+ * 
+ * @author Sriram Radhakrishnan
+ *
+ */
 public class LoginActivity extends Activity {
 
 	private EditText username, password;
@@ -17,51 +27,62 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
+		//login fields
 		username = (EditText) findViewById(R.id.unField);
 		password = (EditText) findViewById(R.id.pwField);
 
+		//load database
 		IOBasic.finalWrite(getApplicationContext());
 		IOBasic.initRead(getApplicationContext());
 
-		/*
-		 * 
-		 * Context context = getApplicationContext(); CharSequence text =
-		 * Integer.toString(IOBasic.getPoints("abaldwin")); int duration =
-		 * Toast.LENGTH_LONG;
-		 * 
-		 * Toast toast = Toast.makeText(context, text, duration); toast.show();
-		 * 
-		 * Intent i = new Intent(this, SignUpActivity.class); startActivity(i);
-		 */
-
 	}
 
+	/**
+	 * This method performs any special actions required when returning to this
+	 * activity.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Constants.LOGOUT_SUCCESSFUL) {
 			showToast("You have logged out!");
-		} else if (resultCode == Constants.REGISTERED) {
+		} 
+		
+		else if (resultCode == Constants.REGISTERED) {
 			showToast("Thank you for registering!");
 		}
 	}
 	
 	
 
+	/**
+	 * Resets the login fields upon return to this activity
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
 		resetLoginFields();
 	}
 
+	/**
+	 * Shows a short-duration toast with the input message
+	 * @param message
+	 */
 	private void showToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Submits the login, checking for a valid user and
+	 * password.
+	 * 
+	 * @param view
+	 */
 	public void submitLogin(View view) {
 		String un = username.getText().toString();
 		String pw = password.getText().toString();
 
 		String actPW = IOBasic.password(un);
+		
 		if (actPW == null)
 			invalidLogin("User does not exist!");
 
@@ -75,6 +96,12 @@ public class LoginActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Shows an error message and then resets the login
+	 * fields for another login attempt
+	 * 
+	 * @param message
+	 */
 	private void invalidLogin(String message) {
 		if (message == null)
 			message = "Login Failed!";
@@ -83,6 +110,9 @@ public class LoginActivity extends Activity {
 		resetLoginFields();
 	}
 
+	/**
+	 * Clears the login fields
+	 */
 	private void resetLoginFields() {
 		username.setText("");
 		password.setText("");
@@ -94,7 +124,6 @@ public class LoginActivity extends Activity {
 	}
 
 	public void onTapRegister(View view) {
-		startActivityForResult(new Intent(this, SignUpActivity.class),
-				Constants.NEW_USER);
+		startActivity(new Intent(this, SignUpActivity.class));
 	}
 }
