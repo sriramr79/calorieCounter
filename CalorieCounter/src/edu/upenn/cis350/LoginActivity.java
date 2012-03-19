@@ -8,14 +8,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * This is the launch activity for the CalorieCounter app.
- * It handles user login, and also contains an option for
- * a user to sign-up for an account.
- * This class also loads the data from the database to a local
- * file on the device.
+ * This is the launch activity for the CalorieCounter app. It handles user
+ * login, and also contains an option for a user to sign-up for an account. This
+ * class also loads the data from the database to a local file on the device.
  * 
  * @author Sriram Radhakrishnan
- *
+ * 
  */
 public class LoginActivity extends Activity {
 
@@ -27,11 +25,11 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
-		//login fields
+		// login fields
 		username = (EditText) findViewById(R.id.unField);
 		password = (EditText) findViewById(R.id.pwField);
 
-		//load database
+		// load database
 		IOBasic.finalWrite(getApplicationContext());
 		IOBasic.initRead(getApplicationContext());
 
@@ -45,14 +43,12 @@ public class LoginActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Constants.LOGOUT_SUCCESSFUL) {
 			showToast("You have logged out!");
-		} 
-		
+		}
+
 		else if (resultCode == Constants.REGISTERED) {
 			showToast("Thank you for registering!");
 		}
 	}
-	
-	
 
 	/**
 	 * Resets the login fields upon return to this activity
@@ -65,28 +61,36 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * Shows a short-duration toast with the input message
+	 * 
 	 * @param message
 	 */
 	private void showToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 
+	private boolean checkLogin(String un) {
+		String pw = password.getText().toString();
+		String actPW = IOBasic.password(un);
+
+		if (actPW == null) {
+			invalidLogin("User does not exist!");
+			return false;
+		} else if (pw.equals(actPW)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**
-	 * Submits the login, checking for a valid user and
-	 * password.
+	 * Submits the login, checking for a valid user and password.
 	 * 
 	 * @param view
 	 */
 	public void submitLogin(View view) {
 		String un = username.getText().toString();
-		String pw = password.getText().toString();
 
-		String actPW = IOBasic.password(un);
-		
-		if (actPW == null)
-			invalidLogin("User does not exist!");
-
-		else if (pw.equals(actPW)) {
+		if (checkLogin(un)) {
 			showToast("Login Successful!");
 			Intent i = new Intent(this, HomeActivity.class);
 			i.putExtra(Constants.UNEXTRA, un);
@@ -97,8 +101,8 @@ public class LoginActivity extends Activity {
 	}
 
 	/**
-	 * Shows an error message and then resets the login
-	 * fields for another login attempt
+	 * Shows an error message and then resets the login fields for another login
+	 * attempt
 	 * 
 	 * @param message
 	 */

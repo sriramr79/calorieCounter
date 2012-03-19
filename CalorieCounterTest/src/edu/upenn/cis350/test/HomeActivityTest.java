@@ -1,8 +1,9 @@
 package edu.upenn.cis350.test;
 
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import edu.upenn.cis350.IOBasic;
+import android.widget.TextView;
 import edu.upenn.cis350.HomeActivity;
 
 
@@ -23,8 +24,18 @@ public class HomeActivityTest extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		
 		mInst = this.getInstrumentation();
 		this.injectInstrumentation(mInst);
+		
+		edu.upenn.cis350.IOBasic.finalWrite(mInst.getTargetContext());
+		edu.upenn.cis350.IOBasic.initRead(mInst.getTargetContext());
+				
+		Intent i = new Intent();
+		i.setClassName("edu.upenn.cis350", "LoginActivity");
+		i.putExtra(edu.upenn.cis350.Constants.UNEXTRA, "sriramr");
+		setActivityIntent(i);
+				
 		mActivity = this.getActivity();
 	}
 	
@@ -38,27 +49,13 @@ public class HomeActivityTest extends
 	
 
 	public void testNameLoaded() {
-		
+		TextView name = (TextView)mActivity.findViewById(edu.upenn.cis350.R.id.homeName);
+		assertEquals("Welcome: Sriram Radhakrishnan", name.getText().toString());
 	}
 	
 	public void testScoreLoaded() {
-		
-	}
-	
-	public void testGame1() {
-		
-	}
-	
-	public void testGame2() {
-		
-	}
-	
-	public void testGame3() {
-		
-	}
-	
-	public void testLogout() {
-		
+		TextView score = (TextView)mActivity.findViewById(edu.upenn.cis350.R.id.homeScore);
+		assertEquals("Score: 100 Points", score.getText().toString());		
 	}
 	
 	

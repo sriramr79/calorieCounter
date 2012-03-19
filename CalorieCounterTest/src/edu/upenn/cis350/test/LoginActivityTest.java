@@ -1,13 +1,11 @@
 package edu.upenn.cis350.test;
 
-import java.util.HashSet;
-
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import edu.upenn.cis350.CalorieCounterActivity;
-import edu.upenn.cis350.FoodItem;
-import edu.upenn.cis350.FoodGenerator;
-import edu.upenn.cis350.GameLevel;
+import android.test.TouchUtils;
+import android.test.ViewAsserts;
+import android.widget.Button;
+import android.widget.EditText;
 import edu.upenn.cis350.IOBasic;
 import edu.upenn.cis350.LoginActivity;
 
@@ -21,6 +19,10 @@ public class LoginActivityTest extends
 	// If you want to send motion events to your activity/view, you need to use this to do it
 	private Instrumentation mInst;
 	
+	private EditText username, password;
+	private Button submit, signup, quit;
+	
+	
 	public LoginActivityTest() {
 		super(LoginActivity.class);
 		setActivityInitialTouchMode(false);
@@ -32,6 +34,15 @@ public class LoginActivityTest extends
 		mInst = this.getInstrumentation();
 		this.injectInstrumentation(mInst);
 		mActivity = this.getActivity();
+		
+		username = (EditText)mActivity.findViewById(edu.upenn.cis350.R.id.unField);
+		password = (EditText)mActivity.findViewById(edu.upenn.cis350.R.id.pwField);
+		
+		submit = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.submit);
+		signup = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.signUpButton);
+		quit = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.quitButton);
+		
+		
 	}
 	
 	/**
@@ -47,21 +58,32 @@ public class LoginActivityTest extends
 		assertEquals("Sriram Radhakrishnan", IOBasic.fullName("sriramr"));
 	}
 	
-	public void testValidLogin() {
+	public void testAValidLogin() {
+		username.clearComposingText();
+		password.clearComposingText();
 		
+		TouchUtils.tapView(this, username);
+		sendKeys("S R I R A M R");
+		
+		TouchUtils.tapView(this, password);
+		sendKeys("S R I R A M R");
+		
+		assertEquals("sriramr", username.getText().toString());
+		assertEquals("sriramr", password.getText().toString());
 	}
 	
 	public void testInvalidLogin() {
+		username.clearComposingText();
+		password.clearComposingText();
 		
-	}
-	
-	public void testQuit() {
+		TouchUtils.tapView(this, username);
+		sendKeys("W R O N G");
 		
-	}
-	
-	public void testSignUp() {
+		TouchUtils.tapView(this, password);
+		sendKeys("W R O N G");
 		
+		assertEquals("wrong", username.getText().toString());
+		assertEquals("wrong", password.getText().toString());
 	}
-	
 	
 }

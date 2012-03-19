@@ -40,7 +40,12 @@ public class HomeActivity extends Activity {
 			return;
 		}
 
-		name.setText("Welcome: " + IOBasic.fullName(username));
+		String un = IOBasic.fullName(username);
+		
+		if (un == null)
+			return;
+		
+		name.setText("Welcome: " + un);
 		setScore(IOBasic.getPoints(username));
 
 	}
