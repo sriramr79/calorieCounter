@@ -10,12 +10,28 @@ import android.os.Bundle;
  */
 
 public class OneRightPriceActivity extends Activity {
-	
+	private String username;
+	private int score;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onerightprice);
+        
+        this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
+        //should never occur
+        if (username == null) {
+        	finish();
+        }
+    }
+    
+    /**
+     * Get method for the username of the current user
+     * @return the String of the username for the current user
+     */
+    public String getUsername() {
+    	return this.username;
     }
    
-}
+    }
+   

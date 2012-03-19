@@ -36,7 +36,7 @@ public class OneRightPriceView extends View {
 	private int dispWidth;
 	
 	public int numAttempts;
-	
+	public int tries;
 	public ScreenSquare calorieNumberSquare;
 	
 	public ScreenSquare food0Square;
@@ -59,7 +59,8 @@ public class OneRightPriceView extends View {
 	public int calorieNumber;
 	
 	private Context mContext;
-	
+	private String username;
+	private int score;
 
 	public OneRightPriceView(Context c, AttributeSet a) {
 		super(c, a);
@@ -67,6 +68,9 @@ public class OneRightPriceView extends View {
 		setUpDisplayItems();
 		this.mContext = c;
 		showDialog(START_DIALOG);
+		username = ((OneRightPriceActivity)c).getUsername();
+		score = IOBasic.getPoints(username);
+		
 	}
 	
 	/**
@@ -244,28 +248,33 @@ public class OneRightPriceView extends View {
 		if(square.overlapping(food1Square)) food1Occupied = true;
 	}
 	
-	/**
-	 * Clears the occupancy variable for the position of the square that was just picked up
-	 * @param square The square that was just touched
-	 */
+
 	private void unmarkOverlapping(ScreenSquare square) {
 		if(square.overlapping(food0Square)) food0Occupied = false;
 		if(square.overlapping(food1Square)) food1Occupied = false;
 	}
 
-	/**
-	 * Checks to see whether the order that the foods were ranked is correct
-	 * @return True if the user has set the ranking squares in the correct order, false otherwise.
-	 */
+
 	public boolean checkCorrect() {
 		if(food0Occupied && food0.getCalorieCount() == calorieNumber){
+			if(tries == 0){
+				score++;
+				IOBasic.setPoints(username, score);
+			}
 			return true;
 		}
 		else if(food1Occupied && food1.getCalorieCount() == calorieNumber){
+			if(tries == 0){
+				score++;
+				IOBasic.setPoints(username, score);
+			}
 			return true;
 		}
-		else
+		else{
+			tries = 1;
 			return false;
+		}
+		
 	}
 	
 	private static final int START_DIALOG = 1;
