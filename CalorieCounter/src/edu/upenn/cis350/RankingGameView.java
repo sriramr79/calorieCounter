@@ -17,6 +17,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 
 /**
@@ -193,11 +194,6 @@ public class RankingGameView extends View {
 				numAttempts++;
 				if(checkEnteredOrder()) {
 					showDialog(CORRECT_DIALOG);
-					if(username != null) {
-						int points = IOBasic.getPoints(username);
-						points += numAttempts == 2 ? 1 : numAttempts == 1 ? 2 : 0;
-						IOBasic.setPoints(username, points);
-					}
 					
 				} else {
 					showDialog(WRONG_DIALOG);
@@ -363,6 +359,10 @@ public class RankingGameView extends View {
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.dismiss();
+    				int points = IOBasic.getPoints(username);
+    				points += 2;//numAttempts == 2 ? 1 : numAttempts == 1 ? 2 : 0;
+    				IOBasic.setPoints(username, points);
+    				Toast.makeText(mContext, "Test: " + IOBasic.getPoints(username), Toast.LENGTH_LONG).show();
     				((Activity)mContext).finish();
     			}
     		});

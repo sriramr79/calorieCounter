@@ -17,13 +17,14 @@ public class RankingGameActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ranking);
        
         this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
         //should never occur
         if (username == null) {
         	finish();
         }
+        
+        setContentView(R.layout.ranking);
     }
     
     /**

@@ -28,6 +28,7 @@ public class RankingGameTest extends
 	public RankingGameTest() {
 		super(RankingGameActivity.class);
 		setActivityInitialTouchMode(false);
+		
 	}
 	
 	
@@ -98,10 +99,61 @@ public class RankingGameTest extends
 		mView.fakeTouchEvent(MotionEvent.ACTION_DOWN, 0, 0);
 		assertNull(mView.touchedSquare);
 	
-		
-		// Unfortunately, we can only test no-op test functionality from here.  Anything that causes onTouchEvent to
-		// return true will cause a privilege/thread violation exception, resulting in a failed test.
-		
+		// In order to test movement, we need to run on the UI thread
+		mActivity.runOnUiThread(
+	    	      	new Runnable() {
+	    	      	public void run() {
+	    	        	mView.fakeTouchEvent(MotionEvent.ACTION_DOWN, mView.order0Square.getCenterX(), mView.order0Square.getCenterY());
+	    	        	assertNotNull(mView.touchedSquare);
+	    	        } // end of run() method definition
+	    	      } // end of anonymous Runnable object instantiation
+	    	    ); // end of invocation of runOnUiThread
+
+
+    	
+    	int xpos = mView.order0Square.getCenterX();
+    	int ypos = mView.order0Square.getCenterY();
+    	
+	    mActivity.runOnUiThread(
+    	      	new Runnable() {
+    	      	public void run() {
+    	        	mView.fakeTouchEvent(MotionEvent.ACTION_MOVE, mView.order0Square.getCenterX()+50, mView.order0Square.getCenterY()+50);
+    	        } // end of run() method definition
+    	      } // end of anonymous Runnable object instantiation
+    	    ); // end of invocation of runOnUiThread
+	    
+	    assertNotNull(mView.touchedSquare);
+	    assertEquals(xpos + 50, mView.order0Square.getCenterX());
+	    assertEquals(ypos + 50, mView.order0Square.getCenterY());
+	
+	    
+	    // Make sure that the square doesn't snap while its picked up
+	    mActivity.runOnUiThread(
+    	      	new Runnable() {
+    	      	public void run() {
+    	        	mView.fakeTouchEvent(MotionEvent.ACTION_MOVE, mView.food0Square.getCenterX() + 10, mView.food0Square.getCenterY() + 10);
+    	        } // end of run() method definition
+    	      } // end of anonymous Runnable object instantiation
+    	    ); // end of invocation of runOnUiThread
+	    
+	    assertNotNull(mView.touchedSquare);
+	    assertEquals(mView.food0Square.getCenterX() + 10, mView.order0Square.getCenterX());
+	    assertEquals(mView.food0Square.getCenterY() + 10, mView.order0Square.getCenterY());
+	    
+	    // Make sure that the square does snap when dropped
+	    mActivity.runOnUiThread(
+    	      	new Runnable() {
+    	      	public void run() {
+    	        	mView.fakeTouchEvent(MotionEvent.ACTION_UP, mView.order0Square.getCenterX(), mView.order0Square.getCenterY());
+    	        } // end of run() method definition
+    	      } // end of anonymous Runnable object instantiation
+    	    ); // end of invocation of runOnUiThread
+
+	    assertNull(mView.touchedSquare);
+	    assertEquals(mView.food0Square.getCenterX(), mView.order0Square.getCenterX());
+	    assertEquals(mView.food0Square.getCenterY(), mView.order0Square.getCenterY());
+	    
+	    
 	}
 	
 	
