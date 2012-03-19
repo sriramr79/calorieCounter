@@ -14,12 +14,23 @@ import android.widget.TextView;
 public class CalorieCounterActivity extends Activity {
 	
 	public GameLevel level;
+	private String username;
+	private int score;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calcount);
+        
+        username = getIntent().getStringExtra(Constants.UNEXTRA);
+        score = IOBasic.getPoints(username);
+        
+        //should never occur
+        if (username == null) {
+        	finish();
+        }
+        
         level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
         showDialog(INSTRUCTION_DIALOG);
@@ -40,6 +51,7 @@ public class CalorieCounterActivity extends Activity {
     	FoodItem.AnswerType evaluation = level.getCurrentFood().checkGuess(calorieGuess);
     	switch(evaluation) {
     	case CORRECT:
+    		score++;
     		removeDialog(CORRECT_DIALOG);
             showDialog(CORRECT_DIALOG);
             break;
@@ -187,7 +199,7 @@ public class CalorieCounterActivity extends Activity {
     }
     
     public void onQuitEvent(View view) {
-//    	setResult(Constants.LOGOUT_SUCCESSFUL);
+    	IOBasic.setPoints(username, score);
     	finish();
     }
 }

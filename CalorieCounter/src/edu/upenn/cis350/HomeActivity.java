@@ -15,7 +15,6 @@ public class HomeActivity extends Activity {
 	
 	private String username;
 	private TextView scoreField;
-	private int score;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +30,17 @@ public class HomeActivity extends Activity {
 			name.setText("Welcome " + IOBasic.fullName(username));
 		}
 		
-		score = IOBasic.getPoints(username);
 		
 		if (scoreField != null) {
-			setScore(score);
+			setScore(IOBasic.getPoints(username));
 		}
 		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setScore(IOBasic.getPoints(username));
 	}
 	
 	private void setScore (int score) {
@@ -67,18 +71,22 @@ public class HomeActivity extends Activity {
 	}
 
 
-
+	private void startGame(Class c) {
+		Intent i = new Intent(this, c);
+		i.putExtra(Constants.UNEXTRA, username);
+		startActivity(i);
+	}
 
 	public void onTapGame1 (View view) {
-		startActivity(new Intent(this, CalorieCounterActivity.class));
+		startGame(CalorieCounterActivity.class);
 	}
-	
+
 	public void onTapGame2 (View view) {
-		startActivity(new Intent(this, RankingGameActivity.class));		
+		startGame(RankingGameActivity.class);		
 	}
 	
 	public void onTapGame3 (View view) {
-		startActivity(new Intent(this, OneRightPriceActivity.class));		
+		startGame(OneRightPriceActivity.class);		
 	}
 	
 	public void onTapLogout (View view) {
