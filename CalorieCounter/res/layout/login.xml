@@ -58,6 +58,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/unField"
         android:hint="@string/pwHint"
+        android:imeOptions="actionNext"
         android:inputType="textPassword" />
 
     <Button

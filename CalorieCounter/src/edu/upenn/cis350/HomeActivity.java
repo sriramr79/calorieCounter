@@ -77,6 +77,10 @@ public class HomeActivity extends Activity {
 		startActivity(new Intent(this, RankingGameActivity.class));		
 	}
 	
+	public void onTapGame3 (View view) {
+		startActivity(new Intent(this, OneRightPriceActivity.class));		
+	}
+	
 	public void onTapLogout (View view) {
 		createDialog(LOGOUT);
 	}

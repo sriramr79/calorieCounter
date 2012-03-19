@@ -39,6 +39,13 @@
         android:text="@string/game2" />
 
     <Button
+        android:id="@+id/game3Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTapGame3"
+        android:text="@string/game3" />
+
+    <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
