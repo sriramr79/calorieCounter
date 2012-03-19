@@ -51,6 +51,11 @@ public class HomeActivity extends Activity {
 		setScore(IOBasic.getPoints(username));
 	}
 
+	@Override
+	public void onBackPressed() {
+		createDialog(LOGOUT);
+	}
+
 	private void setScore(int score) {
 		String message = "Score: " + score + " Point";
 		if (score != 1)
