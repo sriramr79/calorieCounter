@@ -9,6 +9,6 @@ public class Constants {
 	static final int REGISTERED = 4;
 	
 	/* Intent Extra Tags */
-	static final String UNEXTRA = "username";
+	public static final String UNEXTRA = "username";
 	
 }
