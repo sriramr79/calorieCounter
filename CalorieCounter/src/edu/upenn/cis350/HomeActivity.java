@@ -44,7 +44,11 @@ public class HomeActivity extends Activity {
 	}
 	
 	private void setScore (int score) {
-		scoreField.setText("Score: " + score + " Points");
+		String message = "Score: " + score + " Point";
+		if (score != 1)
+			message = message + "s";
+
+		scoreField.setText(message);
 	}
 	
 	private void createDialog(int id) {
