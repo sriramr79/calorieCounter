@@ -70,8 +70,6 @@ public class LoginActivityTest extends
 		
 		assertEquals("sriramr", username.getText().toString());
 		assertEquals("sriramr", password.getText().toString());
-		
-
 	}
 	
 	public void testInvalidLogin() {
@@ -86,14 +84,6 @@ public class LoginActivityTest extends
 		
 		assertEquals("wrong", username.getText().toString());
 		assertEquals("wrong", password.getText().toString());
-	}
-	
-	public void testQuit() {
-		
-	}
-	
-	public void testSignUp() {
-		
 	}
 	
 }

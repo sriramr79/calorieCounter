@@ -58,21 +58,5 @@ public class HomeActivityTest extends
 		assertEquals("Score: 100 Points", score.getText().toString());		
 	}
 	
-	public void testGame1() {
-		
-	}
-	
-	public void testGame2() {
-		
-	}
-	
-	public void testGame3() {
-		
-	}
-	
-	public void testLogout() {
-		
-	}
-	
 	
 }
