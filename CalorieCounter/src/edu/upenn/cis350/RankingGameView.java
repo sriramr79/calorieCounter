@@ -91,6 +91,7 @@ public class RankingGameView extends View {
 		Collections.sort(correctOrder);
 		numAttempts = 0;
 	}
+
 	
 	/**
 	 * Sets up the initial state of all static and dynamic display items
@@ -119,7 +120,7 @@ public class RankingGameView extends View {
 		food2Square = new ScreenSquare(19*dispWidth/26, 15*dispHeight/26, 3*dispWidth/26, 3*dispWidth/26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
 		
 		submitSquare = new ScreenSquare(16*dispWidth/26, 20*dispHeight/26, 9*dispWidth/26, 3*dispWidth/26, Color.RED, this.getContext().getResources().getString(R.string.rankSubmitButton), Color.WHITE);
-		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.RED, this.getContext().getResources().getString(R.string.rankXButton), Color.MAGENTA);
+		quitSquare = new ScreenSquare(dispWidth - dispWidth/13, 0, dispWidth/13, dispWidth/13, Color.BLACK, this.getContext().getResources().getString(R.string.rankXButton), Color.RED);
 		
 		checkOccupancy();
 		
@@ -128,6 +129,9 @@ public class RankingGameView extends View {
 		displayOrder.get(2).getImage().setBounds(food2Loc);
 	}
 	
+	/**
+	 * Called whenever the screen is redrawn
+	 */
 	protected void onDraw(Canvas canvas) {
 		Paint paint = new Paint();
 		displayOrder.get(0).getImage().draw(canvas);
@@ -174,6 +178,9 @@ public class RankingGameView extends View {
 		return onTouchEvent(e);
 	}
 	
+	/**
+	 * Called whenever the screen is touched
+	 */
 	public boolean onTouchEvent(MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			int touchX = (int)event.getX();

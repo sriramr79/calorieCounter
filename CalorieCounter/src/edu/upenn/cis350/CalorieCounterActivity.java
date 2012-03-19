@@ -13,18 +13,18 @@ import android.widget.TextView;
 
 public class CalorieCounterActivity extends Activity {
 	
-	GameLevel level;
+	public GameLevel level;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.calcount);
         level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
+        showDialog(INSTRUCTION_DIALOG);
     }
     
-    //testing
     public void onSubmitEvent(View view) {
     	EditText userInput = (EditText)findViewById(R.id.calorieInput);
     	// Surround in try-catch to avoid crash on unparseable input
@@ -64,7 +64,7 @@ public class CalorieCounterActivity extends Activity {
     		showDialog(INVALID_DIALOG);
     		break;
     	default:
-    		throw new RuntimeException("Unexpected FoodItem.AnswerType returned!");
+    		throw new RuntimeException("Non-existant FoodItem.AnswerType returned?  You should not be returning any int from FoodItem.checkGuess()!  Use the Enum.");
     	}
     	
    
@@ -92,6 +92,7 @@ public class CalorieCounterActivity extends Activity {
     private static final int CLOSEHIGH_DIALOG = 3;
     private static final int WRONGHIGH_DIALOG = 4;
     private static final int INVALID_DIALOG = 5;
+    private static final int INSTRUCTION_DIALOG = 6;
     
     protected Dialog onCreateDialog(int id) {
     	
@@ -157,6 +158,19 @@ public class CalorieCounterActivity extends Activity {
     		return builder.create();
     	}
     	
+    	else if(id == INSTRUCTION_DIALOG) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(res.getString(R.string.instructionMessage));
+    		builder.setPositiveButton(R.string.startButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		
+    		return builder.create();
+    	}
+    	
     	else {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setMessage("This dialog not yet implemented");
@@ -172,8 +186,8 @@ public class CalorieCounterActivity extends Activity {
     
     }
     
-    public void onLogoutEvent(View view) {
-    	setResult(Constants.LOGOUT_SUCCESSFUL);
+    public void onQuitEvent(View view) {
+//    	setResult(Constants.LOGOUT_SUCCESSFUL);
     	finish();
     }
 }

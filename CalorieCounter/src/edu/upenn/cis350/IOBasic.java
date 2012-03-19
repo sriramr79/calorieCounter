@@ -33,7 +33,7 @@ public class IOBasic{
 	static public void finalWrite(Context context)
 	{
 		String FILENAME = "userInfo.txt";
-		String string = "zhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
+		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
 		try{
 			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
 			fos.write(string.getBytes());
@@ -88,6 +88,7 @@ public class IOBasic{
 	 */
 	static public String password (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return null;
 		String[] data=dataStruct.get(USN);
 		return data[0];
 	}
@@ -95,10 +96,24 @@ public class IOBasic{
 	/*
 	 * get points of a person based off of the username
 	 */
-	static public int points (String USN)
+	static public int getPoints (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return -1;
 		String[] data=dataStruct.get(USN);
 		return Integer.parseInt(data[2]);
+	}
+	
+	/*
+	 * set the Points of user USN to points
+	 * 
+	 * returns true if it succeeded, false otherwise (no user with specific usn USN)
+	 */
+	static public boolean setPoints(String USN, int points)
+	{
+		if (!dataStruct.containsKey(USN)) return false;
+		
+		dataStruct.get(USN)[2]=Integer.toString(points);
+		return true;
 	}
 	
 	/*
@@ -106,7 +121,20 @@ public class IOBasic{
 	 */
 	static public String fullName (String USN)
 	{
+		if (!dataStruct.containsKey(USN)) return null;
 		String[] data=dataStruct.get(USN);
 		return data[1];
 	}
+	
+	/*
+	 * returns False if the usn is already taken, otherwise return true
+	 */
+	static public boolean addUser(String usn, String pass, String fullName)
+	{
+		if (dataStruct.containsKey(usn)==true) return false;
+		String[] data = {pass,fullName,"0"};
+		dataStruct.put(usn, data);
+		return true;
+	}
+	
 }
