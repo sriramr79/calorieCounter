@@ -14,6 +14,8 @@ public class HomeActivity extends Activity {
 	private final static int LOGOUT = 1;
 	
 	private String username;
+	private TextView scoreField;
+	private int score;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +24,24 @@ public class HomeActivity extends Activity {
 		
 		username = getIntent().getStringExtra(Constants.UNEXTRA);
 		
-		TextView tv = (TextView)findViewById(R.id.homeTitle);
+		TextView name = (TextView)findViewById(R.id.homeName);
+		scoreField = (TextView)findViewById(R.id.homeScore);
 		
-		if (tv != null) {
-			tv.setText("Welcome " + IOBasic.fullName(username));
+		if (name != null) {
+			name.setText("Welcome " + IOBasic.fullName(username));
+		}
+		
+		score = IOBasic.getPoints(username);
+		
+		if (scoreField != null) {
+			setScore(score);
 		}
 		
 	}
 	
+	private void setScore (int score) {
+		scoreField.setText("Score: " + score + " Points");
+	}
 	
 	private void createDialog(int id) {
 	

@@ -33,7 +33,7 @@ public class IOBasic{
 	static public void finalWrite(Context context)
 	{
 		String FILENAME = "userInfo.txt";
-		String string = "g,g,Test Name, 9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
+		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
 		try{
 			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
 			fos.write(string.getBytes());

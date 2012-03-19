@@ -6,7 +6,16 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/homeTitle"
+        android:id="@+id/homeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:scrollHorizontally="false"
+        android:text="hello"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/homeScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
