@@ -22,7 +22,7 @@
     <string name="scoreReportMessage2">\u0020points for this guess.</string>
 
     <!-- Button Text -->
-    <string name="submitButton">Submit</string>
+    <string name="submitButton">Log In</string>
     <string name="quitButton">Quit</string>
     <string name="registerButton">Sign Up!</string>
     <string name="logoutButton">Logout</string>
