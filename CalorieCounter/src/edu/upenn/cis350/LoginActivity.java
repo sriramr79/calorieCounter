@@ -3,8 +3,12 @@ package edu.upenn.cis350;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 /**
@@ -29,10 +33,28 @@ public class LoginActivity extends Activity {
 		username = (EditText) findViewById(R.id.unField);
 		password = (EditText) findViewById(R.id.pwField);
 
+		setFieldListeners();
+
 		// load database
 		IOBasic.finalWrite(getApplicationContext());
 		IOBasic.initRead(getApplicationContext());
 
+	}
+	
+	private void setFieldListeners () {
+		password.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+					submitLogin(v);
+					return true;
+				} else
+					return false;
+			}
+		});
+		
 	}
 
 	/**

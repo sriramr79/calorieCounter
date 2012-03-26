@@ -5,27 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/loginscreen" >
 
-    <!--
-         <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        android:text="@string/welcome"
-        android:textSize="30dp" />
-    -->
-
-    <TextView
-        android:id="@+id/centerPoint"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="" />
-
     <TextView
         android:id="@+id/unTitle"
         android:layout_width="wrap_content"
@@ -44,22 +23,8 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/unTitle"
         android:hint="@string/unHint"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/pwField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/unField"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/unField"
-        android:layout_marginTop="18dp"
-        android:hint="@string/pwHint"
         android:imeOptions="actionNext"
-        android:inputType="textPassword" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/pwTitle"
@@ -71,6 +36,21 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/pwTitle"
         android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/pwField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/unField"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/unField"
+        android:layout_marginTop="18dp"
+        android:hint="@string/pwHint"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/loginSubmit"
