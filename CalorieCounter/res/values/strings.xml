@@ -47,6 +47,7 @@
     <string name="signup">Sign Up!</string>
     <string name="back">Back</string>
     <string name="dupUsnMsg">Sorry, this username has already been taken.  Please try again.</string>
+    <string name="invUsnMsg">Sorry, this is an invalid entry.  Please try again.</string>
 
     <!-- Home Activity -->
     <string name="yes">Yes</string>

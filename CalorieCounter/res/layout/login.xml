@@ -24,7 +24,7 @@
         android:layout_toRightOf="@+id/unTitle"
         android:hint="@string/unHint"
         android:imeOptions="actionNext"
-        android:inputType="text" />
+        android:inputType="textNoSuggestions" />
 
     <TextView
         android:id="@+id/pwTitle"

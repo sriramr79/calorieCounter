@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class SignUpActivity extends Activity {
 
-	private final static int DUP_USN_DIALOG = 1;
+	private final static int INV_USN_DIALOG = 1;
 	
 	private EditText fnField, unField, pwField;
 	
@@ -28,10 +28,10 @@ public class SignUpActivity extends Activity {
 		
 	}
 
-	private void createDialog(int id) {
-		if (id == DUP_USN_DIALOG) {
+	private void createDialog(int id, String msg) {
+		if (id == INV_USN_DIALOG) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(R.string.dupUsnMsg);
+			builder.setMessage(msg);
 			builder.setPositiveButton(R.string.ok,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
@@ -43,17 +43,24 @@ public class SignUpActivity extends Activity {
 	}
 	
 	public void onTapRegister(View view) {
-		String fullname = ((EditText) findViewById(R.id.signUpFullName)).getText().toString();
-		String username = ((EditText) findViewById(R.id.signUpUN)).getText().toString();
-		String password = ((EditText) findViewById(R.id.signUpPass)).getText().toString();
-		
-		if (!IOBasic.addUser(username, password, fullname)) {
-			createDialog(DUP_USN_DIALOG);
+		String fullname = fnField.getText().toString();
+		String username = unField.getText().toString();
+		String password = pwField.getText().toString();
+
+		if (fullname.equals("") || username.equals("") || password.equals("")) {
+			createDialog(INV_USN_DIALOG, getResources().getString(R.string.invUsnMsg));
 			resetFields();
 			return;
 		}
+		
+		if (!IOBasic.addUser(username, password, fullname)) {
+			createDialog(INV_USN_DIALOG, getResources().getString(R.string.dupUsnMsg));
+			resetFields();
+			return;
+		}
+		
 
-		Toast.makeText(this, "Congratulations, you have successfully signed up!", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Congratulations, you have successfully signed up!", Toast.LENGTH_SHORT).show();
 		
 		Intent i = new Intent();
 		i.putExtra(Constants.UNEXTRA, username);

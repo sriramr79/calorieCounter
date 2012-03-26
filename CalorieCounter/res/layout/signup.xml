@@ -35,7 +35,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Full Name: "
+                android:text="@string/fullnameTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -43,8 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter full name"
-                android:inputType="textPersonName" >
+                android:hint="@string/fullnameHint"
+                android:inputType="textPersonName|textNoSuggestions" >
 
                 <requestFocus />
             </EditText>
@@ -60,17 +60,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Username: "
+                android:text="@string/unTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <EditText
                 android:id="@+id/signUpUN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.46"
-                android:hint="Enter username"
-                android:inputType="text" />
-        </LinearLayout>
+                android:hint="@string/unHint"
+                android:inputType="textNoSuggestions" />
+</LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -81,7 +81,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password: "
+                android:text="@string/pwTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter password"
+                android:hint="@string/pwHint"
                 android:inputType="textPassword" />
         </LinearLayout>
 
