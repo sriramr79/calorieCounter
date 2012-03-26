@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView.OnEditorActionListener;
 
 public class SignUpActivity extends Activity {
 
@@ -26,20 +30,41 @@ public class SignUpActivity extends Activity {
 		unField = ((EditText) findViewById(R.id.signUpUN));
 		pwField = ((EditText) findViewById(R.id.signUpPass));
 		
+		setFieldListeners();
+		
+		if (fnField == null || unField == null || pwField == null)
+			return;
+		
+	}
+	
+	private void setFieldListeners() {
+		pwField.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+					onTapRegister(v);
+					return true;
+				} else
+					return false;
+			}
+		});
+
 	}
 
 	private void createDialog(int id, String msg) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(msg);
+
 		if (id == INV_USN_DIALOG) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(msg);
 			builder.setPositiveButton(R.string.ok,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							dialog.dismiss();
 						}
 					});
-			builder.create().show();
 		}
+		builder.create().show();
 	}
 	
 	public void onTapRegister(View view) {
