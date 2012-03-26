@@ -1,52 +1,74 @@
 package edu.upenn.cis350;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class SignUpActivity extends Activity {
+
+	private final static int DUP_USN_DIALOG = 1;
 	
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
-        
-       
-       
-    }
-    
-    public void register (View view) {
-    	String fullName = ((EditText)findViewById(R.id.signUpFullName)).getText().toString();
-    	String username = ((EditText)findViewById(R.id.signUpUN)).getText().toString();
-    	String password = ((EditText)findViewById(R.id.signUpPass)).getText().toString();
-    	if (!IOBasic.addUser(username, password, fullName))
-    	{
-    		Context context = getApplicationContext();
-            CharSequence text = "Sorry this username is already taken";
-            int duration = Toast.LENGTH_LONG;
+	private EditText fnField, unField, pwField;
+	
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.signup);
+		
+		fnField = ((EditText) findViewById(R.id.signUpFullName));
+		unField = ((EditText) findViewById(R.id.signUpUN));
+		pwField = ((EditText) findViewById(R.id.signUpPass));
+		
+	}
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-    		return;
-    	}
-    	
-    	Context context = getApplicationContext();
-        CharSequence text = "Congratulation, you are signed up successfully!";
-        int duration = Toast.LENGTH_LONG;
+	private void createDialog(int id) {
+		if (id == DUP_USN_DIALOG) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.dupUsnMsg);
+			builder.setPositiveButton(R.string.ok,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.dismiss();
+						}
+					});
+			builder.create().show();
+		}
+	}
+	
+	public void onTapRegister(View view) {
+		String fullname = ((EditText) findViewById(R.id.signUpFullName)).getText().toString();
+		String username = ((EditText) findViewById(R.id.signUpUN)).getText().toString();
+		String password = ((EditText) findViewById(R.id.signUpPass)).getText().toString();
+		
+		if (!IOBasic.addUser(username, password, fullname)) {
+			createDialog(DUP_USN_DIALOG);
+			resetFields();
+			return;
+		}
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    	
-    	
-    	setResult(Constants.REGISTERED);
+		Toast.makeText(this, "Congratulations, you have successfully signed up!", Toast.LENGTH_LONG).show();
+		
+		Intent i = new Intent();
+		i.putExtra(Constants.UNEXTRA, username);
+		setResult(Constants.REGISTERED, i);
 		finish();
 	}
-    
-    public void goBack (View view) {
+
+	private void resetFields() {
+		fnField.setText("");
+		unField.setText("");
+		pwField.setText("");
+		fnField.requestFocus();
+	}
+
+	public void onTapBack(View view) {
 		finish();
 	}
 

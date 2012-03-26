@@ -2,7 +2,7 @@
 <resources>
 
     <!-- General App Strings -->
-    <string name="app_name">Calorie Counter</string>
+    <string name="app_name">Food With Friends</string>
     <string name="appVersion">CalorieCounter Beta v0.3: 3.20.2012</string>
 
     <!-- Game messages -->
@@ -29,18 +29,24 @@
     <string name="nextButton">Next</string>
     <string name="retryButton">Retry</string>
     <string name="startButton">Begin</string>
+    <string name="ok">Ok</string>
 
     <!-- Games -->
     <string name="game1">Calorie is Right!</string>
     <string name="game2">1-2-3</string>
     <string name="game3">One Right Price</string>
 
-    <!-- Login Activity -->
+    <!-- Login/Signup Activity -->
     <string name="welcome">Welcome to the Calorie Counter!</string>
     <string name="unTitle">Username:\u0020</string>
     <string name="pwTitle">Password:\u0020</string>
+    <string name="fullnameTitle">Full Name:\u0020</string>
     <string name="unHint">Enter username</string>
     <string name="pwHint">Enter password</string>
+    <string name="fullnameHint">Enter full name</string>
+    <string name="signup">Sign Up!</string>
+    <string name="back">Back</string>
+    <string name="dupUsnMsg">Sorry, this username has already been taken.  Please try again.</string>
 
     <!-- Home Activity -->
     <string name="yes">Yes</string>
@@ -70,7 +76,6 @@
     <string name="rankExitButton">Exit</string>
     <string name="rankRetryButton">Retry</string>
     <string name="rankPoints">\u0020points for this game.</string>
-    
 
     <!-- One Right Price -->
     <string name="oneWelcomeMessage">Welcome to the  One Right Price!  In this game, you will be presented with two foods and one calorie value. You must match the calorie value with the correct food.</string>

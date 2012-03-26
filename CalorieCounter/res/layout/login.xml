@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwField"
         android:layout_toRightOf="@+id/pwTitle"
-        android:onClick="submitLogin"
+        android:onClick="onTapLogin"
         android:text="@string/submitButton" />
 
     <Button

@@ -112,7 +112,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="86dp"
                     android:layout_toLeftOf="@+id/centerPoint"
-                    android:onClick="register"
+                    android:onClick="onTapRegister"
                     android:text="Sign Up" />
 
                 <Button
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/signUpButton"
-                    android:onClick="goBack"
+                    android:onClick="onTapBack"
                     android:text="Back" />
             </RelativeLayout>
         </LinearLayout>

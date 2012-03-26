@@ -68,7 +68,8 @@ public class LoginActivity extends Activity {
 		}
 
 		else if (resultCode == Constants.REGISTERED) {
-			showToast("Thank you for registering!");
+			login(data.getStringExtra(Constants.UNEXTRA));
+			showToast("Thank you for registering!  You are now logged in.");
 		}
 	}
 
@@ -114,12 +115,16 @@ public class LoginActivity extends Activity {
 
 		if (checkLogin(un)) {
 			showToast("Login Successful!");
-			Intent i = new Intent(this, HomeActivity.class);
-			i.putExtra(Constants.UNEXTRA, un);
-			startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
+			login(un);
 		} else {
 			resetLoginFields();
 		}
+	}
+	
+	private void login(String un) {
+		Intent i = new Intent(this, HomeActivity.class);
+		i.putExtra(Constants.UNEXTRA, un);
+		startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
 	}
 
 	/**
@@ -150,6 +155,6 @@ public class LoginActivity extends Activity {
 	}
 
 	public void onTapRegister(View view) {
-		startActivity(new Intent(this, SignUpActivity.class));
+		startActivityForResult(new Intent(this, SignUpActivity.class), Constants.NEW_USER);
 	}
 }
