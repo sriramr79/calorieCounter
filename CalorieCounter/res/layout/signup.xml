@@ -35,7 +35,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Full Name: "
+                android:text="@string/fullnameTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -43,8 +43,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter full name"
-                android:inputType="textPersonName" >
+                android:hint="@string/fullnameHint"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textNoSuggestions" >
 
                 <requestFocus />
             </EditText>
@@ -60,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Username: "
+                android:text="@string/unTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -68,8 +69,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.46"
-                android:hint="Enter username"
-                android:inputType="text" />
+                android:hint="@string/unHint"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +83,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password: "
+                android:text="@string/pwTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -89,7 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter password"
+                android:hint="@string/pwHint"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword" />
         </LinearLayout>
 
@@ -112,7 +115,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="86dp"
                     android:layout_toLeftOf="@+id/centerPoint"
-                    android:onClick="register"
+                    android:onClick="onTapRegister"
                     android:text="Sign Up" />
 
                 <Button
@@ -121,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/signUpButton"
-                    android:onClick="goBack"
+                    android:onClick="onTapBack"
                     android:text="Back" />
             </RelativeLayout>
         </LinearLayout>

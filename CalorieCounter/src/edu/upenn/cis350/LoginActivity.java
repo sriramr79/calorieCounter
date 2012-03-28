@@ -1,10 +1,16 @@
 package edu.upenn.cis350;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 /**
@@ -19,6 +25,9 @@ public class LoginActivity extends Activity {
 
 	private EditText username, password;
 
+	private final static int NEW_USER_DIALOG = 1;
+	private final static int INVALID_LOGIN_DIALOG = 2;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +38,26 @@ public class LoginActivity extends Activity {
 		username = (EditText) findViewById(R.id.unField);
 		password = (EditText) findViewById(R.id.pwField);
 
+		setFieldListeners();
+
 		// load database
 		IOBasic.finalWrite(getApplicationContext());
 		IOBasic.initRead(getApplicationContext());
+
+	}
+
+	private void setFieldListeners() {
+		password.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+					onTapLogin(v);
+					return true;
+				} else
+					return false;
+			}
+		});
 
 	}
 
@@ -46,7 +72,8 @@ public class LoginActivity extends Activity {
 		}
 
 		else if (resultCode == Constants.REGISTERED) {
-			showToast("Thank you for registering!");
+			login(data.getStringExtra(Constants.UNEXTRA));
+			showToast("Thank you for registering!  You are now logged in.");
 		}
 	}
 
@@ -69,15 +96,22 @@ public class LoginActivity extends Activity {
 	}
 
 	private boolean checkLogin(String un) {
+		
+		if (un == null || un.trim().equals("")) {
+			createDialog(INVALID_LOGIN_DIALOG, "Username or password is incorrect.  Please try again.");
+			return false;
+		}
+		
 		String pw = password.getText().toString();
 		String actPW = IOBasic.password(un);
 
 		if (actPW == null) {
-			invalidLogin("User does not exist!");
+			createDialog(NEW_USER_DIALOG, "The user " + un + " does not exist.  Please sign up for an account.");
 			return false;
 		} else if (pw.equals(actPW)) {
 			return true;
 		} else {
+			createDialog(INVALID_LOGIN_DIALOG, "Username or password is incorrect.  Please try again.");
 			return false;
 		}
 	}
@@ -87,31 +121,19 @@ public class LoginActivity extends Activity {
 	 * 
 	 * @param view
 	 */
-	public void submitLogin(View view) {
+	public void onTapLogin(View view) {
 		String un = username.getText().toString();
 
 		if (checkLogin(un)) {
 			showToast("Login Successful!");
-			Intent i = new Intent(this, HomeActivity.class);
-			i.putExtra(Constants.UNEXTRA, un);
-			startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
-		} else {
-			resetLoginFields();
+			login(un);
 		}
 	}
 
-	/**
-	 * Shows an error message and then resets the login fields for another login
-	 * attempt
-	 * 
-	 * @param message
-	 */
-	private void invalidLogin(String message) {
-		if (message == null)
-			message = "Login Failed!";
-
-		showToast(message);
-		resetLoginFields();
+	private void login(String un) {
+		Intent i = new Intent(this, HomeActivity.class);
+		i.putExtra(Constants.UNEXTRA, un);
+		startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
 	}
 
 	/**
@@ -128,6 +150,37 @@ public class LoginActivity extends Activity {
 	}
 
 	public void onTapRegister(View view) {
-		startActivity(new Intent(this, SignUpActivity.class));
+		startActivityForResult(new Intent(this, SignUpActivity.class), Constants.NEW_USER);
 	}
+
+	private void createDialog(int id, String msg) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(msg);
+
+		if (id == INVALID_LOGIN_DIALOG) {
+			builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.dismiss();
+					resetLoginFields();
+				}
+			});
+		} else if (id == NEW_USER_DIALOG) {
+			builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.dismiss();
+					onTapRegister(getCurrentFocus());
+				}
+			});
+			
+			builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.dismiss();
+					resetLoginFields();
+				}
+			});
+		}
+		builder.create().show();
+	}
+
 }

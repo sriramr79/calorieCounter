@@ -2,29 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        android:text="@string/welcome"
-        android:textSize="30dp" />
+    android:layout_height="match_parent"
+    android:background="@drawable/loginscreen" >
 
     <TextView
         android:id="@+id/unTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/unField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/unField"
-        android:layout_below="@+id/appTitle"
-        android:layout_toLeftOf="@+id/unField"
+        android:layout_centerVertical="true"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/unTitle"
         android:textSize="20dp" />
@@ -33,11 +18,13 @@
         android:id="@+id/unField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pwField"
+        android:layout_alignBaseline="@+id/unTitle"
+        android:layout_alignBottom="@+id/unTitle"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/appTitle"
+        android:layout_toRightOf="@+id/unTitle"
         android:hint="@string/unHint"
-        android:inputType="text" />
+        android:imeOptions="actionNext"
+        android:inputType="textNoSuggestions" />
 
     <TextView
         android:id="@+id/pwTitle"
@@ -46,7 +33,6 @@
         android:layout_alignBaseline="@+id/pwField"
         android:layout_alignBottom="@+id/pwField"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/unTitle"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/pwTitle"
         android:textSize="20dp" />
@@ -55,39 +41,25 @@
         android:id="@+id/pwField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/unField"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/unField"
+        android:layout_marginTop="18dp"
         android:hint="@string/pwHint"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword" />
+        android:imeOptions="actionDone"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/loginSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/quitButton"
         android:layout_below="@+id/pwField"
-        android:layout_toLeftOf="@+id/centerPoint"
-        android:onClick="submitLogin"
+        android:layout_toRightOf="@+id/pwTitle"
+        android:onClick="onTapLogin"
         android:text="@string/submitButton" />
-
-    <TextView
-        android:id="@+id/centerPoint"
-        android:layout_width="0dip"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pwField"
-        android:layout_centerHorizontal="true"
-        android:text="" />
-
-    <Button
-        android:id="@+id/quitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pwField"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/centerPoint"
-        android:onClick="onTapQuit"
-        android:text="@string/quitButton" />
 
     <Button
         android:id="@+id/button1"
@@ -95,7 +67,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginSubmit"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
         android:onClick="onTapRegister"
         android:text="@string/registerButton" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pwField"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/loginSubmit"
+        android:onClick="onTapQuit"
+        android:text="@string/quitButton" />
 
 </RelativeLayout>
