@@ -22,7 +22,8 @@
     <string name="scoreReportMessage2">\u0020points for this guess.</string>
 
     <!-- Button Text -->
-    <string name="submitButton">Log In</string>
+    <string name="submitButton">Submit</string>
+    <string name="loginButton">Log in</string>
     <string name="quitButton">Quit</string>
     <string name="registerButton">Sign Up!</string>
     <string name="logoutButton">Logout</string>
@@ -35,6 +36,7 @@
     <string name="game1">Calorie is Right!</string>
     <string name="game2">1-2-3</string>
     <string name="game3">One Right Price</string>
+    <string name="game4">Meal with Friends</string>
 
     <!-- Login/Signup Activity -->
     <string name="welcome">Welcome to the Calorie Counter!</string>
@@ -91,5 +93,9 @@
     <string name="tacobellburrito">a Taco Bell Beefy 5-Layer Burrito</string>
     <string name="cokecan">a 12-ounce can of Coca-Cola</string>
     <string name="waterglass">an 8-ounce glass of water</string>
+    
+    <!-- Plate game -->
+    <string name="tableFood1Desc">First entered food</string>
+    <string name="tableTotalCalories">Calories for this meal:</string>
 
 </resources>

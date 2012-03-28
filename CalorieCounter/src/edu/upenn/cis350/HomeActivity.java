@@ -109,6 +109,10 @@ public class HomeActivity extends Activity {
 	public void onTapGame3(View view) {
 		startGame(OneRightPriceActivity.class);
 	}
+	
+	public void onTapGame4(View view) {
+		startGame(PlateGameActivity.class);
+	}
 
 	public void onTapLogout(View view) {
 		createDialog(LOGOUT);

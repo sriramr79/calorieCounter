@@ -42,6 +42,13 @@
         android:layout_height="wrap_content"
         android:onClick="onTapGame3"
         android:text="@string/game3" />
+    
+    <Button
+        android:id="@+id/game4Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTapGame4"
+        android:text="@string/game4" />
 
     <Button
         android:id="@+id/logoutButton"

@@ -59,7 +59,7 @@
         android:layout_below="@+id/pwField"
         android:layout_toRightOf="@+id/pwTitle"
         android:onClick="onTapLogin"
-        android:text="@string/submitButton" />
+        android:text="@string/loginButton" />
 
     <Button
         android:id="@+id/button1"
