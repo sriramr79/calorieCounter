@@ -41,8 +41,8 @@ public class LoginActivity extends Activity {
 		setFieldListeners();
 
 		// load database
-		IOBasic.finalWrite(getApplicationContext());
-		IOBasic.initRead(getApplicationContext());
+		//IOBasic.finalWrite(getApplicationContext());
+		IOBasic.initRead();
 
 	}
 

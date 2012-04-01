@@ -3,16 +3,20 @@
  */
 package edu.upenn.cis350;
 
-import java.io.BufferedReader;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import edu.upenn.cis350.util.*;
+import edu.upenn.cis350.util.HttpRequest.HttpMethod;
 
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * @author Zhang
@@ -23,6 +27,7 @@ public class IOBasic{
 	//arrayFormat = [password, full name, points]
 	static HashMap<String,String[]> dataStruct;
 	static String directory="";
+	public static final String readKEY = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/backend.php";
 	//
 	
 	
@@ -32,6 +37,8 @@ public class IOBasic{
 	 */
 	static public void finalWrite(Context context)
 	{
+		
+		
 		String FILENAME = "userInfo.txt";
 		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
 		try{
@@ -50,10 +57,28 @@ public class IOBasic{
 	 * This function should be called when launching the app: it reads the file in its entirety and
 	 * constructs a datastructure out of it
 	 */
-	static public void initRead(Context context)
+	static public void initRead()
 	{
 		dataStruct = new HashMap<String,String[]>();
-		BufferedReader buff;
+		String[] data;
+		String result = null;
+		HttpRequest m_request = new HttpRequest();
+		result=m_request.execHttpRequest(readKEY, HttpMethod.Get, null);
+		try{
+			JSONArray jArray = new JSONArray(result);
+			for(int i=0;i<jArray.length();i++){
+				JSONObject json_data = jArray.getJSONObject(i);
+				data = new String[3];
+				data[0] = json_data.getString("pass");
+				data[1] = json_data.getString("fn");
+				data[2] = json_data.getString("points");
+				dataStruct.put(json_data.getString("usn"), data);
+				//Get an output to the screen
+			}
+		}catch(JSONException e){
+			Log.e("log_tag", "Error parsing data "+e.toString());
+		}
+		/*BufferedReader buff;
 		String FILENAME = "userInfo.txt";
 		String currentLine = null;
 		StringTokenizer tk;
@@ -80,7 +105,7 @@ public class IOBasic{
 		catch (Exception e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	/*
