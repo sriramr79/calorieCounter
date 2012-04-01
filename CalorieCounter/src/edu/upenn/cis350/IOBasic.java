@@ -3,20 +3,16 @@
  */
 package edu.upenn.cis350;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import edu.upenn.cis350.util.*;
-import edu.upenn.cis350.util.HttpRequest.HttpMethod;
 
-
-import android.content.Context;
 import android.util.Log;
+import edu.upenn.cis350.util.HttpRequest;
+import edu.upenn.cis350.util.HttpRequest.HttpMethod;
 
 /**
  * @author Zhang
@@ -26,8 +22,8 @@ public class IOBasic{
 	//HashMap that maps a USN to an array of Strings that contains all the other info for the person
 	//arrayFormat = [password, full name, points]
 	static HashMap<String,String[]> dataStruct;
-	static String directory="";
 	public static final String readKEY = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/backend.php";
+	public static String write = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/updateDB.php?command=";
 	//
 	
 	
@@ -35,10 +31,22 @@ public class IOBasic{
 	 * This function should be called when closing app: it writes the current state of the datastructure
 	 * that will keep track of things
 	 */
-	static public void finalWrite(Context context)
+	static public void finalWrite()
 	{
 		
 		
+		HttpRequest m_request = new HttpRequest();
+		
+		Set<String> usn = dataStruct.keySet();
+		
+		for (String user: usn)
+		{
+			String password = dataStruct.get(user)[0];
+			String fn = dataStruct.get(user)[1];
+			String points = dataStruct.get(user)[2];
+			m_request.execHttpRequest(write+"insert%20into%20users%20values%20('"+user+"','"+password+"','"+fn+"',"+points+")", HttpMethod.Post, null);
+		}
+		/*
 		String FILENAME = "userInfo.txt";
 		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
 		try{
@@ -50,7 +58,7 @@ public class IOBasic{
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	/*
