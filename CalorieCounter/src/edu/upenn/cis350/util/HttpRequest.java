@@ -3,10 +3,14 @@ package edu.upenn.cis350.util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -18,12 +22,14 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.util.Log;
 
 //Internal base deal request object - makes actual HTTP Request (GET/POST)
 public class HttpRequest {
@@ -67,6 +73,29 @@ public class HttpRequest {
 		ClientConnectionManager cm = new SingleClientConnManager(params, schemeRegistry);
 		m_client = new DefaultHttpClient(cm, params);
 	}		
+	
+	public String postData(String uri, String command)
+	{
+		
+		HttpRequestBase request = new HttpGet();
+
+		try {			
+			request.setURI(new URI(uri.toString()));
+			
+			// Set Headers
+            request.addHeader("User-Agent", "YP Mobile Android/2.1");
+            
+            // Execute
+            HttpResponse response = m_client.execute(request);
+            return response.toString();
+		}
+		catch (Exception e)
+		{
+			return e.toString();
+		}
+		
+	}
+	
 	//protected
 	public String execHttpRequest(String uri, HttpMethod method, String body) {	
 		HttpRequestBase request;
