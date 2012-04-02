@@ -38,7 +38,7 @@ public class PlateGameActivity extends Activity {
 		ImageView clickedImage = (ImageView)view;
 		int clickedId = clickedImage.getId();
 		
-		if(clickedId == R.id.scrollFoodButton1) {
+		if(clickedId == R.id.scrollFood) {
 			Toast.makeText(this, "Test press button 1", Toast.LENGTH_LONG);
 		}
 		
