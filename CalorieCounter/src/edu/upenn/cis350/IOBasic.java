@@ -79,7 +79,7 @@ public class IOBasic{
 		if (games.get(user)==null)
 			return null;
 		
-		return games.get(user).get(user);
+		return games.get(user).get(opponent);
 	}
 	
 	/*
@@ -121,7 +121,7 @@ public class IOBasic{
 	static public void initRead()
 	{
 		dataStruct = new HashMap<String,String[]>();
-		/*
+		
 		String[] data;
 		String result = null;
 		HttpRequest m_request = new HttpRequest();
@@ -140,7 +140,7 @@ public class IOBasic{
 		}catch(JSONException e){
 			Log.e("log_tag", "Error parsing data "+e.toString());
 		}
-		*/
+		
 	
 	}
 

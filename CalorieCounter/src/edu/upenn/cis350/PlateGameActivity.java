@@ -18,8 +18,8 @@ import android.widget.Toast;
  * Someone can think of a better name for this...
  * 
  * @author Paul M. Gurniak
- * @date 3/28/12
- * @version 0.1
+ * @date 4/2//12
+ * @version 1.0
  *
  */
 public class PlateGameActivity extends Activity {
@@ -193,10 +193,10 @@ public class PlateGameActivity extends Activity {
 	}
 	
 	public void exitCleanly() {
-		IOBasic.addOpponent(username, opponent, fg.getStateString(tableFoods));
+		IOBasic.addOpponent(opponent, username, fg.getStateString(tableFoods));
 		// If the user is not playing him/herself, set the other user to wait
 		if(!opponent.equals(username)) {
-			IOBasic.addOpponent(opponent, username, "");
+			IOBasic.addOpponent(username, opponent, "");
 		}
 		this.finish();
 	}

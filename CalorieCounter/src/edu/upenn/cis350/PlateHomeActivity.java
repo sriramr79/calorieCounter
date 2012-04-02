@@ -21,6 +21,8 @@ public class PlateHomeActivity extends Activity {
 	
 	private List<String> opponents;
 	
+	private int defaultColor;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class PlateHomeActivity extends Activity {
         }
         
         this.setContentView(R.layout.platehome);
+        
+        defaultColor = ((Button)findViewById(R.id.tableCreateGameButton)).getTextColors().getDefaultColor();
         
         updateButtonText();
         
@@ -48,6 +52,8 @@ public class PlateHomeActivity extends Activity {
 		Button game1 = (Button)this.findViewById(R.id.tableGameButton1);
 		Button game2 = (Button)this.findViewById(R.id.tableGameButton2);
 		Button game3 = (Button)this.findViewById(R.id.tableGameButton3);
+
+		Button create = (Button)this.findViewById(R.id.tableCreateGameButton);
 		
 		opponents = IOBasic.getOpponents(username);
         if(opponents == null) {
@@ -57,18 +63,17 @@ public class PlateHomeActivity extends Activity {
         game1.setClickable(false);
         game2.setClickable(false);
         game3.setClickable(false);
+        create.setClickable(true);
         
 		if(opponents.size() >= 1) {
 			updateButtonText(game1, opponents.get(0));
-			game1.setClickable(true);
+			create.setClickable(false);
 		}
 		if(opponents.size() >= 2) {
 			updateButtonText(game2, opponents.get(1));
-			game2.setClickable(true);
 		}
 		if(opponents.size() >= 3) {
 			updateButtonText(game3, opponents.get(2));
-			game3.setClickable(true);
 		}
 	}
 	
@@ -76,13 +81,20 @@ public class PlateHomeActivity extends Activity {
 		String state = IOBasic.getGameState(username, opponent);
 		String display_name = IOBasic.fullName(opponent);
 		if(state == null) {
-			b.setText(this.getString(R.string.tableError));
+			b.setText(this.getString(R.string.tableGameWith) + display_name + ": " + this.getString(R.string.tableError));
+			b.setTextColor(Color.RED);
+			b.setTypeface(Typeface.DEFAULT_BOLD);
+			b.setClickable(true);
 		} else if("".equals(state)) {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameWaiting));
+			b.setTextColor(defaultColor);
+			b.setTypeface(Typeface.DEFAULT);
+			b.setClickable(false);
 		} else {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameYourTurn));
 			b.setTextColor(Color.GREEN);
 			b.setTypeface(Typeface.DEFAULT_BOLD);
+			b.setClickable(true);
 		}
 	}
 	

@@ -27,7 +27,7 @@ public class PlateGameGuessActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
-        this.opponent = getIntent().getStringExtra(Constants.UNEXTRA);
+        this.opponent = getIntent().getStringExtra(Constants.OPEXTRA);
         String stateString = getIntent().getStringExtra(Constants.GSEXTRA);
         
         // Shouldn't happen
