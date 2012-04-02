@@ -3,9 +3,12 @@
  */
 package edu.upenn.cis350;
 
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.apache.http.client.methods.HttpRequestBase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,29 +39,27 @@ public class IOBasic{
 		
 		
 		HttpRequest m_request = new HttpRequest();
-		
 		Set<String> usn = dataStruct.keySet();
 		
 		for (String user: usn)
 		{
 			String password = dataStruct.get(user)[0];
 			String fn = dataStruct.get(user)[1];
+			fn = fn.replace(" ", "%20");
 			String points = dataStruct.get(user)[2];
-			m_request.execHttpRequest(write+"insert%20into%20users%20values%20('"+user+"','"+password+"','"+fn+"',"+points+")", HttpMethod.Post, null);
+			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+")", null);
+			Log.e("ERROR", response);
+
 		}
-		/*
-		String FILENAME = "userInfo.txt";
-		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
-		try{
-			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			fos.write(string.getBytes());
-			directory = context.getFilesDir().toString();
-			fos.close();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}*/
+
+	}
+	
+	static public void reset()
+	{
+		finalWrite();
+		//dataStruct = null;
+		//initRead();
+	
 	}
 	
 	/*
