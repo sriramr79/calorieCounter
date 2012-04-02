@@ -29,8 +29,8 @@ public class OneRightPriceTest extends
 		mInst = this.getInstrumentation();
 		this.injectInstrumentation(mInst);
 
-		edu.upenn.cis350.IOBasic.finalWrite(mInst.getTargetContext());
-		edu.upenn.cis350.IOBasic.initRead(mInst.getTargetContext());
+//		edu.upenn.cis350.IOBasic.finalWrite(mInst.getTargetContext());
+//		edu.upenn.cis350.IOBasic.initRead(mInst.getTargetContext());
 
 		Intent i = new Intent();
 		i.setClassName("edu.upenn.cis350", "LoginActivity");

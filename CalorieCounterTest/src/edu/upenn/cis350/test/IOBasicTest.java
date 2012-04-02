@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 public class IOBasicTest extends TestCase {
 	public void testReading()
 	{
-		IOBasic.initRead(null);
+//		IOBasic.initRead(null);
 		
 		assertEquals(IOBasic.fullName("zhangka"),"Alex Zhang");
 		assertEquals(IOBasic.fullName("pgurns"),"Paul Gurniak");
@@ -18,11 +18,11 @@ public class IOBasicTest extends TestCase {
 	
 	public void testWriting()
 	{
-		IOBasic.initRead(null);
+//		IOBasic.initRead(null);
 		IOBasic.addUser("herp", "derp", "Herp Derp");
-		IOBasic.finalWrite(null);
+//		IOBasic.finalWrite(null);
 		
-		IOBasic.initRead(null);
+//		IOBasic.initRead(null);
 		
 		assertEquals(IOBasic.fullName("herp"),"Herp Derp");
 		assertEquals(IOBasic.fullName("zhangka"),"Alex Zhang");
@@ -32,7 +32,7 @@ public class IOBasicTest extends TestCase {
 	
 	public void testErrorCheck()
 	{
-		IOBasic.initRead(null);
+//		IOBasic.initRead(null);
 		
 		assertEquals(IOBasic.addUser("herp", "derp", "Herp Derp"),true);
 		assertEquals(IOBasic.addUser("herp", "derp", "Herp Derp"),false);
@@ -46,7 +46,7 @@ public class IOBasicTest extends TestCase {
 	
 	public void testPoints()
 	{
-		IOBasic.initRead(null);
+//		IOBasic.initRead(null);
 		
 		assertEquals(IOBasic.getPoints("pgurns"),0);
 		assertEquals(IOBasic.getPoints("abaldwin"),100);
