@@ -46,7 +46,16 @@ public class FoodGenerator {
 		FoodItem tacobellburrito = new FoodItem(res.getDrawable(R.drawable.tacobellburrito),
 				res.getString(R.string.tacobellburrito),
 				525, 575, 25);
-		
+		/*FoodItem sliceofbread = new FoodItem(res.getDrawable(R.drawable.sliceofbread)),
+				res.getString(R.string.sliceofbread),
+				40,70,20);//make sure this is correct 80cal
+		FoodItem broccoli = new FoodItem(re.getDrawable(R.drawable.broccoli)),
+				res.getString(R.string.broccoli),
+				50,90,10);//make sure this is right 90 cal
+		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice)),
+				res.getString(R.string.cupofrice),
+				);//220
+*/		
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
 		unseenItems.add(apple);
@@ -55,7 +64,11 @@ public class FoodGenerator {
 		unseenItems.add(waterglass);
 		unseenItems.add(cokecan);
 		unseenItems.add(tacobellburrito);
+		/*unseenItems.add(sliceofbread);
+		unseenItems.add(broccoli);
+		unseenItems.add(cupofrice);*/
 	}
+	
 	
 	/**
 	 * Checks to see if there are additional food items that are yet to be provided by nextFood

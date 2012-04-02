@@ -3,60 +3,89 @@
     android:id="@+id/home"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/homescreen"
+    android:gravity="center"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/homeName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:scrollHorizontally="false"
-        android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/homeScore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal"
-        android:scrollHorizontally="false"
-        android:textSize="20dp" />
+             android:id="@+id/homeName"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center_horizontal"
+             android:scrollHorizontally="false"
+             android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/game1Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onTapGame1"
-        android:text="@string/game1" />
+         <TextView
+             android:id="@+id/homeScore"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="30dp"
+             android:gravity="center_horizontal"
+             android:scrollHorizontally="false"
+             android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/game2Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onTapGame2"
-        android:text="@string/game2" />
+     <RelativeLayout
+         android:id="@+id/relativeLayout1"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/game3Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onTapGame3"
-        android:text="@string/game3" />
-    
-    <Button
-        android:id="@+id/game4Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onTapGame4"
-        android:text="@string/game4" />
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="20dp"
-        android:onClick="onTapLogout"
-        android:text="@string/logoutButton" />
+      
+
+         <Button
+             android:id="@+id/logoutButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true"
+             android:layout_marginBottom="32dp"
+             android:onClick="onTapLogout"
+             android:text="@string/logoutButton" />
+
+         <Button
+             android:id="@+id/game4Button"
+             android:layout_width="92dp"
+             android:layout_height="92dp"
+             android:layout_below="@+id/homeScore"
+             android:layout_marginTop="42dp"
+             android:background="@android:color/transparent"
+             android:drawableTop="@drawable/makeyourplate"
+             android:gravity="left"
+             android:onClick="onTapGame4" />
+
+         <Button
+             android:id="@+id/game2Button"
+             android:layout_width="92dp"
+             android:layout_height="92dp"
+             android:layout_alignParentLeft="true"
+             android:layout_alignTop="@+id/game4Button"
+             android:layout_marginTop="63dp"
+             android:background="@android:color/transparent"
+             android:drawableTop="@drawable/onetwothree"
+             android:onClick="onTapGame2" />
+
+         <Button
+             android:id="@+id/game3Button"
+             android:layout_width="92dp"
+             android:layout_height="92dp"
+             android:layout_alignParentRight="true"
+             android:layout_below="@+id/game4Button"
+             android:background="@android:color/transparent"
+             android:drawableTop="@drawable/onerightprice"
+             android:gravity="right"
+             android:onClick="onTapGame3" />
+
+         <Button
+             android:id="@+id/game1Button"
+             android:layout_width="92dp"
+             android:layout_height="92dp"
+             android:layout_above="@+id/game3Button"
+             android:layout_alignParentRight="true"
+             android:background="@android:color/transparent"
+             android:drawableTop="@drawable/howmanycals"
+             android:onClick="onTapGame1" />
+
+     </RelativeLayout>
 
 </LinearLayout>

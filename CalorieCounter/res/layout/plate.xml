@@ -4,13 +4,20 @@
     android:layout_width="wrap_content"
     android:layout_height="fill_parent" >
     
+    <TextView
+        android:id="@+id/tableTopText"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:background="#0000f0"
+        android:textSize="20dip"
+        android:text="Creating a meal for %name"
+        />
     
     <LinearLayout
-        android:id="@+id/tableFood"
         android:orientation="horizontal"
         android:background="@drawable/table"
         android:layout_width="fill_parent"
-        android:layout_height="100dip">
+        android:layout_height="150dip">
     
     	<ImageView
      	    android:id="@+id/tableFoodButton1"
