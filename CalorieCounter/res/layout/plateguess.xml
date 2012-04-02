@@ -8,8 +8,6 @@
         android:id="@+id/tableTopText"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
-        android:background="#0000f0"
-        android:textSize="20dip"
         android:text="" />
     
     <LinearLayout

@@ -26,6 +26,7 @@ public class PlateGameActivity extends Activity {
 
 	private String username;
 	private String opponent;
+	private String opponent_display;
 	
 	private ArrayList<FoodItem> selectableFoods;
 	private ArrayList<FoodItem> tableFoods;
@@ -45,7 +46,10 @@ public class PlateGameActivity extends Activity {
         	finish();
         }
 
+        opponent_display = IOBasic.fullName(opponent);
+        
         this.setContentView(R.layout.plate);
+        ((TextView)findViewById(R.id.tableTopText)).setText(getString(R.string.tableCreatingMealFor) + opponent_display);
         
         fg = new FoodGenerator(this.getResources());
         selectableFoods = new ArrayList<FoodItem>();
@@ -63,6 +67,8 @@ public class PlateGameActivity extends Activity {
         visibleFood = this.selectableFoods.size()/2;
         updateDisplayedFoods();
 		updateCalorieText();
+		
+		createDialog(INSTRUCTIONS).show();
 	}
 	
 	public void onFoodButtonClick(View view) {
@@ -206,6 +212,7 @@ public class PlateGameActivity extends Activity {
 
 	public static final int SUBMIT_OKAY = 1;
 	public static final int SUBMIT_FAIL= 2;
+	public static final int INSTRUCTIONS = 3;
 	
 	/**
 	 * Creates an instance of the desired Dialog
@@ -215,7 +222,7 @@ public class PlateGameActivity extends Activity {
 	public Dialog createDialog(int id) {
     	if(id == SUBMIT_OKAY) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage(getResources().getString(R.string.tableSubmitOkay) + opponent);
+    		builder.setMessage(getResources().getString(R.string.tableSubmitOkay) + opponent_display);
     		builder.setPositiveButton(R.string.quitButton,
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
@@ -229,6 +236,17 @@ public class PlateGameActivity extends Activity {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setMessage(getResources().getString(R.string.tableSubmitFail));
     		builder.setPositiveButton(R.string.retryButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		return builder.create();
+    	}
+    	else if(id == INSTRUCTIONS) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(getResources().getString(R.string.tableCreateInstructions));
+    		builder.setPositiveButton(R.string.startButton,
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.cancel();

@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PlateGameGuessActivity extends Activity {
 
 	private String username;
+	private String opponent_display;
 	private String opponent;
 	private ArrayList<FoodItem> tableFoods;
 	private FoodGenerator fg;
@@ -48,8 +50,12 @@ public class PlateGameGuessActivity extends Activity {
         	finish();
         }
         
+        opponent_display = IOBasic.fullName(opponent);
+        ((TextView)findViewById(R.id.tableTopText)).setText(getString(R.string.tableGuessingMealFrom) + opponent_display);
+        
         updateDisplayedFoods();
         
+        createDialog(INSTRUCTIONS).show();
 	}
 	
 	public void updateDisplayedFoods() {
@@ -135,6 +141,7 @@ public class PlateGameGuessActivity extends Activity {
 		Intent i = new Intent(this, PlateGameActivity.class);
 		i.putExtra(Constants.UNEXTRA, username);
 		i.putExtra(Constants.OPEXTRA, opponent);
+		IOBasic.setPoints(username, IOBasic.getPoints(username) + pointsWon);
 		startActivity(i);
 		finish();
 	}
@@ -144,6 +151,7 @@ public class PlateGameGuessActivity extends Activity {
 	public static final int FOOD1_INFO = 3;
 	public static final int FOOD2_INFO = 4;
 	public static final int FOOD3_INFO = 5;
+	public static final int INSTRUCTIONS = 6;
 	
 	/**
 	 * Creates an instance of the desired Dialog
@@ -154,7 +162,7 @@ public class PlateGameGuessActivity extends Activity {
     	if(id == SUBMIT_OKAY) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		String message = getResources().getString(R.string.tableGuessOkay1) + Integer.toString(pointsWon) 
-    					+ getResources().getString(R.string.tableGuessOkay2) + opponent;
+    					+ getResources().getString(R.string.tableGuessOkay2) + opponent_display;
     		builder.setMessage(message);
     		builder.setPositiveButton(R.string.ok,
     				new DialogInterface.OnClickListener() {
@@ -182,6 +190,17 @@ public class PlateGameGuessActivity extends Activity {
     		String message = this.getString(R.string.tableFoodInfo) + tableFoods.get(num).getName();
     		builder.setMessage(message);
     		builder.setPositiveButton(R.string.ok,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		return builder.create();
+    	}
+    	else if(id == INSTRUCTIONS) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(getResources().getString(R.string.tableGuessInstructions));
+    		builder.setPositiveButton(R.string.startButton,
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.cancel();

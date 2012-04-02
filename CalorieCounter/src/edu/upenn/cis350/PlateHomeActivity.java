@@ -3,6 +3,9 @@ package edu.upenn.cis350;
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -31,6 +34,8 @@ public class PlateHomeActivity extends Activity {
         this.setContentView(R.layout.platehome);
         
         updateButtonText();
+        
+        createDialog(WELCOME_MSG1).show();
 	}
 	
 	@Override
@@ -69,12 +74,13 @@ public class PlateHomeActivity extends Activity {
 	
 	private void updateButtonText(Button b, String opponent) {
 		String state = IOBasic.getGameState(username, opponent);
+		String display_name = IOBasic.fullName(opponent);
 		if(state == null) {
 			b.setText(this.getString(R.string.tableError));
 		} else if("".equals(state)) {
-			b.setText(this.getString(R.string.tableGameWith) + opponent + this.getString(R.string.tableGameWaiting));
+			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameWaiting));
 		} else {
-			b.setText(this.getString(R.string.tableGameWith) + opponent + this.getString(R.string.tableGameYourTurn));
+			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameYourTurn));
 			b.setTextColor(Color.GREEN);
 			b.setTypeface(Typeface.DEFAULT_BOLD);
 		}
@@ -115,4 +121,41 @@ public class PlateHomeActivity extends Activity {
 		i.putExtra(Constants.OPEXTRA, opponent);
 		startActivity(i);
 	}
+	
+	public static final int WELCOME_MSG1 = 0;
+	public static final int WELCOME_MSG2 = 1;
+	
+	
+	/**
+	 * Creates an instance of the desired Dialog
+	 * @param id ID number of the dialog to create
+	 * @return a Dialog instance ready to be displayed
+	 */
+	public Dialog createDialog(int id) {
+    	if(id == WELCOME_MSG1) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(getString(R.string.tableHomeInstructions1));
+    		builder.setPositiveButton(R.string.nextButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.dismiss();
+    				createDialog(WELCOME_MSG2).show();
+    			}
+    		});
+    		return builder.create();
+    	}
+    	else if(id == WELCOME_MSG2) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage(getString(R.string.tableHomeInstructions2));
+    		builder.setPositiveButton(R.string.startButton,
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		return builder.create();
+    	}
+    	return null;
+	}
+
 }
