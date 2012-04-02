@@ -93,7 +93,9 @@
     <string name="tacobellburrito">a Taco Bell Beefy 5-Layer Burrito</string>
     <string name="cokecan">a 12-ounce can of Coca-Cola</string>
     <string name="waterglass">an 8-ounce glass of water</string>
-    
+    <string name="sliceofbread">one slice of whole wheat bread</string>
+    <string name="broccoli">one cup of steamed broccoli</string>
+    <string name="cupofrice">one cup of brown rice</string>
     <!-- Plate game -->
     <string name="tableFood1Desc">First entered food</string>
     <string name="tableTotalCalories">Calories for this meal:</string>
