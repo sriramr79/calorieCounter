@@ -78,7 +78,7 @@ public class HomeActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							setResult(Constants.LOGOUT_SUCCESSFUL);
-							finish();
+							logoutAndSave();
 						}
 					});
 			builder.setNegativeButton(R.string.no,
@@ -92,6 +92,13 @@ public class HomeActivity extends Activity {
 
 	}
 
+	private void logoutAndSave() {
+		
+		//ALEX'S SERVER DATA SAVING CODE HERE
+		IOBasic.reset();
+		finish(); //returns to LoginActivity
+	}
+	
 	private void startGame(Class c) {
 		Intent i = new Intent(this, c);
 		i.putExtra(Constants.UNEXTRA, username);
@@ -111,7 +118,7 @@ public class HomeActivity extends Activity {
 	}
 	
 	public void onTapGame4(View view) {
-		startGame(PlateGameActivity.class);
+		startGame(PlateHomeActivity.class);
 	}
 
 	public void onTapLogout(View view) {
