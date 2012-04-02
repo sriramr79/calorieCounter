@@ -19,6 +19,7 @@ public class FoodItem implements Comparable<FoodItem> {
 	
 	private Drawable image;
 	private String name;
+	private String shortName;
 	private int calorieLow;
 	private int calorieHigh;
 	private int calorieError;
@@ -43,6 +44,7 @@ public class FoodItem implements Comparable<FoodItem> {
 		this.calorieLow = calorieLow;
 		this.calorieHigh = calorieHigh;
 		this.calorieError = calorieError;
+		this.shortName = null;
 	}
 	
 	public Drawable getImage() {
@@ -51,6 +53,18 @@ public class FoodItem implements Comparable<FoodItem> {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public String getShortName() {
+		return this.shortName;
+	}
+	
+	/**
+	 * Sets the short name for this FoodItem, which will serve as a persistence identifier
+	 * @param name The string to use to identify this FoodItem
+	 */
+	public void setShortName(String name) {
+		this.shortName = name;
 	}
 	
 	/**
