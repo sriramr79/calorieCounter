@@ -3,9 +3,12 @@
  */
 package edu.upenn.cis350;
 
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.apache.http.client.methods.HttpRequestBase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,10 +25,46 @@ public class IOBasic{
 	//HashMap that maps a USN to an array of Strings that contains all the other info for the person
 	//arrayFormat = [password, full name, points]
 	static HashMap<String,String[]> dataStruct;
+	static HashMap<String,HashMap<String,String>> games = new HashMap<String, HashMap<String,String>>();
 	public static final String readKEY = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/backend.php";
 	public static String write = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/updateDB.php?command=";
 	//
 	
+	
+	/*
+	 *This method adds an opponent for a given user for the Food with Friends game 
+	 * 
+	 */
+	static public void addOpponent(String user, String opponent,String state)
+	{
+		if (!games.containsKey(user)) //first new game
+		{
+			HashMap<String,String> userGames = new HashMap<String,String>();
+			userGames.put(opponent, state);
+			games.put(user, userGames);
+		}
+		else
+		{
+			games.get(user).put(opponent, state);
+		}
+	}
+	
+	/*
+	 * returns the game state of the game between a user and an opponent. 
+	 * 
+	 * Returns the state of the game, or null if the game does not exist
+	 */
+	static public String getGameState(String user, String opponent)
+	{
+		if (!games.containsKey(user))
+		{
+			return null;
+		}
+		if (games.get(user)==null)
+			return null;
+		
+		return games.get(user).get(user);
+	}
 	
 	/*
 	 * This function should be called when closing app: it writes the current state of the datastructure
@@ -36,29 +75,27 @@ public class IOBasic{
 		
 		
 		HttpRequest m_request = new HttpRequest();
-		
 		Set<String> usn = dataStruct.keySet();
 		
 		for (String user: usn)
 		{
 			String password = dataStruct.get(user)[0];
 			String fn = dataStruct.get(user)[1];
+			fn = fn.replace(" ", "%20");
 			String points = dataStruct.get(user)[2];
-			m_request.execHttpRequest(write+"insert%20into%20users%20values%20('"+user+"','"+password+"','"+fn+"',"+points+")", HttpMethod.Post, null);
+			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+")", null);
+			Log.e("ERROR", response);
+
 		}
-		/*
-		String FILENAME = "userInfo.txt";
-		String string = "g,g,Test Name,9001\nzhangka,zhangka,Alex Zhang,100\npgurns,pgurns,Paul Gurniak,0\nmkreider,mkreider,Molly Kreider,500\nsriramr,sriramr,Sriram Radhakrishnan,100\nabaldwin,abaldwin,Ashley Baldwin,100";
-		try{
-			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			fos.write(string.getBytes());
-			directory = context.getFilesDir().toString();
-			fos.close();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}*/
+
+	}
+	
+	static public void reset()
+	{
+		finalWrite();
+		//dataStruct = null;
+		//initRead();
+	
 	}
 	
 	/*
@@ -86,34 +123,7 @@ public class IOBasic{
 		}catch(JSONException e){
 			Log.e("log_tag", "Error parsing data "+e.toString());
 		}
-		/*BufferedReader buff;
-		String FILENAME = "userInfo.txt";
-		String currentLine = null;
-		StringTokenizer tk;
-		String[] additionalData=null;
-		String usn=null;
-		int length;
-		try{
-			buff = new BufferedReader(new FileReader(directory+"/"+FILENAME));
-			while((currentLine=buff.readLine())!=null)
-			{
-				tk = new StringTokenizer(currentLine,",");
-				additionalData = new String[tk.countTokens()-1];
-				length = additionalData.length;
-				usn = tk.nextToken();
-				for (int i =0;i<length;i++)
-				{
-					additionalData[i]=tk.nextToken();
-				}
-				dataStruct.put(usn, additionalData);
-				
-			}
-			buff.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}*/
+
 	}
 
 	/*

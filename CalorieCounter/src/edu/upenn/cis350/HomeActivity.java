@@ -95,7 +95,7 @@ public class HomeActivity extends Activity {
 	private void logoutAndSave() {
 		
 		//ALEX'S SERVER DATA SAVING CODE HERE
-		
+		IOBasic.reset();
 		finish(); //returns to LoginActivity
 	}
 	
