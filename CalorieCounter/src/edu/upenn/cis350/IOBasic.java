@@ -25,10 +25,46 @@ public class IOBasic{
 	//HashMap that maps a USN to an array of Strings that contains all the other info for the person
 	//arrayFormat = [password, full name, points]
 	static HashMap<String,String[]> dataStruct;
+	static HashMap<String,HashMap<String,String>> games = new HashMap<String, HashMap<String,String>>();
 	public static final String readKEY = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/backend.php";
 	public static String write = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/updateDB.php?command=";
 	//
 	
+	
+	/*
+	 *This method adds an opponent for a given user for the Food with Friends game 
+	 * 
+	 */
+	static public void addOpponent(String user, String opponent,String state)
+	{
+		if (!games.containsKey(user)) //first new game
+		{
+			HashMap<String,String> userGames = new HashMap<String,String>();
+			userGames.put(opponent, state);
+			games.put(user, userGames);
+		}
+		else
+		{
+			games.get(user).put(opponent, state);
+		}
+	}
+	
+	/*
+	 * returns the game state of the game between a user and an opponent. 
+	 * 
+	 * Returns the state of the game, or null if the game does not exist
+	 */
+	static public String getGameState(String user, String opponent)
+	{
+		if (!games.containsKey(user))
+		{
+			return null;
+		}
+		if (games.get(user)==null)
+			return null;
+		
+		return games.get(user).get(user);
+	}
 	
 	/*
 	 * This function should be called when closing app: it writes the current state of the datastructure
@@ -87,34 +123,7 @@ public class IOBasic{
 		}catch(JSONException e){
 			Log.e("log_tag", "Error parsing data "+e.toString());
 		}
-		/*BufferedReader buff;
-		String FILENAME = "userInfo.txt";
-		String currentLine = null;
-		StringTokenizer tk;
-		String[] additionalData=null;
-		String usn=null;
-		int length;
-		try{
-			buff = new BufferedReader(new FileReader(directory+"/"+FILENAME));
-			while((currentLine=buff.readLine())!=null)
-			{
-				tk = new StringTokenizer(currentLine,",");
-				additionalData = new String[tk.countTokens()-1];
-				length = additionalData.length;
-				usn = tk.nextToken();
-				for (int i =0;i<length;i++)
-				{
-					additionalData[i]=tk.nextToken();
-				}
-				dataStruct.put(usn, additionalData);
-				
-			}
-			buff.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}*/
+
 	}
 
 	/*
