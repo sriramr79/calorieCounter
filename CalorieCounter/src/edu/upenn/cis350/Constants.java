@@ -11,5 +11,6 @@ public class Constants {
 	/* Intent Extra Tags */
 	public static final String UNEXTRA = "username";
 	public static final String GSEXTRA = "gamestate";
+	public static final String OPEXTRA = "opponent";
 	
 }

@@ -108,7 +108,21 @@
     <string name="tableFood2Desc">Second item:\u0020</string>
     <string name="tableFood3Desc">Third item:\u0020</string>
     <string name="tableTotalCalories">Calories for this meal:\u0020</string>
-    <string name="tableSubmitOkay">Excellent, your meal will be sent to %name.</string>
+    <string name="tableSubmitOkay">Excellent, your meal will be sent to\u0020</string>
     <string name="tableSubmitFail">Please select three foods.</string>
+    <string name="tableGuessOkay1">You won\u0020</string>
+    <string name="tableGuessOkay2">\u0020points for that game.  Now, send a meal back to\u0020</string>
+    <string name="tableGuessFail">Sorry, that guess was not valid.</string>
+    <string name="tableFoodGuessHint">Enter a calorie guess</string>
+    <string name="tableFoodInfo">This is\u0020</string>
+    <string name="tableHomeWelcome">Continue an existing game:</string>
+    <string name="tableBlankGame">Create a game below</string>
+    <string name="tableStartNewGame">Create game</string>
+    <string name="tableError">Error!</string>
+    <string name="tableGameWith">Game with\u0020</string>
+    <string name="tableGameWaiting">: waiting for turn</string>
+    <string name="tableGameYourTurn">: your turn</string>
+    <string name="tableNewGameHint">Enter a friend\'s username</string>
+    <string name="tableCreateGameMessage">Create a new game with another user:</string>
 
 </resources>

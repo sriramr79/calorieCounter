@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity for the game where you put a bunch of foods on a plate.
@@ -24,6 +25,7 @@ import android.widget.TextView;
 public class PlateGameActivity extends Activity {
 
 	private String username;
+	private String opponent;
 	
 	private ArrayList<FoodItem> selectableFoods;
 	private ArrayList<FoodItem> tableFoods;
@@ -34,10 +36,12 @@ public class PlateGameActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
-		
+        this.opponent = getIntent().getStringExtra(Constants.OPEXTRA);
         //should never occur
-        if (username == null) {
+        if (username == null || opponent == null) {
+        	Toast.makeText(this, "Error: issue passing string extras!", Toast.LENGTH_LONG).show();
         	finish();
         }
 
@@ -182,10 +186,18 @@ public class PlateGameActivity extends Activity {
 		this.finish();
 	}
 	
+	public void exitCleanly() {
+		IOBasic.addOpponent(username, opponent, fg.getStateString(tableFoods));
+		// If the user is not playing him/herself, set the other user to wait
+		if(!opponent.equals(username)) {
+			IOBasic.addOpponent(opponent, username, "");
+		}
+		this.finish();
+	}
+	
 	
 	public void onSubmitButtonClick(View view) {
 		if(tableFoods.size() == 3) {
-			String state = fg.getStateString(tableFoods);
 			this.createDialog(SUBMIT_OKAY).show();
 		} else {
 			this.createDialog(SUBMIT_FAIL).show();
@@ -203,12 +215,12 @@ public class PlateGameActivity extends Activity {
 	public Dialog createDialog(int id) {
     	if(id == SUBMIT_OKAY) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage(getResources().getString(R.string.tableSubmitOkay));
+    		builder.setMessage(getResources().getString(R.string.tableSubmitOkay) + opponent);
     		builder.setPositiveButton(R.string.quitButton,
     				new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int id) {
     				dialog.dismiss();
-    				finish();
+    				exitCleanly();
     			}
     		});
     		return builder.create();

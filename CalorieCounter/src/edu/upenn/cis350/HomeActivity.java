@@ -118,7 +118,7 @@ public class HomeActivity extends Activity {
 	}
 	
 	public void onTapGame4(View view) {
-		startGame(PlateGameActivity.class);
+		startGame(PlateHomeActivity.class);
 	}
 
 	public void onTapLogout(View view) {
