@@ -58,15 +58,22 @@ public class FoodGenerator {
 				res.getString(R.string.tacobellburrito),
 				525, 575, 25);
 		tacobellburrito.setShortName(res.getString(R.string.tacobellburrito_simple));
+		
 		FoodItem sliceofbread = new FoodItem(res.getDrawable(R.drawable.sliceofbread),
 				res.getString(R.string.sliceofbread),
 				40,70,10);//make sure this is correct 80cal
+		sliceofbread.setShortName(res.getString(R.string.sliceofbread_simple));
+
 		FoodItem broccoli = new FoodItem(res.getDrawable(R.drawable.broccoli),
 				res.getString(R.string.broccoli),
 				50,90,10);//make sure this is right 90 cal
+		broccoli.setShortName(res.getString(R.string.broccoli_simple));
+
 		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice),
 				res.getString(R.string.cupofrice),
 				250,200,20);
+		cupofrice.setShortName(res.getString(R.string.cupofrice_simple));
+
 					
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
