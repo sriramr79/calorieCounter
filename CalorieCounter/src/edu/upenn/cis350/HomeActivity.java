@@ -99,7 +99,7 @@ public class HomeActivity extends Activity {
 		finish(); //returns to LoginActivity
 	}
 	
-	private void startGame(Class c) {
+	private void startGame(Class<?> c) {
 		Intent i = new Intent(this, c);
 		i.putExtra(Constants.UNEXTRA, username);
 		startActivity(i);
