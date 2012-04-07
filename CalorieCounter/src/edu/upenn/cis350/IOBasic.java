@@ -96,8 +96,8 @@ public class IOBasic{
 			String fn = dataStruct.get(user)[1];
 			fn = fn.replace(" ", "%20");
 			String points = dataStruct.get(user)[2];
-			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+")", null);
-			Log.e("ERROR", response);
+			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+",'null')", null);
+			Log.d("finalWrite", response);
 
 		}
 
@@ -192,6 +192,19 @@ public class IOBasic{
 		if (dataStruct.containsKey(usn)==true) return false;
 		String[] data = {pass,fullName,"0"};
 		dataStruct.put(usn, data);
+		
+		HttpRequest m_request = new HttpRequest();
+		
+		String password = dataStruct.get(usn)[0];
+		String fn = dataStruct.get(usn)[1];
+		fn = fn.replace(" ", "%20");
+		String points = dataStruct.get(usn)[2];
+		String response=m_request.postData(write+"insert%20into%20users%20values('"+usn+"','"+password+"','"+fn+"',"+points+",'null')", null);
+		Log.d("adding user", response);
+
+		
+		
+		
 		return true;
 	}
 	
