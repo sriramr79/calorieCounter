@@ -96,8 +96,9 @@ public class IOBasic{
 			String fn = dataStruct.get(user)[1];
 			fn = fn.replace(" ", "%20");
 			String points = dataStruct.get(user)[2];
-			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+",'null')", null);
-			Log.d("finalWrite", response);
+			//String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+",'null')", null);
+			//Log.d("finalWrite", response);
+			m_request.postData(write+"update%20users%20set%20points="+points+"%20where%20usn='"+user+"'",null);
 
 		}
 
