@@ -12,6 +12,8 @@
         android:layout_centerVertical="true"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/unTitle"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:textSize="20dp" />
 
     <EditText
@@ -34,6 +36,8 @@
         android:layout_alignBottom="@+id/pwField"
         android:layout_alignParentLeft="true"
         android:gravity="center_vertical|center_horizontal"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:text="@string/pwTitle"
         android:textSize="20dp" />
 
@@ -59,7 +63,8 @@
         android:layout_below="@+id/pwField"
         android:layout_toRightOf="@+id/pwTitle"
         android:onClick="onTapLogin"
-        android:text="@string/loginButton" />
+        android:src="@drawable/login"
+            android:background="@drawable/login" />
 
     <Button
         android:id="@+id/button1"
@@ -69,7 +74,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
         android:onClick="onTapRegister"
-        android:text="@string/registerButton" />
+        android:src="@drawable/signup"
+            android:background="@drawable/signup" />
 
     <Button
         android:id="@+id/quitButton"
@@ -79,6 +85,7 @@
         android:layout_marginLeft="14dp"
         android:layout_toRightOf="@+id/loginSubmit"
         android:onClick="onTapQuit"
-        android:text="@string/quitButton" />
+        android:src="@drawable/quit"
+            android:background="@drawable/quit" />
 
 </RelativeLayout>

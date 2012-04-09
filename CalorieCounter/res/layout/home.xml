@@ -41,7 +41,8 @@
              android:layout_centerHorizontal="true"
              android:layout_marginBottom="32dp"
              android:onClick="onTapLogout"
-             android:text="@string/logoutButton" />
+             android:src="@drawable/logout"
+            android:background="@drawable/logout" />
 
          <Button
              android:id="@+id/game4Button"
