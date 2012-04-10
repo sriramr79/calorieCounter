@@ -137,9 +137,11 @@ public class PlateGameActivity extends Activity {
 	
 	/**
 	 * Updates the TextViews in the associated layout to display the
-	 * current state of the game.
+	 * current state of the game (the individual calorie counts,
+	 * as well as the total for the items entered so far).
 	 */
 	private void updateCalorieText() {
+		
 		TextView food1 = (TextView)this.findViewById(R.id.food1Desc);
 		TextView food2 = (TextView)this.findViewById(R.id.food2Desc);
 		TextView food3 = (TextView)this.findViewById(R.id.food3Desc);
@@ -164,6 +166,7 @@ public class PlateGameActivity extends Activity {
 		for(int i = 0; i < tableFoods.size(); i++) {
 			totalCalories += tableFoods.get(i).getCalorieCount();
 		}
+		
 		TextView total = (TextView)this.findViewById(R.id.foodTotalDesc);
 		total.setText(this.getResources().getString(R.string.tableTotalCalories) + Integer.toString(totalCalories));
 		

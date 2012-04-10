@@ -39,6 +39,7 @@ public class CalorieCounterActivity extends Activity {
     
     public void onSubmitEvent(View view) {
     	EditText userInput = (EditText)findViewById(R.id.calorieInput);
+    	
     	// Surround in try-catch to avoid crash on unparseable input
     	int calorieGuess = -1;
     	try {
@@ -79,7 +80,7 @@ public class CalorieCounterActivity extends Activity {
     		showDialog(INVALID_DIALOG);
     		break;
     	default:
-    		throw new RuntimeException("Non-existant FoodItem.AnswerType returned?  You should not be returning any int from FoodItem.checkGuess()!  Use the Enum.");
+    		throw new RuntimeException("Non-existant FoodItem.AnswerType returned?  You should not be returning an int from FoodItem.checkGuess(), use the Enum.");
     	}
     	
    

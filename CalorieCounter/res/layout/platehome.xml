@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="onButton1Click"
+        android:onClick="onButton2Click"
         android:text="@string/tableBlankGame" />
     
     <Button
@@ -37,7 +37,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="onButton1Click"
+        android:onClick="onButton3Click"
         android:text="@string/tableBlankGame" />
     
     <TextView

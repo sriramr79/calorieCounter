@@ -37,7 +37,7 @@ public class PlateHomeActivity extends Activity {
         
         defaultColor = ((Button)findViewById(R.id.tableCreateGameButton)).getTextColors().getDefaultColor();
         
-        updateButtonText();
+        updateAllButtons();
         
         createDialog(WELCOME_MSG1).show();
 	}
@@ -45,14 +45,13 @@ public class PlateHomeActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		updateButtonText();
+		updateAllButtons();
 	}
 	
-	private void updateButtonText() {
+	private void updateAllButtons() {
 		Button game1 = (Button)this.findViewById(R.id.tableGameButton1);
 		Button game2 = (Button)this.findViewById(R.id.tableGameButton2);
 		Button game3 = (Button)this.findViewById(R.id.tableGameButton3);
-
 		Button create = (Button)this.findViewById(R.id.tableCreateGameButton);
 		
 		opponents = IOBasic.getOpponents(username);
@@ -67,30 +66,39 @@ public class PlateHomeActivity extends Activity {
         
 		if(opponents.size() >= 1) {
 			updateButtonText(game1, opponents.get(0));
-			create.setClickable(false);
+			game1.setClickable(true);
 		}
 		if(opponents.size() >= 2) {
 			updateButtonText(game2, opponents.get(1));
+			game2.setClickable(true);
 		}
 		if(opponents.size() >= 3) {
 			updateButtonText(game3, opponents.get(2));
+			game3.setClickable(true);
+			create.setClickable(false);
 		}
 	}
 	
 	private void updateButtonText(Button b, String opponent) {
 		String state = IOBasic.getGameState(username, opponent);
 		String display_name = IOBasic.fullName(opponent);
+		
+		// Null string should not occur: mark in red to designate bug
 		if(state == null) {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + ": " + this.getString(R.string.tableError));
 			b.setTextColor(Color.RED);
 			b.setTypeface(Typeface.DEFAULT_BOLD);
 			b.setClickable(true);
-		} else if("".equals(state)) {
+		}
+		// Empty string means we are waiting for the opponent
+		else if("".equals(state)) {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameWaiting));
 			b.setTextColor(defaultColor);
 			b.setTypeface(Typeface.DEFAULT);
 			b.setClickable(false);
-		} else {
+		}
+		// Otherwise, opponent is waiting for us
+		else {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameYourTurn));
 			b.setTextColor(Color.GREEN);
 			b.setTypeface(Typeface.DEFAULT_BOLD);
@@ -100,6 +108,14 @@ public class PlateHomeActivity extends Activity {
 	
 	public void onButton1Click(View view) {
 		startGameGuess(opponents.get(0));
+	}
+	
+	public void onButton2Click(View view) {
+		startGameGuess(opponents.get(1));
+	}
+	
+	public void onButton3Click(View view) {
+		startGameGuess(opponents.get(2));
 	}
 	
 	public void onNewGameClick(View view) {
