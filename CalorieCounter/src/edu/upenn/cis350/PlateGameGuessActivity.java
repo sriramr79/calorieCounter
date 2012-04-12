@@ -55,7 +55,10 @@ public class PlateGameGuessActivity extends Activity {
         
         updateDisplayedFoods();
         
-        createDialog(INSTRUCTIONS).show();
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameGuess)) { 
+        	createDialog(INSTRUCTIONS).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameGuess);
+        }
 	}
 	
 	public void updateDisplayedFoods() {

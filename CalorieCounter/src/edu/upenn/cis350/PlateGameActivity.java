@@ -68,7 +68,11 @@ public class PlateGameActivity extends Activity {
         updateDisplayedFoods();
 		updateCalorieText();
 		
-		createDialog(INSTRUCTIONS).show();
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameCreate)) { 
+        	createDialog(INSTRUCTIONS).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameCreate);
+        }
+        
 	}
 	
 	public void onFoodButtonClick(View view) {

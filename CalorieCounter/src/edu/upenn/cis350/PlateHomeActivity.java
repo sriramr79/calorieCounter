@@ -39,7 +39,11 @@ public class PlateHomeActivity extends Activity {
         
         updateAllButtons();
         
-        createDialog(WELCOME_MSG1).show();
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameHome)) { 
+        	createDialog(WELCOME_MSG1).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameHome);
+        }
+        
 	}
 	
 	@Override
@@ -48,6 +52,19 @@ public class PlateHomeActivity extends Activity {
 		updateAllButtons();
 	}
 	
+	/**
+	 * Updates the text on all buttons to reflect the state of each game.
+	 * This is one of three strings:
+	 * 
+	 * - Waiting for opponent
+	 * - Game with opponent: Your turn
+	 * - No game created (create below)
+	 * 
+	 * If the state is "your turn", the button is made clickable.  Otherwise,
+	 * the button is not clickable.
+	 * 
+	 * If there are already three games in progress, the create button is disabled.
+	 */
 	private void updateAllButtons() {
 		Button game1 = (Button)this.findViewById(R.id.tableGameButton1);
 		Button game2 = (Button)this.findViewById(R.id.tableGameButton2);

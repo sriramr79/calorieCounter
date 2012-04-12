@@ -22,6 +22,11 @@ public class FoodGenerator {
 	private LinkedList<FoodItem> seenItems;
 	private Random rand;
 	
+	/**
+	 * Create a new instance of FoodGenerator using all of the resources
+	 * in this application.  Initializes all FoodItems as unseen.
+	 * @param res Reference to the Resources object for this application
+	 */
 	public FoodGenerator(Resources res) {
 		rand = new Random();
 		unseenItems = new LinkedList<FoodItem>();

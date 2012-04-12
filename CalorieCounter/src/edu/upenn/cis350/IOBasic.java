@@ -29,6 +29,63 @@ public class IOBasic{
 	// Data structure to store the persistence data for the PlateGame
 	static HashMap<String,HashMap<String,String>> games = new HashMap<String, HashMap<String,String>>();
 	
+	// Data structure to prevent help dialog from appearing more than once per session
+	static HashMap<String,ArrayList<Boolean>> shownHelp = new HashMap<String, ArrayList<Boolean>>();
+	
+	public static final int HomeScreen = 0;
+	public static final int OneRightPrice = 1;
+	public static final int PlateGameHome = 2;
+	public static final int PlateGameGuess = 3;
+	public static final int PlateGameCreate = 4;
+	public static final int RankingGame = 5;
+	public static final int CalorieCounter = 6;
+	
+	private static final int miniGameCount = 7;
+	
+	/**
+	 * Checks to see if the user has already been shown the help screen
+	 * for the specified activity
+	 * @param username The username for the desired user
+	 * @param activity The integer corresponding to the desired activity (public variables in IOBasic.java)
+	 * @return
+	 */
+	public static boolean getShownHelp(String username, int activity)
+	{
+		if(username == null || !dataStruct.containsKey(username) || activity < 0 || activity > miniGameCount) {
+			return false;
+		}
+		return shownHelp.containsKey(username) && shownHelp.get(username).get(activity);
+	}
+	
+	/**
+	 * Sets that the user has seen the help dialog for the specified activity
+	 * @param username The username for the desired user
+	 * @param activity The integer corresponding to the desired activity (public variables in IOBasic.java)
+	 */
+	public static void setShownHelp(String username, int activity)
+	{
+		if(username != null && dataStruct.containsKey(username) && activity >= 0 && activity < miniGameCount) {
+			if(!shownHelp.containsKey(username)) {
+				shownHelp.put(username, new ArrayList<Boolean>(miniGameCount));
+				for(int i = 0; i < miniGameCount; i++) {
+					shownHelp.get(username).add(false);
+				}
+			}
+			shownHelp.get(username).set(activity, true);
+		}
+	}
+	
+	/**
+	 * Resets the help dialog status for the specified user
+	 * @param username The username for the desired user
+	 */
+	public static void resetShownHelp(String username)
+	{
+		if(username != null && dataStruct.containsKey(username)) {
+			shownHelp.put(username, new ArrayList<Boolean>(miniGameCount));
+		}
+	}
+	
 	/**
 	 * Returns a list of the other users the specified user is currently playing a game with
 	 * @param user The username of the user

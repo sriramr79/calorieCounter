@@ -63,16 +63,25 @@ public class RankingGameView extends View {
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((RankingGameActivity)c).getUsername();
+
+		if(!IOBasic.getShownHelp(username, IOBasic.RankingGame)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.RankingGame);
+		}
+		
 	}
 	public RankingGameView(Context c, AttributeSet a) {
 		super(c, a);
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((RankingGameActivity)c).getUsername();
+		
+		if(!IOBasic.getShownHelp(username, IOBasic.RankingGame)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.RankingGame);
+		}
 	}
 	
 	/**
@@ -184,9 +193,12 @@ public class RankingGameView extends View {
 		return onTouchEvent(e);
 	}
 	
+	
 	/**
-	 * Called whenever the screen is touched.  This method is
-	 * used to process all square movement on the screen.
+	 * Handle user input events.
+	 * - On ACTION_DOWN, pick up a square if one was touched.
+	 * - On ACTION_UP, drop (snapping to another square if needed) the picked up square
+	 * - On ACTION_MOVE, center the currently picked up square at the touched location
 	 */
 	public boolean onTouchEvent(MotionEvent event) {
 		
