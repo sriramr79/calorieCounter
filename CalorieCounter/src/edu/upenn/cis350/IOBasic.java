@@ -2,7 +2,6 @@
 package edu.upenn.cis350;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -276,6 +275,13 @@ public class IOBasic{
 		}
 			
 		return names;
+	}
+
+	public static boolean isTeacher(String un) {
+		if (un.equals("a"))
+			return true;
+		else
+			return false;
 	}
 	
 }
