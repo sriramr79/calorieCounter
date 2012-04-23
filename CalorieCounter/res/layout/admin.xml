@@ -10,11 +10,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Admin Page"
+        android:text="@string/adminTitle"
         android:textSize="30dp" />
 
     <ListView
-        android:id="@+id/adminList"
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@android:id/empty"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

@@ -52,6 +52,11 @@
     <string name="dupUsnMsg">Sorry, this username has already been taken.  Please try again.</string>
     <string name="invUsnMsg">Sorry, this is an invalid entry.  Please try again.</string>
 
+    <!-- Admin Activity -->
+    <string name="adminTitle">Admin: Select a User</string>
+    <string name="usnTitle">Username:\u0020</string>
+    <string name="scoreTitle">Score:\u0020</string>
+
     <!-- Home Activity -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
