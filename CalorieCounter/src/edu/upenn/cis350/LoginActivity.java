@@ -131,7 +131,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void login(String un) {
-		Intent i = new Intent(this, HomeActivity.class);
+		Intent i = new Intent(this, AdminActivity.class);
 		i.putExtra(Constants.UNEXTRA, un);
 		startActivityForResult(i, Constants.LOGIN_SUCCESSFUL);
 	}

@@ -2,6 +2,7 @@
 package edu.upenn.cis350;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -264,6 +265,17 @@ public class IOBasic{
 		
 		
 		return true;
+	}
+	
+	static public HashMap<String, String> allNames () {
+		HashMap<String, String> names = new HashMap<String,String>();
+		
+		Set<String> usernames = dataStruct.keySet();
+		for (String usn : usernames) {
+			names.put(usn, dataStruct.get(usn)[1]);
+		}
+			
+		return names;
 	}
 	
 }

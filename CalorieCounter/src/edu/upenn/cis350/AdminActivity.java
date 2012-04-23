@@ -1,17 +1,12 @@
 package edu.upenn.cis350;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class AdminActivity extends Activity {
 
@@ -22,6 +17,20 @@ public class AdminActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.admin);
+		
+		ListView list = (ListView) findViewById(R.id.adminList);
+		HashMap<String, String> names = IOBasic.allNames();
+		ArrayList<String> values = new ArrayList<String>();
+		for (String usn : names.keySet()) {
+			values.add(names.get(usn) + " (" + usn + ")");
+		}
+		
+		String[] items = new String[values.size()];
+		items = values.toArray(items);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, items);
+		
+		list.setAdapter(adapter);
 
 	}
 	
