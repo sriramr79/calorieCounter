@@ -21,7 +21,7 @@ import edu.upenn.cis350.util.HttpRequest.HttpMethod;
  */
 public class IOBasic{
 	//HashMap that maps a USN to an array of Strings that contains all the other info for the person
-	//arrayFormat = [password, full name, points]
+	//arrayFormat = [password, full name, points, others]
 	static HashMap<String,String[]> dataStruct;
 	public static final String readKEY = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/backend.php";
 	public static String write = "https://fling.seas.upenn.edu/~zhangka/cgi-bin/updateDB.php?command=";
@@ -155,8 +155,17 @@ public class IOBasic{
 			String points = dataStruct.get(user)[2];
 			//String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+",'null')", null);
 			//Log.d("finalWrite", response);
-			m_request.postData(write+"update%20users%20set%20points="+points+"%20where%20usn='"+user+"'",null);
-
+			m_request.postData(write+"update%20users%20set%20points="+points+"%20where%20usn='"+user+"'",null); // update points
+			String temp = dataStruct.get(user)[3];
+			if (temp == null)
+			{
+				m_request.postData(write+"update%20users%20set%20others='null'%20where%20usn='"+user+"'",null);
+			}
+			else
+			{
+				//temp.replace(" ", "%20");
+				m_request.postData(write+"update%20users%20set%20others='"+temp+"'%20where%20usn='"+user+"'",null);
+			}
 		}
 
 	}
@@ -185,10 +194,15 @@ public class IOBasic{
 			JSONArray jArray = new JSONArray(result);
 			for(int i=0;i<jArray.length();i++){
 				JSONObject json_data = jArray.getJSONObject(i);
-				data = new String[3];
+				data = new String[4];
 				data[0] = json_data.getString("pass");
 				data[1] = json_data.getString("fn");
 				data[2] = json_data.getString("points");
+				String temp = json_data.getString("others");
+				if (temp.toLowerCase().equals("null"))
+					data[3] = null;
+				else
+					data[3] = temp;
 				dataStruct.put(json_data.getString("usn"), data);
 				//Get an output to the screen
 			}
@@ -207,6 +221,28 @@ public class IOBasic{
 		if (!dataStruct.containsKey(USN)) return null;
 		String[] data=dataStruct.get(USN);
 		return data[0];
+	}
+	
+	/*
+	 * return false if user doesn't exist
+	 * the String set must HAVE NO SPACE
+	 */
+	static public boolean setOtherInfo(String USN, String info)
+	{
+		if (!dataStruct.containsKey(USN)) return false;
+		dataStruct.get(USN)[3] = info;
+		return true;
+	}
+	
+	
+	/*
+	 * return null if user doesn't exist
+	 */
+	static public String otherInfo(String USN)
+	{
+		if (!dataStruct.containsKey(USN)) return null;
+		String[] data=dataStruct.get(USN);
+		return data[3];
 	}
 	
 	/*
@@ -248,7 +284,7 @@ public class IOBasic{
 	static public boolean addUser(String usn, String pass, String fullName)
 	{
 		if (dataStruct.containsKey(usn)==true) return false;
-		String[] data = {pass,fullName,"0"};
+		String[] data = {pass,fullName,"0",null};
 		dataStruct.put(usn, data);
 		
 		HttpRequest m_request = new HttpRequest();
