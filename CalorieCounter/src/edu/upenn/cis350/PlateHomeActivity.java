@@ -21,6 +21,8 @@ public class PlateHomeActivity extends Activity {
 	
 	private List<String> opponents;
 	
+	private int defaultColor;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,21 +35,41 @@ public class PlateHomeActivity extends Activity {
         
         this.setContentView(R.layout.platehome);
         
-        updateButtonText();
+        defaultColor = ((Button)findViewById(R.id.tableCreateGameButton)).getTextColors().getDefaultColor();
         
-        createDialog(WELCOME_MSG1).show();
+        updateAllButtons();
+        
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameHome)) { 
+        	createDialog(WELCOME_MSG1).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameHome);
+        }
+        
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		updateButtonText();
+		updateAllButtons();
 	}
 	
-	private void updateButtonText() {
+	/**
+	 * Updates the text on all buttons to reflect the state of each game.
+	 * This is one of three strings:
+	 * 
+	 * - Waiting for opponent
+	 * - Game with opponent: Your turn
+	 * - No game created (create below)
+	 * 
+	 * If the state is "your turn", the button is made clickable.  Otherwise,
+	 * the button is not clickable.
+	 * 
+	 * If there are already three games in progress, the create button is disabled.
+	 */
+	private void updateAllButtons() {
 		Button game1 = (Button)this.findViewById(R.id.tableGameButton1);
 		Button game2 = (Button)this.findViewById(R.id.tableGameButton2);
 		Button game3 = (Button)this.findViewById(R.id.tableGameButton3);
+		Button create = (Button)this.findViewById(R.id.tableCreateGameButton);
 		
 		opponents = IOBasic.getOpponents(username);
         if(opponents == null) {
@@ -57,6 +79,7 @@ public class PlateHomeActivity extends Activity {
         game1.setClickable(false);
         game2.setClickable(false);
         game3.setClickable(false);
+        create.setClickable(true);
         
 		if(opponents.size() >= 1) {
 			updateButtonText(game1, opponents.get(0));
@@ -69,25 +92,47 @@ public class PlateHomeActivity extends Activity {
 		if(opponents.size() >= 3) {
 			updateButtonText(game3, opponents.get(2));
 			game3.setClickable(true);
+			create.setClickable(false);
 		}
 	}
 	
 	private void updateButtonText(Button b, String opponent) {
 		String state = IOBasic.getGameState(username, opponent);
 		String display_name = IOBasic.fullName(opponent);
+		
+		// Null string should not occur: mark in red to designate bug
 		if(state == null) {
-			b.setText(this.getString(R.string.tableError));
-		} else if("".equals(state)) {
+			b.setText(this.getString(R.string.tableGameWith) + display_name + ": " + this.getString(R.string.tableError));
+			b.setTextColor(Color.RED);
+			b.setTypeface(Typeface.DEFAULT_BOLD);
+			b.setClickable(true);
+		}
+		// Empty string means we are waiting for the opponent
+		else if("".equals(state)) {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameWaiting));
-		} else {
+			b.setTextColor(defaultColor);
+			b.setTypeface(Typeface.DEFAULT);
+			b.setClickable(false);
+		}
+		// Otherwise, opponent is waiting for us
+		else {
 			b.setText(this.getString(R.string.tableGameWith) + display_name + this.getString(R.string.tableGameYourTurn));
 			b.setTextColor(Color.GREEN);
 			b.setTypeface(Typeface.DEFAULT_BOLD);
+			b.setClickable(true);
 		}
 	}
 	
 	public void onButton1Click(View view) {
 		startGameGuess(opponents.get(0));
+	}
+	
+	public void onButton2Click(View view) {
+		startGameGuess(opponents.get(1));
+	}
+	
+	public void onButton3Click(View view) {
+		startGameGuess(opponents.get(2));
 	}
 	
 	public void onNewGameClick(View view) {

@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/genb"
     android:orientation="vertical" >
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/appVersion" />
+        android:text="@string/appVersion"
+        android:textColor="#000000" />
 
     <ImageView
         android:id="@+id/foodImage"
@@ -22,7 +24,11 @@
         android:id="@+id/foodName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mcfries" />
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:text="@string/mcfries"
+        
+         />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -44,14 +50,16 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:onClick="onSubmitEvent"
-            android:text="@string/submitButton" />
+            android:src="@drawable/submit"
+            android:background="@drawable/submit" />
 
         <Button
             android:id="@+id/quitCalCount"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:onClick="onQuitEvent"
-            android:text="@string/quitButton" />
+            android:src="@drawable/quit"
+            android:background="@drawable/quit" />
     </LinearLayout>
 
 </LinearLayout>

@@ -67,8 +67,13 @@ public class OneRightPriceView extends View {
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((OneRightPriceActivity)c).getUsername();
+
+		if(!IOBasic.getShownHelp(username, IOBasic.OneRightPrice)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.OneRightPrice);
+		}
+		
 		score = IOBasic.getPoints(username);
 		
 	}
@@ -77,8 +82,13 @@ public class OneRightPriceView extends View {
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((OneRightPriceActivity)c).getUsername();
+		
+		if(!IOBasic.getShownHelp(username, IOBasic.OneRightPrice)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.OneRightPrice);
+		}
+		
 		score = IOBasic.getPoints(username);
 		
 	}
@@ -176,6 +186,12 @@ public class OneRightPriceView extends View {
 		return onTouchEvent(e);
 	}
 	
+	/**
+	 * Handle user input events.
+	 * - On ACTION_DOWN, pick up a square if one was touched.
+	 * - On ACTION_UP, drop (snapping to another square if needed) the picked up square
+	 * - On ACTION_MOVE, center the currently picked up square at the touched location
+	 */
 	public boolean onTouchEvent(MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			int touchX = (int)event.getX();

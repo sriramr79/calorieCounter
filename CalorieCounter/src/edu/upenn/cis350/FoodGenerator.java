@@ -22,6 +22,11 @@ public class FoodGenerator {
 	private LinkedList<FoodItem> seenItems;
 	private Random rand;
 	
+	/**
+	 * Create a new instance of FoodGenerator using all of the resources
+	 * in this application.  Initializes all FoodItems as unseen.
+	 * @param res Reference to the Resources object for this application
+	 */
 	public FoodGenerator(Resources res) {
 		rand = new Random();
 		unseenItems = new LinkedList<FoodItem>();
@@ -58,16 +63,23 @@ public class FoodGenerator {
 				res.getString(R.string.tacobellburrito),
 				525, 575, 25);
 		tacobellburrito.setShortName(res.getString(R.string.tacobellburrito_simple));
-		/*FoodItem sliceofbread = new FoodItem(res.getDrawable(R.drawable.sliceofbread)),
+		
+		FoodItem sliceofbread = new FoodItem(res.getDrawable(R.drawable.sliceofbread),
 				res.getString(R.string.sliceofbread),
-				40,70,20);//make sure this is correct 80cal
-		FoodItem broccoli = new FoodItem(re.getDrawable(R.drawable.broccoli)),
+				40,70,10);//make sure this is correct 80cal
+		sliceofbread.setShortName(res.getString(R.string.sliceofbread_simple));
+
+		FoodItem broccoli = new FoodItem(res.getDrawable(R.drawable.broccoli),
 				res.getString(R.string.broccoli),
 				50,90,10);//make sure this is right 90 cal
-		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice)),
+		broccoli.setShortName(res.getString(R.string.broccoli_simple));
+
+		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice),
 				res.getString(R.string.cupofrice),
-				);//220
-*/		
+				250,200,20);
+		cupofrice.setShortName(res.getString(R.string.cupofrice_simple));
+
+					
 		unseenItems.add(fries1);
 		unseenItems.add(fries2);
 		unseenItems.add(apple);
@@ -76,9 +88,9 @@ public class FoodGenerator {
 		unseenItems.add(waterglass);
 		unseenItems.add(cokecan);
 		unseenItems.add(tacobellburrito);
-		/*unseenItems.add(sliceofbread);
+		unseenItems.add(sliceofbread);
 		unseenItems.add(broccoli);
-		unseenItems.add(cupofrice);*/
+		unseenItems.add(cupofrice);
 	}
 	
 	

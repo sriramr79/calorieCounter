@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/plateb" >
     
     <TextView
         android:id="@+id/tableTopText"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:text="" />
     
     <LinearLayout
         android:orientation="horizontal"
-        android:background="@drawable/table"
         android:layout_width="fill_parent"
         android:layout_height="150dip">
     
@@ -46,7 +48,7 @@
         	android:contentDescription="@string/tableFood1Desc" />
    		
 	</LinearLayout>
-	
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_height="40dip"
@@ -56,6 +58,8 @@
        		android:id="@+id/food1Desc"
         	android:layout_width="wrap_content"
         	android:gravity="center"
+        	android:textColor="#000000"
+        	android:textStyle="bold"
         	android:layout_height="fill_parent"
         	android:text="@string/tableFood1Desc"/>
     
@@ -77,6 +81,8 @@
        		android:id="@+id/food2Desc"
         	android:layout_width="wrap_content"
         	android:gravity="center"
+        	android:textColor="#000000"
+       		android:textStyle="bold"
         	android:layout_height="fill_parent"
         	android:text="@string/tableFood2Desc"/>
     
@@ -98,6 +104,8 @@
        		android:id="@+id/food3Desc"
         	android:layout_width="wrap_content"
         	android:gravity="center"
+        	android:textColor="#000000"
+        	android:textStyle="bold"
         	android:layout_height="fill_parent"
         	android:text="@string/tableFood3Desc"/>
     
@@ -123,16 +131,18 @@
             android:layout_marginLeft="50dip"
             android:layout_height="fill_parent"
             android:onClick="onSubmitButtonClick"
-            android:text="@string/submitButton" />
-        
+            android:src="@drawable/sendplate"
+            android:background="@drawable/sendplate" />
+        
         <Button
             android:id="@+id/guessQuitButton"
-            android:layout_width="50dip"
-            android:layout_marginRight="50dip"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_marginRight="50dip"
+            android:background="@drawable/quit"
             android:onClick="onQuitButtonClick"
-            android:text="@string/quitButton" />
+            android:src="@drawable/quit" />
         
     </LinearLayout>
-	
+
 </LinearLayout>

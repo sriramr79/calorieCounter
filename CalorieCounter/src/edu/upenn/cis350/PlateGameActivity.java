@@ -18,8 +18,8 @@ import android.widget.Toast;
  * Someone can think of a better name for this...
  * 
  * @author Paul M. Gurniak
- * @date 3/28/12
- * @version 0.1
+ * @date 4/2//12
+ * @version 1.0
  *
  */
 public class PlateGameActivity extends Activity {
@@ -68,7 +68,11 @@ public class PlateGameActivity extends Activity {
         updateDisplayedFoods();
 		updateCalorieText();
 		
-		createDialog(INSTRUCTIONS).show();
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameCreate)) { 
+        	createDialog(INSTRUCTIONS).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameCreate);
+        }
+        
 	}
 	
 	public void onFoodButtonClick(View view) {
@@ -137,9 +141,11 @@ public class PlateGameActivity extends Activity {
 	
 	/**
 	 * Updates the TextViews in the associated layout to display the
-	 * current state of the game.
+	 * current state of the game (the individual calorie counts,
+	 * as well as the total for the items entered so far).
 	 */
 	private void updateCalorieText() {
+		
 		TextView food1 = (TextView)this.findViewById(R.id.food1Desc);
 		TextView food2 = (TextView)this.findViewById(R.id.food2Desc);
 		TextView food3 = (TextView)this.findViewById(R.id.food3Desc);
@@ -164,6 +170,7 @@ public class PlateGameActivity extends Activity {
 		for(int i = 0; i < tableFoods.size(); i++) {
 			totalCalories += tableFoods.get(i).getCalorieCount();
 		}
+		
 		TextView total = (TextView)this.findViewById(R.id.foodTotalDesc);
 		total.setText(this.getResources().getString(R.string.tableTotalCalories) + Integer.toString(totalCalories));
 		
@@ -193,10 +200,10 @@ public class PlateGameActivity extends Activity {
 	}
 	
 	public void exitCleanly() {
-		IOBasic.addOpponent(username, opponent, fg.getStateString(tableFoods));
+		IOBasic.addOpponent(opponent, username, fg.getStateString(tableFoods));
 		// If the user is not playing him/herself, set the other user to wait
 		if(!opponent.equals(username)) {
-			IOBasic.addOpponent(opponent, username, "");
+			IOBasic.addOpponent(username, opponent, "");
 		}
 		this.finish();
 	}

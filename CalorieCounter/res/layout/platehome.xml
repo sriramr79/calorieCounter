@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/genb" >
     
     <TextView
         android:id="@+id/tableHomeWelcomeText"
         android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:textColor="#000000"
+        android:textStyle="bold"
     	android:text="@string/tableHomeWelcome"  />
     
     <Button
@@ -25,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="onButton1Click"
+        android:onClick="onButton2Click"
         android:text="@string/tableBlankGame" />
     
     <Button
@@ -34,13 +37,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:onClick="onButton1Click"
+        android:onClick="onButton3Click"
         android:text="@string/tableBlankGame" />
     
     <TextView
         android:layout_marginTop="20dip"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:text="@string/tableCreateGameMessage" />
     
     <EditText

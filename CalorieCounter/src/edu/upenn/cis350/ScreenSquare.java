@@ -222,8 +222,6 @@ public class ScreenSquare {
 	/**
 	 * Method to help determine if this square is overlapping another one.
 	 * 
-	 * Warning: for simplicity, this assumes that both squares are the same size.
-	 * 
 	 * @param other Other instance of ScreenSquare to compare to
 	 * @return Whether the ScreenSquares are overlapping
 	 */

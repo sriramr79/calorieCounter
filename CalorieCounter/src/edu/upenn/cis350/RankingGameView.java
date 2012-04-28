@@ -63,16 +63,25 @@ public class RankingGameView extends View {
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((RankingGameActivity)c).getUsername();
+
+		if(!IOBasic.getShownHelp(username, IOBasic.RankingGame)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.RankingGame);
+		}
+		
 	}
 	public RankingGameView(Context c, AttributeSet a) {
 		super(c, a);
 		setUpFoodItems();
 		setUpDisplayItems();
 		this.mContext = c;
-		showDialog(START_DIALOG);
 		username = ((RankingGameActivity)c).getUsername();
+		
+		if(!IOBasic.getShownHelp(username, IOBasic.RankingGame)) {
+			showDialog(START_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.RankingGame);
+		}
 	}
 	
 	/**
@@ -98,9 +107,11 @@ public class RankingGameView extends View {
 
 	
 	/**
-	 * Sets up the initial state of all static and dynamic display items
+	 * Sets up the initial state of all display items (squares) to draw
+	 * on the screen.
 	 */
 	private void setUpDisplayItems() {
+		
 		WindowManager wm = (WindowManager)this.getContext().getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
 		this.dispHeight = display.getHeight();
@@ -131,6 +142,7 @@ public class RankingGameView extends View {
 		displayOrder.get(0).getImage().setBounds(food0Loc);
 		displayOrder.get(1).getImage().setBounds(food1Loc);
 		displayOrder.get(2).getImage().setBounds(food2Loc);
+		
 	}
 	
 	/**
@@ -158,7 +170,7 @@ public class RankingGameView extends View {
 		order0Square.draw(canvas, paint);
 		order1Square.draw(canvas, paint);
 		order2Square.draw(canvas, paint);
-		// Draw touchedSquare last so that it appears on top of everything else
+		// (Re)-draw touchedSquare last so that it appears on top of everything else
 		if(touchedSquare != null) {
 			touchedSquare.draw(canvas, paint);
 		}
@@ -167,10 +179,9 @@ public class RankingGameView extends View {
 	
 	/**
 	 * Method that generates the desired motion event and sends it to onTouchEvent.  This method
-	 * serves no purpose outside of a tester, as it will not be invoked by the system.
-	 * 
-	 * This method is apparently necessary because the testing application runs in a different
-	 * thread than this View class, and therefore cannot call onTouchEvent directly.
+	 * serves no purpose outside of a tester, as it will not be invoked by the actual code.  This method just
+	 * fills in the fields we don't use in the MotionEvent object, and provides a more readable
+	 * interface for the tester.
 	 * 
 	 * @param X X-coordinate of the event
 	 * @param Y Y-coordinate of the event
@@ -182,10 +193,15 @@ public class RankingGameView extends View {
 		return onTouchEvent(e);
 	}
 	
+	
 	/**
-	 * Called whenever the screen is touched
+	 * Handle user input events.
+	 * - On ACTION_DOWN, pick up a square if one was touched.
+	 * - On ACTION_UP, drop (snapping to another square if needed) the picked up square
+	 * - On ACTION_MOVE, center the currently picked up square at the touched location
 	 */
 	public boolean onTouchEvent(MotionEvent event) {
+		
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			int touchX = (int)event.getX();
 			int touchY = (int)event.getY();
@@ -217,6 +233,7 @@ public class RankingGameView extends View {
 			invalidate();
 			return true;
 		}
+		
 		else if(event.getAction() == MotionEvent.ACTION_MOVE) {
 			// If no square was touched on the down action, ignore event
 			if(touchedSquare != null) {
@@ -226,10 +243,11 @@ public class RankingGameView extends View {
 			}
 			return false;
 		}
+		
 		else if(event.getAction() == MotionEvent.ACTION_UP) {
 			// If no square was touched on the down action, ignore event
 			if(touchedSquare != null) {
-				// If we are currently overlapping a "destination" square, reset "starting" position
+				// If we are not currently overlapping a "destination" square, reset to "starting" position
 				ScreenSquare overlapping = 	touchedSquare.overlapping(food0Square) && !food0Occupied ? food0Square :
 										  	touchedSquare.overlapping(food1Square) && !food1Occupied ? food1Square :
 										  	touchedSquare.overlapping(food2Square) && !food2Occupied ? food2Square :
@@ -240,7 +258,6 @@ public class RankingGameView extends View {
 				} else {
 					touchedSquare.moveTo(overlapping);
 					checkOccupancy();
-					//touchedSquare.setStartPosition();
 				}
 				touchedSquare = null;
 				invalidate();
@@ -248,11 +265,15 @@ public class RankingGameView extends View {
 			}
 			return false;
 		}
+		
 		return false;
 	}
 	
 	/**
-	 * Updates all occupancy variables depending on the position of the movable squares
+	 * Updates all occupancy variables depending on the position of the movable squares.
+	 * There is a boolean foodXOccupied (for X = 0,1,2), and if the guess spot for 
+	 * foodX has an order square on top of it (the user dragged it there), we mark
+	 * that guess as entered.
 	 */
 	public void checkOccupancy() {
 		food0Occupied = false;
@@ -264,8 +285,8 @@ public class RankingGameView extends View {
 	}
 	
 	/**
-	 * Sets the occupancy variable for the position of the square that was just released
-	 * @param square The square that was just released
+	 * Sets the occupancy variable for the position of the square that was just moved
+	 * @param square The square that was just moved (released/Down event) by the user
 	 */
 	private void markOverlapping(ScreenSquare square) {
 		if(square.overlapping(food0Square)) food0Occupied = true;
@@ -275,7 +296,7 @@ public class RankingGameView extends View {
 	
 	/**
 	 * Clears the occupancy variable for the position of the square that was just picked up
-	 * @param square The square that was just touched
+	 * @param square The square that was just touched (up event) by the user
 	 */
 	private void unmarkOverlapping(ScreenSquare square) {
 		if(square.overlapping(food0Square)) food0Occupied = false;

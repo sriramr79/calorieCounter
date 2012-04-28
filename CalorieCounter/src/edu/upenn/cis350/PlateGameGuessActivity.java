@@ -27,7 +27,7 @@ public class PlateGameGuessActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         this.username = getIntent().getStringExtra(Constants.UNEXTRA); 
-        this.opponent = getIntent().getStringExtra(Constants.UNEXTRA);
+        this.opponent = getIntent().getStringExtra(Constants.OPEXTRA);
         String stateString = getIntent().getStringExtra(Constants.GSEXTRA);
         
         // Shouldn't happen
@@ -55,7 +55,10 @@ public class PlateGameGuessActivity extends Activity {
         
         updateDisplayedFoods();
         
-        createDialog(INSTRUCTIONS).show();
+        if(!IOBasic.getShownHelp(username, IOBasic.PlateGameGuess)) { 
+        	createDialog(INSTRUCTIONS).show();
+        	IOBasic.setShownHelp(username, IOBasic.PlateGameGuess);
+        }
 	}
 	
 	public void updateDisplayedFoods() {

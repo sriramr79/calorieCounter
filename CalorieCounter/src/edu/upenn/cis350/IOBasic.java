@@ -1,14 +1,11 @@
 
 package edu.upenn.cis350;
 
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.client.methods.HttpRequestBase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +28,63 @@ public class IOBasic{
 	
 	// Data structure to store the persistence data for the PlateGame
 	static HashMap<String,HashMap<String,String>> games = new HashMap<String, HashMap<String,String>>();
+	
+	// Data structure to prevent help dialog from appearing more than once per session
+	static HashMap<String,ArrayList<Boolean>> shownHelp = new HashMap<String, ArrayList<Boolean>>();
+	
+	public static final int HomeScreen = 0;
+	public static final int OneRightPrice = 1;
+	public static final int PlateGameHome = 2;
+	public static final int PlateGameGuess = 3;
+	public static final int PlateGameCreate = 4;
+	public static final int RankingGame = 5;
+	public static final int CalorieCounter = 6;
+	
+	private static final int miniGameCount = 7;
+	
+	/**
+	 * Checks to see if the user has already been shown the help screen
+	 * for the specified activity
+	 * @param username The username for the desired user
+	 * @param activity The integer corresponding to the desired activity (public variables in IOBasic.java)
+	 * @return
+	 */
+	public static boolean getShownHelp(String username, int activity)
+	{
+		if(username == null || !dataStruct.containsKey(username) || activity < 0 || activity > miniGameCount) {
+			return false;
+		}
+		return shownHelp.containsKey(username) && shownHelp.get(username).get(activity);
+	}
+	
+	/**
+	 * Sets that the user has seen the help dialog for the specified activity
+	 * @param username The username for the desired user
+	 * @param activity The integer corresponding to the desired activity (public variables in IOBasic.java)
+	 */
+	public static void setShownHelp(String username, int activity)
+	{
+		if(username != null && dataStruct.containsKey(username) && activity >= 0 && activity < miniGameCount) {
+			if(!shownHelp.containsKey(username)) {
+				shownHelp.put(username, new ArrayList<Boolean>(miniGameCount));
+				for(int i = 0; i < miniGameCount; i++) {
+					shownHelp.get(username).add(false);
+				}
+			}
+			shownHelp.get(username).set(activity, true);
+		}
+	}
+	
+	/**
+	 * Resets the help dialog status for the specified user
+	 * @param username The username for the desired user
+	 */
+	public static void resetShownHelp(String username)
+	{
+		if(username != null && dataStruct.containsKey(username)) {
+			shownHelp.put(username, new ArrayList<Boolean>(miniGameCount));
+		}
+	}
 	
 	/**
 	 * Returns a list of the other users the specified user is currently playing a game with
@@ -79,7 +133,7 @@ public class IOBasic{
 		if (games.get(user)==null)
 			return null;
 		
-		return games.get(user).get(user);
+		return games.get(user).get(opponent);
 	}
 	
 	/*
@@ -99,8 +153,9 @@ public class IOBasic{
 			String fn = dataStruct.get(user)[1];
 			fn = fn.replace(" ", "%20");
 			String points = dataStruct.get(user)[2];
-			String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+")", null);
-			Log.e("ERROR", response);
+			//String response=m_request.postData(write+"insert%20into%20users%20values('"+user+"','"+password+"','"+fn+"',"+points+",'null')", null);
+			//Log.d("finalWrite", response);
+			m_request.postData(write+"update%20users%20set%20points="+points+"%20where%20usn='"+user+"'",null);
 
 		}
 
@@ -195,7 +250,38 @@ public class IOBasic{
 		if (dataStruct.containsKey(usn)==true) return false;
 		String[] data = {pass,fullName,"0"};
 		dataStruct.put(usn, data);
+		
+		HttpRequest m_request = new HttpRequest();
+		
+		String password = dataStruct.get(usn)[0];
+		String fn = dataStruct.get(usn)[1];
+		fn = fn.replace(" ", "%20");
+		String points = dataStruct.get(usn)[2];
+		String response=m_request.postData(write+"insert%20into%20users%20values('"+usn+"','"+password+"','"+fn+"',"+points+",'null')", null);
+		Log.d("adding user", response);
+
+		
+		
+		
 		return true;
+	}
+	
+	static public HashMap<String, String> allNames () {
+		HashMap<String, String> names = new HashMap<String,String>();
+		
+		Set<String> usernames = dataStruct.keySet();
+		for (String usn : usernames) {
+			names.put(usn, dataStruct.get(usn)[1]);
+		}
+			
+		return names;
+	}
+
+	public static boolean isTeacher(String un) {
+		if (un.equals("a"))
+			return true;
+		else
+			return false;
 	}
 	
 }
