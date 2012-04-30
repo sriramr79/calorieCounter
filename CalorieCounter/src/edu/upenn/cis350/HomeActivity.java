@@ -47,6 +47,10 @@ public class HomeActivity extends Activity {
 		
 		name.setText("Welcome: " + un);
 		setScore(IOBasic.getPoints(username));
+		
+		// Track number of log ins
+		IOBasic.setGameAttempts(username, IOBasic.HomeScreen, 
+				IOBasic.getGameAttempts(username, IOBasic.HomeScreen) + 1);
 
 	}
 

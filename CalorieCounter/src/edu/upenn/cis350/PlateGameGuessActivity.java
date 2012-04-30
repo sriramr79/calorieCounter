@@ -59,6 +59,7 @@ public class PlateGameGuessActivity extends Activity {
         	createDialog(INSTRUCTIONS).show();
         	IOBasic.setShownHelp(username, IOBasic.PlateGameGuess);
         }
+        
 	}
 	
 	public void updateDisplayedFoods() {
@@ -98,6 +99,10 @@ public class PlateGameGuessActivity extends Activity {
 			points += getPointsForInput(1, guess[1]);
 			points += getPointsForInput(2, guess[2]);
 			pointsWon = points;
+	        IOBasic.setGameWins(username, IOBasic.PlateGameGuess,
+	        		IOBasic.getGameWins(username, IOBasic.PlateGameGuess) + pointsWon/2);
+	        IOBasic.setGameAttempts(username, IOBasic.PlateGameGuess,
+	        		IOBasic.getGameAttempts(username, IOBasic.PlateGameGuess) + 3);
 			this.createDialog(SUBMIT_OKAY).show();
 		}
 		

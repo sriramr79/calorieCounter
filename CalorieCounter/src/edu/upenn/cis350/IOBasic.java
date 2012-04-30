@@ -238,6 +238,30 @@ public class IOBasic{
 		}
 		s.append(".");
 		
+		// Add wins data
+		if(gameWins.containsKey(username)) {
+			ArrayList<Integer> userWins = gameWins.get(username);
+			for(int i = 0; i < userWins.size(); i++) {
+				s.append(Integer.toString(userWins.get(i)));
+				s.append(',');
+			}
+		}
+		else {
+			s.append("null");
+		}
+		s.append(".");
+		
+		// Add attempts data
+		if(gameAttempts.containsKey(username)) {
+			ArrayList<Integer> userAttempts = gameAttempts.get(username);
+			for(int i = 0; i < userAttempts.size(); i++) {
+				s.append(Integer.toString(userAttempts.get(i)));
+				s.append(',');
+			}
+		}
+		else {
+			s.append("null");
+		}
 		
 		return s.toString();
 	}
@@ -272,6 +296,37 @@ public class IOBasic{
 			}
 		}
 		
+		// Second big token is wins data
+		if(!tokens.hasMoreTokens()) {
+			return;
+		}
+		String winsToken = tokens.nextToken();
+		if(!"null".equals(winsToken)) {
+			StringTokenizer gameWins = new StringTokenizer(winsToken, ",");
+			for(int i = 0; i < miniGameCount && gameWins.hasMoreTokens(); i++) {
+				try {
+					setGameWins(username, i, Integer.parseInt(gameWins.nextToken()));
+				} catch(NumberFormatException e) {
+					break;
+				}
+			}
+		}
+		
+		// Third big token is attempts data
+		if(!tokens.hasMoreTokens()) {
+			return;
+		}
+		String attemptsToken = tokens.nextToken();
+		if(!"null".equals(attemptsToken)) {
+			StringTokenizer gameAttempts = new StringTokenizer(attemptsToken, ",");
+			for(int i = 0; i < miniGameCount && gameAttempts.hasMoreTokens(); i++) {
+				try {
+					setGameAttempts(username, i, Integer.parseInt(gameAttempts.nextToken()));
+				} catch(NumberFormatException e) {
+					break;
+				}
+			}
+		}
 		
 	}
 	
@@ -443,9 +498,6 @@ public class IOBasic{
 		String response=m_request.postData(write+"insert%20into%20users%20values('"+usn+"','"+password+"','"+fn+"',"+points+",'null')", null);
 		Log.d("adding user", response);
 
-		
-		
-		
 		return true;
 	}
 	

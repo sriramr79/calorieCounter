@@ -90,7 +90,7 @@ public class OneRightPriceView extends View {
 		}
 		
 		score = IOBasic.getPoints(username);
-		
+
 	}
 	
 	/**
@@ -286,14 +286,26 @@ public class OneRightPriceView extends View {
 			if(tries == 0){
 				score++;
 				IOBasic.setPoints(username, score);
+		        IOBasic.setGameWins(username, IOBasic.OneRightPrice,
+		        		IOBasic.getGameWins(username, IOBasic.OneRightPrice) + 1);
 			}
+
+	        IOBasic.setGameAttempts(username, IOBasic.OneRightPrice,
+	        		IOBasic.getGameAttempts(username, IOBasic.OneRightPrice) + 1);
+	        
 			return true;
 		}
 		else if(food1Occupied && food1.getCalorieCount() == calorieNumber){
 			if(tries == 0){
 				score++;
 				IOBasic.setPoints(username, score);
+		        IOBasic.setGameWins(username, IOBasic.OneRightPrice,
+		        		IOBasic.getGameWins(username, IOBasic.OneRightPrice) + 1);
 			}
+			
+	        IOBasic.setGameAttempts(username, IOBasic.OneRightPrice,
+	        		IOBasic.getGameAttempts(username, IOBasic.OneRightPrice) + 1);
+			
 			return true;
 		}
 		else{

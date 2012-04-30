@@ -34,7 +34,11 @@ public class CalorieCounterActivity extends Activity {
 		level = new GameLevel(getResources());
         updateDisplayedFood(level.getCurrentFood());
     	numTries = 0;
-        showDialog(INSTRUCTION_DIALOG);
+    	
+		if(!IOBasic.getShownHelp(username, IOBasic.CalorieCounter)) {
+	        showDialog(INSTRUCTION_DIALOG);
+			IOBasic.setShownHelp(username, IOBasic.CalorieCounter);
+		}
     }
     
     public void onSubmitEvent(View view) {
@@ -138,6 +142,15 @@ public class CalorieCounterActivity extends Activity {
     		String message = res.getString(R.string.scoreReportMessage1)
     						+ (numTries == 1 ? Integer.toString(2) : numTries == 2 ? Integer.toString(1) : Integer.toString(0))
     						+ res.getString(R.string.scoreReportMessage2);
+
+        	IOBasic.setGameAttempts(username, IOBasic.CalorieCounter,
+        			IOBasic.getGameAttempts(username, IOBasic.CalorieCounter) + 1);
+        	
+        	if(numTries == 1) {
+            	IOBasic.setGameWins(username, IOBasic.CalorieCounter,
+            			IOBasic.getGameWins(username, IOBasic.CalorieCounter) + 1);
+        	}
+    		
     		builder.setMessage(message);
     		builder.setPositiveButton(R.string.nextButton,
     				new DialogInterface.OnClickListener() {

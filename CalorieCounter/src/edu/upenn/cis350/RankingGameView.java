@@ -70,6 +70,7 @@ public class RankingGameView extends View {
 			IOBasic.setShownHelp(username, IOBasic.RankingGame);
 		}
 		
+		
 	}
 	public RankingGameView(Context c, AttributeSet a) {
 		super(c, a);
@@ -82,6 +83,7 @@ public class RankingGameView extends View {
 			showDialog(START_DIALOG);
 			IOBasic.setShownHelp(username, IOBasic.RankingGame);
 		}
+		
 	}
 	
 	/**
@@ -383,6 +385,15 @@ public class RankingGameView extends View {
     				int points = IOBasic.getPoints(username);
     				points += 2;//numAttempts == 2 ? 1 : numAttempts == 1 ? 2 : 0;
     				IOBasic.setPoints(username, points);
+    				
+    		        IOBasic.setGameAttempts(username, IOBasic.RankingGame,
+    		        		IOBasic.getGameAttempts(username, IOBasic.RankingGame) + 1);
+    		       
+    		        if(numAttempts == 1) {
+    		        	IOBasic.setGameWins(username, IOBasic.RankingGame,
+    		        			IOBasic.getGameWins(username, IOBasic.RankingGame) + 1);
+    		        }
+    		        
     				Toast.makeText(mContext, "Test: " + IOBasic.getPoints(username), Toast.LENGTH_LONG).show();
     				((Activity)mContext).finish();
     			}
