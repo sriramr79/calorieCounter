@@ -3,7 +3,7 @@
 
     <!-- General App Strings -->
     <string name="app_name">Food With Friends</string>
-    <string name="appVersion">CalorieCounter Beta v0.3: 3.20.2012</string>
+    <string name="appVersion">CalorieCounter Beta v1: 4.30.2012</string>
 
     <!-- Game messages -->
     <string name="correctMessage">That\'s right,\u0020</string>
@@ -56,6 +56,13 @@
     <string name="adminTitle">Admin: Select a User</string>
     <string name="usnTitle">Username:\u0020</string>
     <string name="scoreTitle">Score:\u0020</string>
+    <string name="loginsTitle">Number of Logins:\u0020</string>
+    <string name="plateTitle">Make Your Plate!:\u0020</string>
+    <string name="countTitle">How Many Calories?:\u0020</string>
+    <string name="ORPTitle">One Right Price:\u0020</string>
+    <string name="rankingTitle">1-2-3:\u0020</string>
+    <string name="attemptsTitle">Game Attempts</string>
+    <string name="winsTitle">Game Wins</string>
 
     <!-- Home Activity -->
     <string name="yes">Yes</string>
