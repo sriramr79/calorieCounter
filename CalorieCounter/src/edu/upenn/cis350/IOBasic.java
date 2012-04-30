@@ -3,6 +3,7 @@ package edu.upenn.cis350;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -36,6 +37,9 @@ public class IOBasic{
 	// Data structures to store local copies of the user's current 
 	static HashMap<String,ArrayList<Integer>> gameAttempts = new HashMap<String, ArrayList<Integer>>();
 	static HashMap<String,ArrayList<Integer>> gameWins = new HashMap<String, ArrayList<Integer>>();
+	
+	// Data structure to store whether each user is an admin or not
+	static HashSet<String> admins = new HashSet<String>();
 	
 	public static final int HomeScreen = 0;
 	public static final int OneRightPrice = 1;
@@ -262,6 +266,14 @@ public class IOBasic{
 		else {
 			s.append("null");
 		}
+		s.append(".");
+		
+		// Add admin data
+		if(admins.contains(username)) {
+			s.append("admin");
+		} else {
+			s.append("user");
+		}
 		
 		return s.toString();
 	}
@@ -326,6 +338,15 @@ public class IOBasic{
 					break;
 				}
 			}
+		}
+		
+		// Fourth big token is admin string
+		if(!tokens.hasMoreTokens()) {
+			return;
+		}
+		String adminToken = tokens.nextToken();
+		if("admin".equals(adminToken)) {
+			admins.add(username);
 		}
 		
 	}
@@ -506,14 +527,16 @@ public class IOBasic{
 		
 		Set<String> usernames = dataStruct.keySet();
 		for (String usn : usernames) {
-			names.put(usn, dataStruct.get(usn)[1]);
+			if(!isTeacher(usn)) {
+				names.put(usn, dataStruct.get(usn)[1]);
+			}
 		}
 			
 		return names;
 	}
 
 	public static boolean isTeacher(String un) {
-		if (un.equals("a"))
+		if (admins.contains(un))
 			return true;
 		else
 			return false;
