@@ -140,16 +140,14 @@ public class CalorieCounterActivity extends Activity {
     	else if(id == SCORE_DIALOG) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		String message = res.getString(R.string.scoreReportMessage1)
-    						+ (numTries == 1 ? Integer.toString(2) : numTries == 2 ? Integer.toString(1) : Integer.toString(0))
+    						+ (numTries == 1 ? Integer.toString(2) : numTries == 2 ? Integer.toString(2) : Integer.toString(2))
     						+ res.getString(R.string.scoreReportMessage2);
 
         	IOBasic.setGameAttempts(username, IOBasic.CalorieCounter,
         			IOBasic.getGameAttempts(username, IOBasic.CalorieCounter) + 1);
         	
-        	if(numTries == 1) {
-            	IOBasic.setGameWins(username, IOBasic.CalorieCounter,
-            			IOBasic.getGameWins(username, IOBasic.CalorieCounter) + 1);
-        	}
+        	IOBasic.setGameWins(username, IOBasic.CalorieCounter,
+        			IOBasic.getGameWins(username, IOBasic.CalorieCounter) + 1);
     		
     		builder.setMessage(message);
     		builder.setPositiveButton(R.string.nextButton,
