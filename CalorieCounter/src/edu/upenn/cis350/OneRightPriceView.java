@@ -283,12 +283,11 @@ public class OneRightPriceView extends View {
 
 	public boolean checkCorrect() {
 		if(food0Occupied && food0.getCalorieCount() == calorieNumber){
-			if(tries == 0){
-				score++;
+				score++;	
 				IOBasic.setPoints(username, score);
 		        IOBasic.setGameWins(username, IOBasic.OneRightPrice,
 		        		IOBasic.getGameWins(username, IOBasic.OneRightPrice) + 1);
-			}
+			
 
 	        IOBasic.setGameAttempts(username, IOBasic.OneRightPrice,
 	        		IOBasic.getGameAttempts(username, IOBasic.OneRightPrice) + 1);
@@ -361,11 +360,10 @@ public class OneRightPriceView extends View {
     	else if(id == CORRECT_DIALOG) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
     		String returnMessage = getResources().getString(R.string.rankCorrectMessage);
-    		if(numAttempts != 1) {
     			returnMessage = returnMessage + getResources().getString(R.string.rankCorrectMessage2)
-    										+ Integer.toString(numAttempts)
-    										+ getResources().getString(R.string.rankCorrectTries);
-    		}
+    										+ Integer.toString(1)	
+    										+ getResources().getString(R.string.rankPoints);
+    		
     		builder.setMessage(returnMessage);
     		builder.setPositiveButton(R.string.rankExitButton,
     				new DialogInterface.OnClickListener() {

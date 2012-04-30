@@ -91,10 +91,10 @@
     <string name="rankNextButton">Next</string>
     <string name="rankExitButton">Exit</string>
     <string name="rankRetryButton">Retry</string>
-    <string name="rankPoints">\u0020points for this game.</string>
+    <string name="rankPoints">\u0020point(s) for this game.</string>
 
     <!-- One Right Price -->
-    <string name="oneWelcomeMessage">Welcome to the  One Right Price!  In this game, you will be presented with two foods and one calorie value. You must match the calorie value with the correct food.</string>
+    <string name="oneWelcomeMessage">Welcome to the One Right Price!  In this game, you will be presented with two foods and one calorie value. You must match the calorie value with the correct food.</string>
     <string name="oneWelcomeMessage2">To match the calorie value to the food, drag-and-drop the calorie square at the bottom left to the correct gray slot on the right.</string>
 
     <!-- Price is Right -->

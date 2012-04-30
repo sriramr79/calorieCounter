@@ -76,7 +76,7 @@ public class FoodGenerator {
 
 		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice),
 				res.getString(R.string.cupofrice),
-				250,200,20);
+				200,250,20);
 		cupofrice.setShortName(res.getString(R.string.cupofrice_simple));
 
 					
