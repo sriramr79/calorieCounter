@@ -81,15 +81,15 @@ public class PlateHomeActivity extends Activity {
         game3.setClickable(false);
         create.setClickable(true);
         
-		if(opponents.size() >= 1) {
+        if(opponents.size() >= 1) {
 			updateButtonText(game1, opponents.get(0));
 			game1.setClickable(true);
 		}
-		if(opponents.size() >= 2) {
+        else if(opponents.size() >= 2) {
 			updateButtonText(game2, opponents.get(1));
 			game2.setClickable(true);
 		}
-		if(opponents.size() >= 3) {
+        else if(opponents.size() >= 3) {
 			updateButtonText(game3, opponents.get(2));
 			game3.setClickable(true);
 			create.setClickable(false);

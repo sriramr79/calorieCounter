@@ -20,7 +20,6 @@ public class FoodGenerator {
 	
 	private LinkedList<FoodItem> unseenItems;
 	private LinkedList<FoodItem> seenItems;
-	private Random rand;
 	
 	/**
 	 * Create a new instance of FoodGenerator using all of the resources
@@ -28,55 +27,65 @@ public class FoodGenerator {
 	 * @param res Reference to the Resources object for this application
 	 */
 	public FoodGenerator(Resources res) {
-		rand = new Random();
 		unseenItems = new LinkedList<FoodItem>();
 		seenItems = new LinkedList<FoodItem>();
 		FoodItem fries1 = new FoodItem(res.getDrawable(R.drawable.mcfries),
 				res.getString(R.string.mcfries),
 				475, 525, 25);
+		
 		fries1.setShortName(res.getString(R.string.mcfries_simple));
 		FoodItem fries2 = new FoodItem(res.getDrawable(R.drawable.bkfries),
 				res.getString(R.string.bkfries),
 				325, 375, 25);
+		
 		fries2.setShortName(res.getString(R.string.bkfries_simple));
 		FoodItem apple = new FoodItem(res.getDrawable(R.drawable.redapple),
 				res.getString(R.string.redapple),
 				50, 90, 10);
+		
 		apple.setShortName(res.getString(R.string.redapple_simple));
 		FoodItem banana = new FoodItem(res.getDrawable(R.drawable.banana),
 				res.getString(R.string.banana),
 				80, 110, 15);
+		
 		banana.setShortName(res.getString(R.string.banana_simple));
 		FoodItem milkglass = new FoodItem(res.getDrawable(R.drawable.milkglass),
 				res.getString(R.string.milkglass),
 				80, 120, 20);
+		
 		milkglass.setShortName(res.getString(R.string.milkglass_simple));
 		FoodItem waterglass = new FoodItem(res.getDrawable(R.drawable.waterglass),
 				res.getString(R.string.waterglass),
 				0, 0, 0);
+		
 		waterglass.setShortName(res.getString(R.string.waterglass_simple));
 		FoodItem cokecan = new FoodItem(res.getDrawable(R.drawable.cokecan),
 				res.getString(R.string.cokecan),
 				110, 130, 10);
+		
 		cokecan.setShortName(res.getString(R.string.cokecan_simple));
 		FoodItem tacobellburrito = new FoodItem(res.getDrawable(R.drawable.tacobellburrito),
 				res.getString(R.string.tacobellburrito),
 				525, 575, 25);
+		
 		tacobellburrito.setShortName(res.getString(R.string.tacobellburrito_simple));
 		
 		FoodItem sliceofbread = new FoodItem(res.getDrawable(R.drawable.sliceofbread),
 				res.getString(R.string.sliceofbread),
-				40,70,10);//make sure this is correct 80cal
+				40,70,10);
+		
 		sliceofbread.setShortName(res.getString(R.string.sliceofbread_simple));
 
 		FoodItem broccoli = new FoodItem(res.getDrawable(R.drawable.broccoli),
 				res.getString(R.string.broccoli),
-				50,90,10);//make sure this is right 90 cal
+				50,90,10);
+
 		broccoli.setShortName(res.getString(R.string.broccoli_simple));
 
 		FoodItem cupofrice = new FoodItem(res.getDrawable(R.drawable.cupofrice),
 				res.getString(R.string.cupofrice),
 				200,250,20);
+		
 		cupofrice.setShortName(res.getString(R.string.cupofrice_simple));
 
 					
@@ -107,6 +116,7 @@ public class FoodGenerator {
 	 * @return The next FoodItem
 	 */
 	public FoodItem nextFood() {
+		Random rand = new Random();
 		if(unseenItems.isEmpty()) {
 			return null;
 		}

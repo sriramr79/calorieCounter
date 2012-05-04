@@ -119,25 +119,50 @@ public class RankingGameView extends View {
 		this.dispWidth = display.getWidth();
 
 		// Use these rectangles to automatically resize source image to our
-		// screen
-		Rect food0Loc = new Rect(2 * dispWidth / 26, dispHeight / 26, (2 * dispWidth + 8 * dispHeight) / 26, 6 * dispHeight / 26);
-		Rect food1Loc = new Rect(2 * dispWidth / 26, 7 * dispHeight / 26, (2 * dispWidth + 8 * dispHeight) / 26, 12 * dispHeight / 26);
-		Rect food2Loc = new Rect(2 * dispWidth / 26, 13 * dispHeight / 26, (2 * dispWidth + 8 * dispHeight) / 26, 18 * dispHeight / 26);
+		// screen. The numbers given are specific to pixels for the 3.5 in 
+		//phone screen for the application. 
+		Rect food0Loc = new Rect(2 * dispWidth / 26, dispHeight / 26,
+				(2 * dispWidth + 8 * dispHeight) / 26, 6 * dispHeight / 26);
+		Rect food1Loc = new Rect(2 * dispWidth / 26, 7 * dispHeight / 26,
+				(2 * dispWidth + 8 * dispHeight) / 26, 12 * dispHeight / 26);
+		Rect food2Loc = new Rect(2 * dispWidth / 26, 13 * dispHeight / 26,
+				(2 * dispWidth + 8 * dispHeight) / 26, 18 * dispHeight / 26);
 
-		order0Square = new ScreenSquare(1 * dispWidth / 26, 20 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.GREEN, this.getContext().getResources().getString(R.string.rank1Button));
-		order1Square = new ScreenSquare(5 * dispWidth / 26, 20 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.YELLOW, this.getContext().getResources().getString(R.string.rank2Button));
-		order2Square = new ScreenSquare(9 * dispWidth / 26, 20 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.RED, this.getContext().getResources().getString(R.string.rank3Button));
+		order0Square = new ScreenSquare(1 * dispWidth / 26,
+				20 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26,
+				Color.GREEN, this.getContext().getResources().getString(R.string.rank1Button));
+		order1Square = new ScreenSquare(5 * dispWidth / 26, 20 * dispHeight / 26,
+				3 * dispWidth / 26, 3 * dispWidth / 26, Color.YELLOW,
+				this.getContext().getResources().getString(R.string.rank2Button));
+		order2Square = new ScreenSquare(9 * dispWidth / 26, 20 * dispHeight / 26,
+				3 * dispWidth / 26, 3 * dispWidth / 26, Color.RED,
+				this.getContext().getResources().getString(R.string.rank3Button));
 
-		start0Square = new ScreenSquare(order0Square, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
-		start1Square = new ScreenSquare(order1Square, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
-		start2Square = new ScreenSquare(order2Square, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
+		start0Square = new ScreenSquare(order0Square, Color.GRAY, 
+				this.getContext().getResources().getString(R.string.rankOtherButton));
+		start1Square = new ScreenSquare(order1Square, Color.GRAY,
+				this.getContext().getResources().getString(R.string.rankOtherButton));
+		start2Square = new ScreenSquare(order2Square, Color.GRAY,
+				this.getContext().getResources().getString(R.string.rankOtherButton));
 
-		food0Square = new ScreenSquare(19 * dispWidth / 26, 3 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
-		food1Square = new ScreenSquare(19 * dispWidth / 26, 9 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
-		food2Square = new ScreenSquare(19 * dispWidth / 26, 15 * dispHeight / 26, 3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY, this.getContext().getResources().getString(R.string.rankOtherButton));
+		food0Square = new ScreenSquare(19 * dispWidth / 26, 3 * dispHeight / 26,
+				3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY,
+				this.getContext().getResources().getString(R.string.rankOtherButton));
+		food1Square = new ScreenSquare(19 * dispWidth / 26, 9 * dispHeight / 26,
+				3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY,
+				this.getContext().getResources().getString(R.string.rankOtherButton));
+		food2Square = new ScreenSquare(19 * dispWidth / 26, 15 * dispHeight / 26,
+				3 * dispWidth / 26, 3 * dispWidth / 26, Color.GRAY, 
+				this.getContext().getResources().getString(R.string.rankOtherButton));
 
-		submitSquare = new ScreenSquare(16 * dispWidth / 26, 20 * dispHeight / 26, 9 * dispWidth / 26, 3 * dispWidth / 26, Color.RED, this.getContext().getResources().getString(R.string.rankSubmitButton), Color.WHITE);
-		quitSquare = new ScreenSquare(dispWidth - dispWidth / 13, 0, dispWidth / 13, dispWidth / 13, Color.BLACK, this.getContext().getResources().getString(R.string.rankXButton), Color.RED);
+		submitSquare = new ScreenSquare(16 * dispWidth / 26, 20 * dispHeight / 26,
+				9 * dispWidth / 26, 3 * dispWidth / 26, Color.RED, 
+				this.getContext().getResources().getString(R.string.rankSubmitButton),
+				Color.WHITE);
+		quitSquare = new ScreenSquare(dispWidth - dispWidth / 13, 0, dispWidth / 13, 
+				dispWidth / 13, Color.BLACK, 
+				this.getContext().getResources().getString(R.string.rankXButton),
+				Color.RED);
 
 		checkOccupancy();
 

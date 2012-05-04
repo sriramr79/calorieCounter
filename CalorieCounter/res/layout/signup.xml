@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/genb" >
 
     <TextView
         android:id="@+id/signUpappTitle"
@@ -13,8 +14,10 @@
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal"
         android:paddingBottom="15dp"
-        android:text="Register for Calorie Counter"
-        android:textSize="30dp" />
+        android:text="Signup for Food with Friends"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -36,7 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fullnameTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/signUpFullName"
@@ -45,7 +50,8 @@
                 android:layout_weight="1"
                 android:hint="@string/fullnameHint"
                 android:imeOptions="actionNext"
-                android:inputType="textPersonName|textNoSuggestions" >
+                android:inputType="textPersonName|textNoSuggestions"
+                >
 
                 <requestFocus />
             </EditText>
@@ -62,7 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/unTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/signUpUN"
@@ -71,7 +79,8 @@
                 android:layout_weight="3.46"
                 android:hint="@string/unHint"
                 android:imeOptions="actionNext"
-                android:inputType="textNoSuggestions" />
+                android:inputType="textNoSuggestions"
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +93,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pwTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/signUpPass"
@@ -93,6 +104,7 @@
                 android:layout_weight="1"
                 android:hint="@string/pwHint"
                 android:imeOptions="actionDone"
+                
                 android:inputType="textPassword" />
         </LinearLayout>
 

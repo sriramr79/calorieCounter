@@ -1,81 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/genb" >
-    
+    android:background="@drawable/genb"
+    android:orientation="vertical" >
+
     <TextView
         android:id="@+id/tableHomeWelcomeText"
         android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:textColor="#000000"
-        android:textStyle="bold"
-    	android:text="@string/tableHomeWelcome"  />
-    
+        android:layout_height="wrap_content"
+        android:text="@string/tableHomeWelcome"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/tableGameButton1"
-        android:layout_marginTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:gravity="center"
         android:onClick="onButton1Click"
         android:text="@string/tableBlankGame" />
-    
+
     <Button
         android:id="@+id/tableGameButton2"
-        android:layout_marginTop="20dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
         android:gravity="center"
         android:onClick="onButton2Click"
         android:text="@string/tableBlankGame" />
-    
+
     <Button
         android:id="@+id/tableGameButton3"
-        android:layout_marginTop="20dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
         android:gravity="center"
         android:onClick="onButton3Click"
         android:text="@string/tableBlankGame" />
-    
+
     <TextView
-        android:layout_marginTop="20dip"
-        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:text="@string/tableCreateGameMessage"
         android:textColor="#000000"
-        android:textStyle="bold"
-        android:text="@string/tableCreateGameMessage" />
-    
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/tableNewGameUser"
-        android:layout_marginTop="10dip"
-        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:hint="@string/tableNewGameHint"
-        android:inputType="textVisiblePassword" />"
-    
+        android:inputType="textVisiblePassword" />
+
     <Button
         android:id="@+id/tableCreateGameButton"
-        android:layout_marginTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:gravity="center"
         android:onClick="onNewGameClick"
         android:text="@string/tableStartNewGame" />
-    
+
     <Button
         android:id="@+id/tableQuitButton"
-        android:layout_marginTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
         android:gravity="center"
         android:onClick="onQuitButtonClick"
         android:text="@string/quitButton" />
-    
-    
-    
-    
-    
+
 </LinearLayout>

@@ -24,11 +24,9 @@
         android:id="@+id/foodName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textStyle="bold"
         android:text="@string/mcfries"
-        
-         />
+        android:textColor="#000000"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -49,17 +47,17 @@
             android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:background="@drawable/submit"
             android:onClick="onSubmitEvent"
-            android:src="@drawable/submit"
-            android:background="@drawable/submit" />
+            android:src="@drawable/submit" />
 
         <Button
             android:id="@+id/quitCalCount"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:background="@drawable/quit"
             android:onClick="onQuitEvent"
-            android:src="@drawable/quit"
-            android:background="@drawable/quit" />
+            android:src="@drawable/quit" />
     </LinearLayout>
 
 </LinearLayout>
