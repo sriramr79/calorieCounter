@@ -1,10 +1,11 @@
 package edu.upenn.cis350.test;
 
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import edu.upenn.cis350.AdminActivity;
 import edu.upenn.cis350.IOBasic;
 
@@ -30,16 +31,18 @@ public class AdminActivityTest extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		IOBasic.initRead();
+
 		mInst = this.getInstrumentation();
 		this.injectInstrumentation(mInst);
 		mActivity = this.getActivity();
 		
-		username = (EditText)mActivity.findViewById(edu.upenn.cis350.R.id.unField);
-		password = (EditText)mActivity.findViewById(edu.upenn.cis350.R.id.pwField);
-		
-		submit = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.submit);
-		signup = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.signUpButton);
-		quit = (Button)mActivity.findViewById(edu.upenn.cis350.R.id.quitButton);
+
+		Intent i = new Intent();
+		i.setClassName("edu.upenn.cis350", "LoginActivity");
+		i.putExtra(edu.upenn.cis350.Constants.UNEXTRA, "a");
+		setActivityIntent(i);
 		
 		
 	}
@@ -54,35 +57,9 @@ public class AdminActivityTest extends
 	
 
 	public void testDatabaseLoading() {
-		assertEquals("Sriram Radhakrishnan", IOBasic.fullName("sriramr"));
-	}
-	
-	public void testAValidLogin() {
-		username.clearComposingText();
-		password.clearComposingText();
+		ListView l = mActivity.getListView();
 		
-		TouchUtils.tapView(this, username);
-		sendKeys("S R I R A M R");
-		
-		TouchUtils.tapView(this, password);
-		sendKeys("S R I R A M R");
-		
-		assertEquals("sriramr", username.getText().toString());
-		assertEquals("sriramr", password.getText().toString());
-	}
-	
-	public void testInvalidLogin() {
-		username.clearComposingText();
-		password.clearComposingText();
-		
-		TouchUtils.tapView(this, username);
-		sendKeys("W R O N G");
-		
-		TouchUtils.tapView(this, password);
-		sendKeys("W R O N G");
-		
-		assertEquals("wrong", username.getText().toString());
-		assertEquals("wrong", password.getText().toString());
+		assertEquals(6, l.getAdapter().getCount());
 	}
 	
 }
